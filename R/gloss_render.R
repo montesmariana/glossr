@@ -18,6 +18,9 @@
 #' gloss_pdf(ex_sp, ex_gloss, ex_trans, "ex1")
 #'
 #' gloss_html(ex_sp, ex_gloss, ex_trans, "ex1")
+#'
+#' # Within R Markdown
+#' as_gloss(ex_sp, ex_gloss, ex_trans, "ex1")
 NULL
 
 
@@ -50,4 +53,15 @@ gloss_html <- function(original, parsed, translation = NULL, label = NULL) {
     "\n",
     trans_part
   )
+}
+
+#' @describeIn gloss_render Render based on R Markdown output
+#'
+#' @export
+as_gloss <- function(original, parsed, translation = NULL, label = NULL) {
+  if (knitr::is_latex_output()) {
+    gloss_pdf(original, parsed, translation, label)
+  } else {
+    gloss_html(original, parsed, translation, label)
+  }
 }

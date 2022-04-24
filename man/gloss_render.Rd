@@ -5,11 +5,14 @@
 \alias{gloss_render}
 \alias{gloss_pdf}
 \alias{gloss_html}
+\alias{as_gloss}
 \title{Render a gloss}
 \usage{
 gloss_pdf(original, parsed, translation = NULL, label = NULL)
 
 gloss_html(original, parsed, translation = NULL, label = NULL)
+
+as_gloss(original, parsed, translation = NULL, label = NULL)
 }
 \arguments{
 \item{original}{First line for the interlinear gloss,
@@ -33,6 +36,8 @@ Render a gloss
 \item \code{gloss_pdf}: Render in PDF
 
 \item \code{gloss_html}: Render in HTML
+
+\item \code{as_gloss}: Render based on R Markdown output
 }}
 
 \examples{
@@ -42,4 +47,7 @@ ex_trans <- "An example in Spanish"
 gloss_pdf(ex_sp, ex_gloss, ex_trans, "ex1")
 
 gloss_html(ex_sp, ex_gloss, ex_trans, "ex1")
+
+# Within R Markdown
+as_gloss(ex_sp, ex_gloss, ex_trans, "ex1")
 }
