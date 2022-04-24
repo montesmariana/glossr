@@ -1,0 +1,12 @@
+Package: glossr
+Type: Package
+Title: Use interlinear glosses in R Markdown
+Version: 0.1.0
+Author: Mariana Montes
+Maintainer: Mariana Montes <mariana.montes@kuleuven.be>
+Description: Read examples with interlinear glosses from files
+    or from text and print them in a way compatible with both
+    Latex and HTML outputs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
