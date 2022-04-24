@@ -26,7 +26,7 @@ i.e. glosses for individual words or expression.}
 \item{label}{Label for the example (optional).}
 }
 \value{
-Character vector to be printed.
+Character vector to be printed with \code{\link{gloss_frame}}
 }
 \description{
 Render a gloss

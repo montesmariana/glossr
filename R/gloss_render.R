@@ -7,7 +7,7 @@
 #' @param translation Free translation (optional).
 #' @param label Label for the example (optional).
 #'
-#' @return Character vector to be printed.
+#' @return Character vector to be printed with \code{\link{gloss_frame}}
 #' @name gloss_render
 #'
 #' @encoding UTF-8
