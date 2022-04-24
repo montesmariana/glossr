@@ -10,3 +10,9 @@ Description: Read examples with interlinear glosses from files
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    htmltools,
+    magrittr,
+    testthat
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
