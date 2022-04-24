@@ -2,5 +2,7 @@
 
 export("%>%")
 export(gloss_html)
+export(gloss_linetooltip)
 export(gloss_pdf)
+export(gloss_tooltip)
 importFrom(magrittr,"%>%")
