@@ -32,7 +32,7 @@ gloss_pdf <- function(original, parsed, translation = NULL, label = NULL) {
   c(
     sprintf("    \\ex%s\n", label_part),
     sprintf("        \\gll %s \\\\ \n", original),
-    sprintf("        %s \\\\ \n", parsed),
+    sprintf("         %s \\\\ \n", parsed),
     trans_part
   )
 }
@@ -59,9 +59,9 @@ gloss_html <- function(original, parsed, translation = NULL, label = NULL) {
 #'
 #' @export
 as_gloss <- function(original, parsed, translation = NULL, label = NULL) {
-  if (knitr::is_latex_output()) {
-    gloss_pdf(original, parsed, translation, label)
-  } else {
+  if (knitr::is_html_output()) {
     gloss_html(original, parsed, translation, label)
+  } else {
+    gloss_pdf(original, parsed, translation, label)
   }
 }

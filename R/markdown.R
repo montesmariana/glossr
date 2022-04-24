@@ -48,7 +48,7 @@ gloss_frame <- function(...) {
 #' @export
 gloss <- function(label) {
   if (knitr::is_latex_output()) {
-    sprintf("\\@ref(%s)", label)
+    sprintf("(\\@ref(%s))", label)
   } else {
     sprintf("(@%s)", label)
   }

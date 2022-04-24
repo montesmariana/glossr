@@ -1,0 +1,94 @@
+---
+title: "Using glossr for HTML output"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using glossr for HTML output}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE
+)
+```
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
+
+# Introduction
+
+The {glossr} package offers useful functions to recreate Leipzig glosses in R Markdown texts.
+The immediate solution for a $LaTeX$ output is to use the {gb4e} library; this package expands on it and offers a few extensions described in the PDF version of this vignette. However, {gb4e} glosses are not rendered at all if the output is in HTML. This package aims to address this issue, not by trying to render the glosses as interlinear glosses in HTML, but by rendering them as normal examples and showing the morphological annotation as tooltips.
+If you would like that, please prefix your file with the following text:
+
+```js
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
+```
+
+In order to use the glossr package, you should first load it, in the normal set up chunk at the beginning of your report:
+
+```{r setup}
+library(glossr)
+```
+
+# Basic Usage
+
+When you want to include an example, create a gloss with `as_gloss()` and then wrap it in `gloss_frame()` within an R chunk with the `results="asis"` option. (I promise the tooltips look better in a `bookdown::html_document2` file.)
+
+```{r, first-gloss, results = "asis"}
+my_gloss <- as_gloss(
+  original = "Hace calor/frío",
+  parsed = "make.3SG.PRS heat/cold.N.A",
+  translation = "'It is hot/cold'",
+  label = "my-label"
+)
+gloss_frame(my_gloss)
+```
+
+The label given to `as_gloss()` allows you to cross-reference the example: `example (@my-label)` returns "example (@my-label)".
+However, just as the $LaTeX$ glosses are not visible in HTML files, they are referenced in a different way; using `(@label)` will not work to reference your example in the PDF file. In order to address, this, `gloss("my-label")` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file.
+
+If you have many examples, you might want to keep them in their own file, if you don't have them like that already.
+Assuming you have them in a table with columns matching the arguments of `as_gloss()`, you can combine it with `purrr::pmap()` to obtain a list of glosses and feed it into `gloss_frame()`. As an example, let's use the examples provided in the `glosses` dataset of this package:
+
+```{r, data, message = FALSE}
+library(magrittr)
+library(purrr) # for pmap()
+library(dplyr) # for select() and filter()
+data(glosses)
+glosses <- glosses %>% 
+  select(original, parsed, translation, label)
+glosses
+```
+
+This table has more columns than we need, so we will only select the right ones and print the glosses of the first three rows. Note that the values in the "label" column will be used as labels: `gloss("feel-icelandic")` will return `r gloss("feel-icelandic")`.
+
+```{r, data-gloss, results = "asis"}
+glosses %>% head(3) %>% 
+  pmap(as_gloss) %>% 
+  gloss_frame()
+```
+
+# Does nothing in HTML
+
+Finally, while the PDF vignette offers the option of nested lists of examples, the HTML version will just return a top level list.
+For example, given the function below, `gloss("jp")` will return `r gloss("jp")`, whereas `gloss("heartwarming-jp")` and `gloss("languid-jp")` will reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
+But at least it won't break!
+
+```{r, jp-gloss, results = "asis"}
+filter(glosses, endsWith(label, "jp")) %>% 
+  pmap(as_gloss) %>% 
+  gloss_list(listlabel = "jp") %>% 
+  gloss_frame()
+```
+

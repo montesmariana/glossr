@@ -19,3 +19,10 @@ Imports:
     testthat
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
+VignetteBuilder: knitr
+Suggests: 
+    bookdown,
+    dplyr,
+    rmarkdown
+Depends: 
+    R (>= 2.10)

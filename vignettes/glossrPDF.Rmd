@@ -1,0 +1,101 @@
+---
+title: "Using the glossr package"
+output:
+  bookdown::pdf_document2:
+    extra_dependencies: ["gb4e"]
+vignette: >
+  %\VignetteIndexEntry{glossr PDF}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE
+)
+```
+
+# Introduction
+
+The {glossr} package offers useful functions to recreate Leipzig glosses in R Markdown texts.
+The immediate solution for a $LaTeX$ output is to use the {gb4e} library; this package expands on it and offers a few extensions described below. However, {gb4e} glosses are not rendered at all if the output is in HTML; this is addressed in the HTML vignette.
+
+In order to use the glossr package for PDF output, you should first add the "gb4e" dependency in the YAML and then load the package in the normal set up chunk at the beginning of your report. You might have to install the tex library with `tinytex::tlmgr_install("gb4e")`.
+
+```yaml
+output:
+   bookdown:pdf_document2:
+     extra_dependencies: ["gb4e"]
+```
+
+```{r setup}
+library(glossr)
+```
+
+# Basic usage
+
+When you want to include an example, create a gloss with `as_gloss()` and then wrap it in `gloss_frame()` within an R chunk with the `results="asis"` option.
+
+```{r, first-gloss, results = "asis"}
+my_gloss <- as_gloss(
+  original = "Hace calor/frío",
+  parsed = "make.3SG.PRS heat/cold.N.A",
+  translation = "'It is hot/cold'",
+  label = "my-label"
+)
+gloss_frame(my_gloss)
+```
+
+The label given to `as_gloss()` allows you to cross-reference the example: `example (\@ref(my-label))` returns "example  (\@ref(my-label))".
+However, just as the $LaTeX$ glosses are not visible in HTML files, (@my-label) they are referenced in a different way; using `\@ref(label)` will not work to reference your example in the HTML file. In order to address, this, `gloss("my-label")` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file.
+
+If you have many examples, you might want to keep them in their own file, if you don't have them like that already.
+Assuming you have them in a table with columns matching the arguments of `as_gloss()`, you can combine it with `purrr::pmap()` to obtain a list of glosses and feed it into `gloss_frame()`. As an example, let's use the examples provided in the `glosses` dataset of this package:
+
+```{r, data, message = FALSE}
+library(magrittr)
+library(purrr) # for pmap()
+library(dplyr) # for select() and filter()
+data(glosses)
+glosses <- glosses %>% 
+  select(original, parsed, translation, label)
+glosses
+```
+
+This table has more columns than we need, so we will only select the right ones and print the glosses of the first three rows. Note that the values in the "label" column will be used as labels: `gloss("feel-icelandic")` will return `r gloss("feel-icelandic")`.
+
+```{r, data-gloss, results = "asis"}
+glosses %>% head(3) %>% 
+  pmap(as_gloss) %>% 
+  gloss_frame()
+```
+
+# PDF-only features
+
+This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item. For example, given the function below, we can use `gloss("jp")` to reference `r gloss("jp")`, or `gloss("heartwarming-jp")` and `gloss("languid-jp")` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
+
+```{r, jp-gloss, results = "asis"}
+filter(glosses, endsWith(label, "jp")) %>% 
+  pmap(as_gloss) %>% 
+  gloss_list(listlabel = "jp") %>% 
+  gloss_frame()
+```
+
+Finally, it might be the case that you want to apply $LaTeX$ formatting to a long string of elements for your first lines of glosses, e.g. set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you `gloss_format_words()`, which you can implement to the strings given to `as_gloss()`:
+
+```{r, format-words}
+gloss_format_words("A long piece of text", "textit")
+```
+
+
+```{r, last-gloss, results = "asis"}
+my_gloss <- as_gloss(
+  original = "Hace calor/frío",
+  parsed = gloss_format_words("make.3SG.PRS heat/cold.N.A", "textsc"),
+  translation = "'It is hot/cold'",
+  label = "formatted"
+)
+gloss_frame(my_gloss)
+```
