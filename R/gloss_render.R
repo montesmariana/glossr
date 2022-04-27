@@ -88,7 +88,7 @@ gloss_leipzig <- function(original, parsed, translation = NULL) {
 #'
 #' @export
 as_gloss <- function(original, parsed, translation = NULL, label = NULL) {
-  if (knitr::is_latex_output()) {
+  if (getOption("glossr.output", "leipzig") == "latex") {
     g <- gloss_pdf(original, parsed, translation, label)
   } else {
     g <- gloss_html(original, parsed, translation, label)

@@ -6,14 +6,14 @@
 #' @exportS3Method knitr::knit_print gloss
 #' @export
 knit_print.gloss <- function(x, ...) {
-  output <- getOption("glossr.output", "tooltip")
+  output <- getOption("glossr.output")
   if (output == "latex") {
     x <- c(
       "\\begin{exe}\n",
       x,
       "\\end{exe}\n"
     )
-    knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("gb4e")))
+    knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("gb4e", extra_lines = "\\noautomath")))
   } else if (output == "leipzig") {
     knitr::asis_output(x, meta = list(use_leipzig()))
   } else {
