@@ -1,13 +1,16 @@
 test_that("italics is replaced", {
   expect_match(ignore_latex("\\textit{something}"), "\\*something\\*")
+  expect_match(ignore_latex("\\em{something}"), "\\*something\\*")
+  expect_match(ignore_latex("\\textit{something} and \\em{another}"), "\\*something\\* and \\*another\\*")
 })
 
 test_that("bold is replaced", {
-  expect_match(ignore_latex("\\textbf{something}"), "\\*something\\*")
+  expect_match(ignore_latex("\\textbf{something} in bold"), "\\*\\*something\\*\\* in bold")
 })
 
 test_that("small caps are replaced", {
-  expect_match(ignore_latex("\\textsc{something}"), "\\*something\\*")
+  expect_match(ignore_latex("Text with \\textsc{small caps}"), "Text with SMALL CAPS")
+  expect_match(ignore_latex("Word.\\textsc{tag}"), "Word.TAG")
 })
 
 test_that("words are split", {

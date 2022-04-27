@@ -1,38 +1,24 @@
-#' Include glosses in R Markdown
+#' Print method for glosses
 #'
-#' Finishes off the output of \code{\link{gloss_render}} for
-#'   an R Markdown file, based on its output format.
-#'   The input can be one glossed example, multiple ones,
-#'   a list of glossed examples or even a glossed list
-#'   created by \code{\link{gloss_list}}.
-#'
-#'   This function should be called in an R chunk with
-#'   the `results = "asis"` option (and `echo = FALSE` to avoid
-#'   showing the code). The name of the chunk is
-#'   not relevant.
-#'
-#' @param ... One or more glosses.
-#'
-#' @return Prints text for markdown, in either latex or html formats.
+#' @param x Object to print
+#' @param ... Other options for knit_print
+#' @importFrom knitr knit_print
+#' @exportS3Method knitr::knit_print gloss
 #' @export
-#'
-#' @examples
-#' ex_sp <- "Un ejemplo en español"
-#' ex_gloss <- "DET.M.SG example in Spanish"
-#' ex_trans <- "An example in Spanish"
-#' my_gloss <- as_gloss(ex_sp, ex_gloss, ex_trans, "ex1")
-#' gloss_frame(my_gloss)
-gloss_frame <- function(...) {
-  glosses <- if (class(...) == "list") purrr::flatten_chr(...) else c(...)
-  if (knitr::is_latex_output()) {
-    glosses <- c(
+knit_print.gloss <- function(x, ...) {
+  output <- getOption("glossr.output", "tooltip")
+  if (output == "latex") {
+    x <- c(
       "\\begin{exe}\n",
-      glosses,
+      x,
       "\\end{exe}\n"
     )
+    knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("gb4e")))
+  } else if (output == "leipzig") {
+    knitr::asis_output(x, meta = list(use_leipzig()))
+  } else {
+    knitr::asis_output(x, meta = list(rmarkdown::html_dependency_jquery(), use_tooltip()))
   }
-  cat(glosses)
-  invisible(glosses)
 }
 
 #' Reference gloss
@@ -47,7 +33,8 @@ gloss_frame <- function(...) {
 #' @return Character string with label reference
 #' @export
 gloss <- function(label) {
-  if (knitr::is_latex_output()) {
+  output <- getOption("glossr.output", "latex")
+  if (output == "latex") {
     sprintf("(\\@ref(%s))", label)
   } else {
     sprintf("(@%s)", label)

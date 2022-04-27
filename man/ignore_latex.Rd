@@ -7,11 +7,11 @@
 ignore_latex(string)
 }
 \arguments{
-\item{string}{Latex string to purge}
+\item{string}{Latex string to parse}
 }
 \value{
 Character vector
 }
 \description{
-Replace most of the latex notation with asterisks.
+Replace most of the latex notation with with HTML equivalent
 }

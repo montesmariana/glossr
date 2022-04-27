@@ -1,9 +1,9 @@
 ---
-title: "Using the glossr package"
+title: "Using the glossr package with tooltip"
 author: "Mariana Montes"
-output: rmarkdown::html_vignette
+output: bookdown::html_document2
 vignette: >
-  %\VignetteIndexEntry{Using the glossr package}
+  %\VignetteIndexEntry{Using the glossr package with tooltip}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,7 +29,7 @@ For the pdf output you might have to install the {gb4e} library with `tinytex::t
 
 ```{r setup}
 library(glossr) # library(glossr)
-use_glossr() # options for html: leipzig (default), tooltip
+use_glossr("tooltip") # options for html: leipzig (default), tooltip
 ```
 
 # Basic usage

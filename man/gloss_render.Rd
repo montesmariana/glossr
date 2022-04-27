@@ -5,14 +5,23 @@
 \alias{gloss_render}
 \alias{gloss_pdf}
 \alias{gloss_html}
+\alias{gloss_tooltip}
+\alias{gloss_leipzig}
 \alias{as_gloss}
+\alias{gloss_df}
 \title{Render a gloss}
 \usage{
 gloss_pdf(original, parsed, translation = NULL, label = NULL)
 
 gloss_html(original, parsed, translation = NULL, label = NULL)
 
+gloss_tooltip(original, parsed, translation = NULL)
+
+gloss_leipzig(original, parsed, translation = NULL)
+
 as_gloss(original, parsed, translation = NULL, label = NULL)
+
+gloss_df(df)
 }
 \arguments{
 \item{original}{First line for the interlinear gloss,
@@ -24,9 +33,12 @@ i.e. glosses for individual words or expression.}
 \item{translation}{Free translation (optional).}
 
 \item{label}{Label for the example (optional).}
+
+\item{df}{Dataframe with at least \code{original} and \code{parsed} columns
+to generate multiple glosses.}
 }
 \value{
-Character vector to be printed with \code{\link{gloss_frame}}
+Object of class \code{gloss}
 }
 \description{
 Render a gloss
@@ -37,7 +49,13 @@ Render a gloss
 
 \item \code{gloss_html}: Render in HTML
 
+\item \code{gloss_tooltip}: Tooltip rendering for HTML
+
+\item \code{gloss_leipzig}: Leipzig.js engine
+
 \item \code{as_gloss}: Render based on R Markdown output
+
+\item \code{gloss_df}: Render glosses from a dataframe
 }}
 
 \examples{

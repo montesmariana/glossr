@@ -4,10 +4,10 @@
 \alias{gloss_list}
 \title{Sublist glosses}
 \usage{
-gloss_list(..., listlabel = NULL)
+gloss_list(glist, listlabel = NULL)
 }
 \arguments{
-\item{...}{Glosses}
+\item{glist}{List of \code{gloss} objects}
 
 \item{listlabel}{Label for the full list (optional)}
 }

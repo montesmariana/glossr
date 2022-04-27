@@ -1,9 +1,9 @@
 ---
-title: "Using the glossr package"
+title: "Using the glossr package for PDF"
 author: "Mariana Montes"
-output: rmarkdown::html_vignette
+output: bookdown::pdf_document2
 vignette: >
-  %\VignetteIndexEntry{Using the glossr package}
+  %\VignetteIndexEntry{Using the glossr package for PDF}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,6 +31,7 @@ For the pdf output you might have to install the {gb4e} library with `tinytex::t
 library(glossr) # library(glossr)
 use_glossr() # options for html: leipzig (default), tooltip
 ```
+
 
 # Basic usage
 
@@ -69,7 +70,7 @@ gloss_df(head(glosses, 3))
 
 # PDF-only features
 
-This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item.  **This will not work in HTML**, which will just keep the numbering on the top level. But on PDF, given the function below, we can use `gloss("jp")` to reference `r gloss("jp")`, or `gloss("heartwarming-jp")` and `gloss("languid-jp")` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
+This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item. **This will not work in HTML**, which will just keep the numbering on the top level. But on PDF, given the function below, we can use `gloss("jp")` to reference `r gloss("jp")`, or `gloss("heartwarming-jp")` and `gloss("languid-jp")` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
 
 ```{r, jp-gloss}
 filter(glosses, endsWith(label, "jp")) %>% 

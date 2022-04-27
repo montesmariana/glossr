@@ -1,5 +1,5 @@
 test_that("tooltip is generated", {
-  observed <- as.character(gloss_tooltip("one", "DET.SG"))
+  observed <- as.character(tooltip("one", "DET.SG"))
   expected <- "<span data-toggle=\"tooltip\" title=\"DET.SG\"> one </span>"
   expect_match(observed, expected)
 })

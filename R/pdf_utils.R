@@ -26,23 +26,24 @@ gloss_format_words <- function(text, formatting) {
 #' Takes a series of glosses from \code{\link{gloss_render}}
 #'   and puts them in a list within one example for PDF output.
 #'
-#' @param ... Glosses
+#' @param glist List of \code{gloss} objects
 #' @param listlabel Label for the full list (optional)
 #'
 #' @return Character vector including the frame for a list of glosses.
 #' @export
-gloss_list <- function(..., listlabel = NULL) {
-  glosses <- if (class(...) == "list") purrr::flatten_chr(...) else c(...)
+gloss_list <- function(glist, listlabel = NULL) {
+  output <- getOption("glossr.output", "latex")
 
-  if (knitr::is_latex_output()) {
+  if (output == "latex") {
     llabel <- if (is.null(listlabel)) "" else sprintf("\\label{%s}", listlabel)
-    c(
+    g <- c(
       sprintf("\\ex%s\n", llabel),
       "\\begin{xlist}\n",
-      glosses,
+      glist,
       "\\end{xlist}\n"
     )
+    structure(g, class = "gloss")
   } else {
-    glosses
+    glist
   }
 }
