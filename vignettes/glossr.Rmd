@@ -1,95 +1,35 @@
 ---
-title: "Using the glossr package"
+title: "About glossr"
 author: "Mariana Montes"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using the glossr package}
+  %\VignetteIndexEntry{About glossr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: ["../inst/REFERENCES.bib", "../inst/packages.bib"]
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  echo = TRUE
+  comment = "#>"
 )
 ```
 
-# Introduction
+Interlinear glosses are a way of writing linguistic examples in a language other than the language of the main text (typically English). They first have a couple of lines of vertically aligned bits (however words are split in the original language) with, normally, some morphological information, and finally they might close with a free translation of the example. Most often they follow the [Leipzig Glossing Rules](https://www.eva.mpg.de/lingua/resources/glossing-rules.php).
 
-The {glossr} package offers useful functions to recreate Leipzig glosses in R Markdown texts.
-The immediate solution for a $LaTeX$ output is to use the {gb4e} library. If that is enough for you, you can still use this package to automatically print them in an R-chunk, avoiding typos, and even generate them automatically from a dataframe with your examples! But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least *some* rendering) of your interlinear glosses in HTML as well. This offers some challenges, because the way to print them is different, the way to reference them is different, and interlinear glosses are a pain to render in HTML.
+R Markdown [@R-rmarkdown] is an R package for literate programming, where you can weave together text and code. You can use R Markdown to write your papers, focusing on content rather than formatting, confident that the same source (pretty much) can turn into both a beautiful PDF file or a gorgeous web page with the minimum of effort. Yes, once you're used to it, it's not harder than writing in MS Word. I've [written a bit](https://www.marianamontes.me/post/academic-writing-in-r-markdown-i/) about it in case you're interested.
 
-I took that pain and packaged it so you don't need to feel it.
+Mixing R Markdown and interlinear glosses has proved challenging. This package offers you some wrapping functions that call [the `gb4e`](https://ctan.org/pkg/gb4e?lang=en) $LaTeX$ package for PDF output and [leipzig.js](https://bdchauvette.net/leipzig.js/) for HTML output. You don't really need to know any Latex or Javascript or HTML to take advantage of both of them.
 
-You can start using `glossr` in a package by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$ or HTML and which HTML rendering you've chosen. Yes you have a choice! The default one is an implementation of [leipzig.js](https://bdchauvette.net/leipzig.js/), which is awesome because of the neat alignment, the small caps in morphological annotation and the explanatory tooltips when hovering over them. However, they have the negative consequence that the number of your examples will be next to the translation, rather than on the top line, and you probably can't manipulate the italics on the first line (I haven't tried, actually). Enter the second option, "tooltip", which instead of aligning the morphological notation, it adds it as a tooltip over each of the first line words. This gives you more freedom to adapt the formatting and *might*^[I have to test this.] be more accessible for screen readers.
+The package also takes care of cross-references, giving you a handy function `gloss()` to sprinkle around your text every time you want to reference one of your examples. Go ahead and check out the articles, particularly `vignette("glossr_leipzig")` for HTML rendering and the [PDF version]("../inst/pdf/glossr_pdf.pdf").
 
-For the pdf output you might have to install the {gb4e} library with `tinytex::tlmgr_install("gb4e")`.
+I'm sure there is a lot of functionality in both `gb4e` and leipzig.js that this package doesn't cover... *yet*. Please, go ahead and report any problems, suggestions and tasks for the wishlist in [the issues section of the repository](https://github.com/montesmariana/glossr/issues). Or fork it and contribute if you'd like!
 
-```{r setup}
-library(glossr) # library(glossr)
-use_glossr() # options for html: leipzig (default), tooltip
-```
+While this is a matter I've wondered about for a while, it was really kicked off by Giulia Mazzola's worries. I'm converting her to the R Markdown crowd and I couldn't let her resolve weaken because of these small matters. Thank you for your encouragement and appreciation!
 
-# Basic usage
+Last but not least, I'd like to acknowledge the source of the examples in the small "dataset" provided by this package. These glosses were taken from @shindo_2015 and @pustet_2015. Any mistakes are mine.
 
-When you want to include an example, create a gloss with `as_gloss()` and call it.
+# References
 
-```{r, first-gloss}
-my_gloss <- as_gloss(
-  original = "Hace calor/frío",
-  parsed = "make-3SG-PRS heat/cold-N-A",
-  translation = "'It is hot/cold'",
-  label = "my-label"
-)
-my_gloss
-```
-
-The label given to `as_gloss()` allows you to cross-reference the example: in PDF this is `example (\@ref(my-label))`, whereas in HTML this is `example (@my-label)`. What should YOU do? `gloss("my-label")` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: `r gloss("my-label")` in this case.
-
-If you have many examples, you might want to keep them in their own file, if you don't have them like that already.
-`glossr` offers a small dataset for testing, called `data(glosses)`.
-
-```{r, data, message = FALSE}
-library(magrittr)
-library(dplyr) # for select() and filter()
-data(glosses)
-glosses <- glosses %>% 
-  select(original, parsed, translation, label)
-glosses
-```
-
-Assuming you have them in a table with columns matching the arguments of `as_gloss()`, you can give it to `gloss_df()` directly and it will do the job.
-This table has more columns than we need, so we will only select the right ones and print the glosses of the first three rows. Note that the values in the "label" column will be used as labels: `gloss("feel-icelandic")` will return `r gloss("feel-icelandic")`.
-
-```{r, data-gloss}
-gloss_df(head(glosses, 3))
-```
-
-# PDF-only features
-
-This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item.  **This will not work in HTML**, which will just keep the numbering on the top level. But on PDF, given the function below, we can use `gloss("jp")` to reference `r gloss("jp")`, or `gloss("heartwarming-jp")` and `gloss("languid-jp")` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
-
-```{r, jp-gloss}
-filter(glosses, endsWith(label, "jp")) %>% 
-  gloss_df() %>% 
-  gloss_list(listlabel = "jp")
-```
-
-Finally, it might be the case that you want to apply $LaTeX$ formatting to a long string of elements for your first lines of glosses, e.g. set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you `gloss_format_words()`, which you can implement to the strings given to `as_gloss()`. Internally, `glossr` will try to parse $LaTeX$ formatting into HTML one (because I'm assuming your data is prepared for that). In the future this might be different.
-
-```{r, format-words}
-gloss_format_words("A long piece of text", "textit")
-```
-
-
-```{r, last-gloss}
-my_gloss <- as_gloss(
-  original = gloss_format_words("Hace calor/frío", "textbf"),
-  parsed = "make.3SG.PRS heat/cold.N.A",
-  translation = "'It is hot/cold'",
-  label = "formatted"
-)
-my_gloss
-```
