@@ -22,7 +22,7 @@ and a sadder one that *might* be more maleable and accessible, just less pro-loo
 
 But please, don't take my word for it ---you can check the output in the following articles:
 
-- `vignette("glossr_pdf")` for the PDF glosses (which is not rendered in [the pkgdown site](https://montesmariana.github.io/glossr), but can be found [in the repo](https://github.com/montesmariana/glossr/blob/v0.1.0/inst/pdf/glossr_pdf.pdf));
+- `vignette("glossr_pdf")` for the PDF glosses (which is not rendered in [the pkgdown site](https://montesmariana.github.io/glossr), but can be found [in the repo](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_pdf.pdf));
 
 - `vignette("glossr_leipzig")` for its leipzig.js counterpart, _where the only difference is the output format_;
 
