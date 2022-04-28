@@ -5,3 +5,8 @@
 ^LICENSE\.md$
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^inst/figures/dev$

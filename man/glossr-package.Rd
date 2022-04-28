@@ -9,4 +9,12 @@
 Read examples with interlinear glosses from files or from text
 and print them in a way compatible with both Latex and HTML outputs.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://montesmariana.github.io/glossr/}
+  \item \url{https://github.com/montesmariana/glossr}
+}
+
+}
 \keyword{internal}

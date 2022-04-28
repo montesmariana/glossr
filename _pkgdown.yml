@@ -1,0 +1,43 @@
+url: https://montesmariana.github.io/glossr/
+template:
+  bootstrap: 5
+  bootswatch: pulse
+
+reference:
+- title: Show glosses
+  desc: |
+    Functions to use in the R Markdown file
+  contents:
+  - gloss
+  - use_glossr
+  - knit_print.gloss
+- title: Create gloss objects
+  desc: |
+    Functions to turn strings into the right gloss format.
+  contents:
+  - gloss_render
+  - gloss_df
+  - gloss_list
+- title: Dataset
+  desc: |
+    Dataset used in vignettes.
+  contents:
+  - glosses
+- title: Helpers for Latex glosses
+  desc: |
+    Functions to help with Latex glosses
+  contents:
+  - gloss_format_words
+- title: Helpers for Latex html glosses
+  desc: |
+    Dependencies and transformation from latex
+  contents:
+  - leipzig_script
+  - use_leipzig
+  - use_tooltip
+  - gloss_linesplit
+  - gloss_linetooltip
+  - ignore_latex
+  - latex_tag
+  - sc_to_upper
+  - tooltip
