@@ -17,8 +17,8 @@ all over the place. If that's the case, `glossr` is for you!
 
 Or maybe you want HTML output to work? If you use `gb4e`, your examples disappear!
 Here `glossr` can most definitely help. It even offers a helper function for cross-references
-that work in both formats!^[There are even TWO different HTML outputs: one using [leipzig.js](https://bdchauvette.net/leipzig.js)
-and a sadder one that *might* be more maleable and accessible, just less pro-looking.]
+that work in both formats! In fact, I included two different HTML outputs: one using [leipzig.js](https://bdchauvette.net/leipzig.js)
+and a sadder one that *might* be more maleable and accessible, just less pro-looking.
 
 But please, don't take my word for it ---you can check the output in the following articles:
 
