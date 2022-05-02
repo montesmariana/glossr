@@ -1,70 +1,71 @@
 ex_sp <- "Un ejemplo en español"
 ex_gloss <- "DET.M.SG example in Spanish"
-ex_trans <- "'An example in Spanish.'"
-pdf_full <- gloss_pdf(ex_sp, ex_gloss, ex_trans, "ex1")
-pdf_notrans <- gloss_pdf(ex_sp, ex_gloss, label = "ex2")
-pdf_bare <- gloss_pdf(ex_sp, ex_gloss)
-html_full <- gloss_html(ex_sp, ex_gloss, ex_trans, "ex1")
-html_notrans <- gloss_html(ex_sp, ex_gloss, label = "ex2")
-html_bare <- gloss_html(ex_sp, ex_gloss)
+ex_trans <- "An example in Spanish."
+my_gloss <- create_gloss(ex_sp, ex_gloss, translation = ex_trans, label = "ex1")
+no_trans <- create_gloss(ex_sp, ex_gloss, label = "ex2")
+bare_gloss <- create_gloss(ex_sp, ex_gloss)
+source_gloss <- create_gloss(ex_sp, ex_gloss, source = "(Author:year)")
+
+# Test classes
+test_that("Classes are correct", {
+  expect_s3_class(my_gloss, "gloss_data")
+  expect_s3_class(gloss_pdf(my_gloss), "gloss")
+  expect_s3_class(gloss_html(my_gloss), "gloss")
+  expect_error(gloss_pdf(ex_sp))
+})
 
 # Test pdf ----
-test_that("gloss label renders in pdf", {
-  expect_match(pdf_full[[1]], " +\\\\ex\\\\label")
+test_that("almost full gloss label renders in pdf", {
+  pdf_full <- gloss_pdf(my_gloss)
+  expect_match(pdf_full[[1]], "^\\\\ex$")
+  expect_match(pdf_full[[2]], "^\\\\label\\{ex1\\}\\\n$")
+  expect_match(pdf_full[[3]], "^\\\\begingl \\\n$")
+  expect_match(pdf_full[[5]], "^\\\\gla Un ejemplo en español// \\\n$")
+  expect_match(pdf_full[[6]], "^\\\\glb DET.M.SG example in Spanish// \\\n$")
+  expect_match(pdf_full[[7]], "^\\\\glft \\\"An example in Spanish.\\\"// \n$")
+  expect_match(pdf_full[[8]], "^\\\\endgl \n$")
+  expect_match(pdf_full[[9]], "^\\\\xe \n$")
 })
 
-test_that("first gloss line renders in pdf", {
-  expect_match(pdf_full[[2]], " +\\\\gll ")
+test_that("gloss label without translation renders in pdf", {
+  pdf <- gloss_pdf(no_trans)
+  expect_equal(nchar(pdf[[7]]), 0)
 })
 
-test_that("second gloss line renders in pdf", {
-  expect_match(pdf_full[[3]], "DET.M.SG example in Spanish")
+test_that("gloss label with source renders in pdf", {
+  pdf <- gloss_pdf(source_gloss)
+  expect_equal(nchar(pdf[[4]]), 29)
 })
 
-test_that("translation is rendered in pdf", {
-  expect_match(pdf_full[[4]], " +\\\\trans ")
-})
-
-test_that("translation is not rendered if not required", {
-  expect_length(pdf_notrans[[4]], 1)
-})
-
-test_that("label is correct with missing translation", {
-  expect_match(pdf_notrans[[1]], "ex2")
-})
-
-test_that("labels is not rendered if not required", {
-  expect_match(pdf_bare[[1]], " +\\\\ex\\n")
-})
 
 # Test html ----
 test_that("gloss label renders in html", {
-  expect_match(html_full[[1]], "\\(@ex1\\)")
-})
-
-test_that("gloss lines render in html", {
-  expect_match(html_full[[2]], "<span><span>.*</span></span>")
-})
-
-test_that("tooltip is included", {
-  expect_match(html_full[[2]], "data-toggle=\"tooltip\"")
-})
-
-test_that("third line in html is empty", {
-  expect_match(html_full[[3]], "\n")
-})
-test_that("translation is rendered in html", {
-  expect_match(html_full[[4]], "\n +'An example in Spanish.'\n")
+  html <- gloss_html(my_gloss)
+  expect_match(html[[1]], "\\(@ex1\\)")
+  expect_match(html[[2]], "^<div data-gloss=\\\"\\\">\\n")
+  expect_match(html[[2]], ".*\\n</div>")
+  expect_match(
+    html[[2]],
+    "<p class=\\\"gloss__line--free\\\">\\\"An example in Spanish.\\\"</p>"
+    )
+  expect_match(html[[3]], "^\\n$")
 })
 
 test_that("translation is not rendered if not required", {
-  expect_length(html_notrans[[4]], 1)
-})
-
-test_that("label is correct with missing translation", {
-  expect_match(html_notrans[[1]], "ex2")
+  html <- gloss_html(no_trans)
+  expect_no_match(
+    html[[2]],
+    "<p class=\\\"gloss__line--free\\\">\\\"An example in Spanish.\\\"</p>"
+    )
 })
 
 test_that("labels is not rendered if not required", {
-  expect_match(html_bare[[1]], "\\(@nolabel\\)")
+  expect_match(gloss_html(bare_gloss)[[1]], "^\\(@\\) $")
+})
+
+test_that("source is rendered", {
+  expect_match(
+    gloss_html(source_gloss)[[2]],
+    "<p class=\\\"gloss__line--original\\\">\\(Author:year\\)</p>"
+    )
 })

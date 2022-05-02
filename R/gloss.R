@@ -14,7 +14,7 @@
 #'    it's the number of items identified in each gloss line.}
 #' }
 #'
-#' @param ... Lines for glossing
+#' @param ... Lines for glossing, or parameters to pass to \code{create_gloss}
 #' @param source (Optional) Source of example
 #' @param translation (Optional) Free translation
 #' @param label (Optional) Example label
@@ -24,6 +24,14 @@
 #' @export
 #'
 #' @examples
+#' ex_sp <- "Un ejemplo en español"
+#' ex_gloss <- "DET.M.SG example in Spanish"
+#' ex_trans <- "An example in Spanish"
+#' my_gloss <- create_gloss(ex_sp, ex_gloss, translation = ex_trans, label="ex1")
+#'
+#' # Within R Markdown
+#' as_gloss(my_gloss)
+
 create_gloss <- function(
     ...,
     source = NULL,
@@ -49,4 +57,16 @@ create_gloss <- function(
     lengths = lengths,
     class = "gloss_data"
   )
+}
+
+#' @describeIn create_gloss Render based on R Markdown output
+#'
+#' @export
+as_gloss <- function(...) {
+  gloss <- create_gloss(...)
+  if (getOption("glossr.output", "leipzig") == "latex") {
+    g <- gloss_pdf(gloss)
+  } else {
+    g <- gloss_html(gloss)
+  }
 }

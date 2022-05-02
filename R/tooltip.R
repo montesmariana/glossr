@@ -18,7 +18,8 @@ tooltip <- function(x, title) {
 
 #' Apply tooltip to a full gloss
 #'
-#' @inheritParams gloss_render
+#' @param original Text to show in the \code{tooltip} rendering.
+#' @param parsed Text to show as tooltip when hovering
 #'
 #' @return List of `shiny.tag`
 #' @export

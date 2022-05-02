@@ -8,11 +8,9 @@
 gloss_linetooltip(original, parsed)
 }
 \arguments{
-\item{original}{First line for the interlinear gloss,
-i.e. example in original language.}
+\item{original}{Text to show in the \code{tooltip} rendering.}
 
-\item{parsed}{Second line for the interlinear gloss,
-i.e. glosses for individual words or expression.}
+\item{parsed}{Text to show as tooltip when hovering}
 }
 \value{
 List of `shiny.tag`

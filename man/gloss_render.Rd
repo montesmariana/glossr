@@ -7,35 +7,26 @@
 \alias{gloss_html}
 \alias{gloss_tooltip}
 \alias{gloss_leipzig}
-\alias{as_gloss}
 \alias{gloss_df}
 \title{Render a gloss}
 \usage{
-gloss_pdf(original, parsed, translation = NULL, label = NULL)
+gloss_pdf(gloss)
 
-gloss_html(original, parsed, translation = NULL, label = NULL)
+gloss_html(gloss)
 
-gloss_tooltip(original, parsed, translation = NULL)
+gloss_tooltip(gloss)
 
-gloss_leipzig(original, parsed, translation = NULL)
-
-as_gloss(original, parsed, translation = NULL, label = NULL)
+gloss_leipzig(gloss)
 
 gloss_df(df)
 }
 \arguments{
-\item{original}{First line for the interlinear gloss,
-i.e. example in original language.}
+\item{gloss}{Object of class \code{gloss_data}}
 
-\item{parsed}{Second line for the interlinear gloss,
-i.e. glosses for individual words or expression.}
-
-\item{translation}{Free translation (optional).}
-
-\item{label}{Label for the example (optional).}
-
-\item{df}{Dataframe with at least \code{original} and \code{parsed} columns
-to generate multiple glosses.}
+\item{df}{Dataframe one row per gloss. Columns \code{translation},
+\code{source} and \code{label} have special meaning
+(see \code{\link{create_gloss}}); all the others will be interpreted as
+lines to align in the order given.}
 }
 \value{
 Object of class \code{gloss}
@@ -53,8 +44,6 @@ Render a gloss
 
 \item \code{gloss_leipzig}: Leipzig.js engine
 
-\item \code{as_gloss}: Render based on R Markdown output
-
 \item \code{gloss_df}: Render glosses from a dataframe
 }}
 
@@ -62,10 +51,8 @@ Render a gloss
 ex_sp <- "Un ejemplo en español"
 ex_gloss <- "DET.M.SG example in Spanish"
 ex_trans <- "An example in Spanish"
-gloss_pdf(ex_sp, ex_gloss, ex_trans, "ex1")
+my_gloss <- create_gloss(ex_sp, ex_gloss, translation = ex_trans, label="ex1")
+gloss_pdf(my_gloss)
 
-gloss_html(ex_sp, ex_gloss, ex_trans, "ex1")
-
-# Within R Markdown
-as_gloss(ex_sp, ex_gloss, ex_trans, "ex1")
+gloss_html(my_gloss)
 }

@@ -29,7 +29,7 @@ For the pdf output you might have to install the {gb4e} library with `tinytex::t
 
 ```{r setup}
 library(glossr) # library(glossr)
-use_glossr() # options for html: leipzig (default), tooltip
+use_glossr('tooltip') # options for html: leipzig (default), tooltip
 ```
 
 
@@ -39,8 +39,8 @@ When you want to include an example, create a gloss with `as_gloss()` and call i
 
 ```{r, first-gloss}
 my_gloss <- as_gloss(
-  original = "Hace calor/frío",
-  parsed = "make-3SG-PRS heat/cold-N-A",
+  "Hace calor/frío",
+  "make-3SG-PRS heat/cold-N-A",
   translation = "'It is hot/cold'",
   label = "my-label"
 )
@@ -57,7 +57,8 @@ library(magrittr)
 library(dplyr) # for select() and filter()
 data(glosses)
 glosses <- glosses %>% 
-  select(original, parsed, translation, label)
+  select(original, parsed, translation, label, source) %>% 
+  mutate(source = paste0("(", source, ")"))
 glosses
 ```
 

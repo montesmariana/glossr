@@ -7,7 +7,8 @@
 gloss_list(glist, listlabel = NULL)
 }
 \arguments{
-\item{glist}{List of \code{gloss} objects}
+\item{glist}{Concatenation of \code{gloss} objects, e.g.
+as output of \code{\link{gloss_df}}.}
 
 \item{listlabel}{Label for the full list (optional)}
 }

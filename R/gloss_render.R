@@ -18,9 +18,6 @@
 #' gloss_pdf(my_gloss)
 #'
 #' gloss_html(my_gloss)
-#'
-#' # Within R Markdown
-#' as_gloss(my_gloss)
 NULL
 
 
@@ -62,7 +59,8 @@ gloss_pdf <- function(gloss) {
 gloss_html <- function(gloss) {
   output <- getOption("glossr.output", "leipzig")
   func <- if (output == "leipzig") gloss_leipzig else gloss_tooltip
-  c(sprintf("(@%s) ", attr(gloss, "label")), func(gloss))
+  g <- c(sprintf("(@%s) ", attr(gloss, "label")), func(gloss))
+  structure(g, class = "gloss")
 }
 
 #' @describeIn gloss_render Tooltip rendering for HTML
@@ -116,18 +114,6 @@ gloss_leipzig <- function(gloss) {
   }
 
   c(as.character(g), "\n")
-}
-#' @describeIn gloss_render Render based on R Markdown output
-#'
-#' @export
-as_gloss <- function(...) {
-  gloss <- create_gloss(...)
-  if (getOption("glossr.output", "leipzig") == "latex") {
-    g <- gloss_pdf(gloss)
-  } else {
-    g <- gloss_html(gloss)
-  }
-  structure(g, class = "gloss")
 }
 
 #' @describeIn gloss_render Render glosses from a dataframe
