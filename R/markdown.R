@@ -8,12 +8,7 @@
 knit_print.gloss <- function(x, ...) {
   output <- getOption("glossr.output")
   if (output == "latex") {
-    x <- c(
-      "\\begin{exe}\n",
-      x,
-      "\\end{exe}\n"
-    )
-    knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("gb4e", extra_lines = "\\noautomath")))
+    knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("expex")))
   } else if (output == "leipzig") {
     knitr::asis_output(x, meta = list(use_leipzig()))
   } else {

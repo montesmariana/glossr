@@ -28,15 +28,37 @@ NULL
 
 #' @describeIn gloss_render Render in PDF
 #' @export
-gloss_pdf <- function(original, parsed, translation = NULL, label = NULL) {
-  label_part <- if (is.null(label)) "" else sprintf("\\label{%s}", label)
-  trans_part <- if (is.null(translation)) "" else sprintf("        \\trans %s \n", translation)
-  c(
-    sprintf("    \\ex%s\n", label_part),
-    sprintf("        \\gll %s \\\\ \n", original),
-    sprintf("         %s \\\\ \n", parsed),
-    trans_part
-  )
+gloss_pdf <- function(gloss) {
+  stopifnot(inherits(gloss, "gloss_data"))
+  # define label
+  if (nchar(attr(gloss, "label")) > 0){
+    attr(gloss, "label") <- sprintf("\\label{%s}", attr(gloss, "label"))
+  }
+
+  # define source
+  if (nchar(attr(gloss, "source")) > 0){
+    attr(gloss, "source") <- sprintf("\\glpreamble %s//\n", attr(gloss, "source"))
+  }
+
+  # define translation
+  if (nchar(attr(gloss, "translation")) > 0){
+    attr(gloss, "translation") <- sprintf("\\glft %s%s%s// \n",
+                                          attr(gloss, "trans_quotes"),
+                                          attr(gloss, "translation"),
+                                          attr(gloss, "trans_quotes")
+                                          )
+  }
+  gloss_lines <- purrr::imap_chr(gloss[1:3],
+                                 ~ sprintf("\\gl%s %s// \n", letters[.y], .x))
+  gloss_text <- c(
+    sprintf("\\ex%s\n", attr(gloss, "label")),
+    "\\begingl \n",
+    attr(gloss, "source"),
+    gloss_lines,
+    attr(gloss, "translation"),
+    "\\endgl \n\\xe\n"
+    )
+  structure(gloss_text, class = "gloss")
 }
 
 #' @describeIn gloss_render Render in HTML
@@ -87,11 +109,12 @@ gloss_leipzig <- function(original, parsed, translation = NULL) {
 #' @describeIn gloss_render Render based on R Markdown output
 #'
 #' @export
-as_gloss <- function(original, parsed, translation = NULL, label = NULL) {
+as_gloss <- function(...) {
+  gloss <- create_gloss(...)
   if (getOption("glossr.output", "leipzig") == "latex") {
-    g <- gloss_pdf(original, parsed, translation, label)
+    g <- gloss_pdf(gloss)
   } else {
-    g <- gloss_html(original, parsed, translation, label)
+    g <- gloss_html(gloss)
   }
   structure(g, class = "gloss")
 }
