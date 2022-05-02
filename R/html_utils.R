@@ -106,7 +106,10 @@ use_tooltip <- function() {
 #' @export
 leipzig_script <- function() {
   htmltools::tags$script(
-    "document.addEventListener('DOMContentLoaded', function() {Leipzig().gloss();});"
+    paste0(
+      "document.addEventListener('DOMContentLoaded', function() ",
+      "{Leipzig({lastLineFree: false}).gloss();});"
     )
+  )
 }
 

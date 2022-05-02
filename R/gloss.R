@@ -10,8 +10,6 @@
 #'    last line of the example, without word alignment and in quotation
 #'    marks if so desired.}
 #'    \item{label}{Named label of the example, for cross-references.}
-#'    \item{trans_quotes}{Types of quotes to surround the free translation with,
-#'    if available.}
 #'    \item{lengths}{This is computed within the function, not provider, and
 #'    it's the number of items identified in each gloss line.}
 #' }
@@ -33,15 +31,22 @@ create_gloss <- function(
     label = NULL,
     trans_quotes = getOption("glossr.trans.quotes", '"')
 ) {
-  gloss_lines <- c(...)
+  gloss_lines <- unname(c(...))
   lengths <- purrr::map_dbl(gloss_lines, ~ length(gloss_linesplit(.x)))
+  source <- set_default(source, NULL) # set to NULL if invalid
+  translation <- set_default(translation, NULL) # set to NULL if invalid
+  if (!is.null(translation)) {
+    # add quotes if not null
+    translation <- sprintf("%s%s%s", trans_quotes, translation, trans_quotes)
+  }
   structure(
     gloss_lines,
-    source = set_default(source),
-    translation = set_default(translation),
+    has_source = !is.null(source),
+    source = set_default(source), # set to empty character if absent
+    has_translation = !is.null(translation),
+    translation = set_default(translation), # set to empty character if absent
     label = set_default(label),
     lengths = lengths,
-    trans_quotes = trans_quotes,
     class = "gloss_data"
   )
 }

@@ -26,7 +26,8 @@ gloss_format_words <- function(text, formatting) {
 #' Takes a series of glosses from \code{\link{gloss_render}}
 #'   and puts them in a list within one example for PDF output.
 #'
-#' @param glist List of \code{gloss} objects
+#' @param glist Concatenation of \code{gloss} objects, e.g.
+#'   as output of \code{\link{gloss_df}}.
 #' @param listlabel Label for the full list (optional)
 #'
 #' @return Character vector including the frame for a list of glosses.
@@ -36,11 +37,12 @@ gloss_list <- function(glist, listlabel = NULL) {
 
   if (output == "latex") {
     llabel <- if (is.null(listlabel)) "" else sprintf("\\label{%s}", listlabel)
+    glist <- stringr::str_replace(glist, "\\\\ex", "\\\\a")
+    glist <- glist[glist != "\\xe \n"]
     g <- c(
-      sprintf("\\ex%s\n", llabel),
-      "\\begin{xlist}\n",
+      sprintf("\\pex%s \n", llabel),
       glist,
-      "\\end{xlist}\n"
+      sprintf("\\xe \n")
     )
     structure(g, class = "gloss")
   } else {
