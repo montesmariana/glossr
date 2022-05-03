@@ -1,3 +1,7 @@
+# glossr 0.3.0
+
+- Add `gloss_word()` function and utility functions to generate Word output using `flextable::flextable()`.
+
 # glossr 0.2.0
 
 - Create class `gloss_data` to read and manage data from glosses.

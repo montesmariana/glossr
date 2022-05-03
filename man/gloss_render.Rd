@@ -7,6 +7,7 @@
 \alias{gloss_html}
 \alias{gloss_tooltip}
 \alias{gloss_leipzig}
+\alias{gloss_word}
 \alias{gloss_df}
 \title{Render a gloss}
 \usage{
@@ -17,6 +18,8 @@ gloss_html(gloss)
 gloss_tooltip(gloss)
 
 gloss_leipzig(gloss)
+
+gloss_word(gloss)
 
 gloss_df(df)
 }
@@ -43,6 +46,8 @@ Render a gloss
 \item \code{gloss_tooltip}: Tooltip rendering for HTML
 
 \item \code{gloss_leipzig}: Leipzig.js engine
+
+\item \code{gloss_word}: Render in Word
 
 \item \code{gloss_df}: Render glosses from a dataframe
 }}

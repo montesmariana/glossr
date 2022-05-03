@@ -1,7 +1,7 @@
 Package: glossr
 Type: Package
 Title: Use interlinear glosses in R Markdown
-Version: 0.2.0
+Version: 0.3.0
 Author: Mariana Montes
 Maintainer: Mariana Montes <mariana.montes@kuleuven.be>
 Description: Read examples with interlinear glosses from files
@@ -11,19 +11,23 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    tibble,
+    dplyr,
     flextable,
     htmltools,
     knitr,
     magrittr,
     purrr,
+    rlang,
     stringr,
-    testthat
+    tidyr
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Suggests: 
     bookdown,
-    dplyr,
+    officedown,
+    testthat,
     rmarkdown
 Depends: 
     R (>= 2.10)

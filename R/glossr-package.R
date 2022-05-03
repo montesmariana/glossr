@@ -20,6 +20,8 @@ use_glossr <- function(html_format = NULL) {
   opt <- getOption("glossr.output")
   if (knitr::is_latex_output()) {
     output <- "latex"
+  } else if (!knitr::is_html_output()) {
+    output <- "word"
   } else if (is.null(opt)) {
     output <- if (is.null(html_format)) "leipzig" else match.arg(html_format, html_formats)
   } else if (!is.null(html_format)) {
@@ -27,7 +29,7 @@ use_glossr <- function(html_format = NULL) {
   } else {
     output <- opt
   }
-  if (!output %in% c("latex", html_formats)) {
+  if (!output %in% c("latex", "word", html_formats)) {
     output <- "leipzig"
   }
   options("glossr.output" = output)

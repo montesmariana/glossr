@@ -69,7 +69,7 @@ gloss_tooltip <- function(gloss) {
   trans_part <- if (!attr(gloss, "has_translation")) {
     ""}
   else {
-    sprintf("\n    %s\n", ignore_latex(attr(gloss, "translation")))
+    sprintf("\n    %s\n", latex2html(attr(gloss, "translation")))
   }
   words <- htmltools::span(
     htmltools::tagList(
@@ -88,7 +88,7 @@ gloss_leipzig <- function(gloss) {
   source <- if (attr(gloss, "has_source")) attr(gloss, "source") else htmltools::HTML("&#160;")
 
   # define glosses
-  gloss_list <- purrr::map(gloss, ~ htmltools::p(ignore_latex(.x)))
+  gloss_list <- purrr::map(gloss, ~ htmltools::p(latex2html(.x)))
 
   # define translation
   translation <- if (attr(gloss, "has_translation")){
@@ -115,6 +115,37 @@ gloss_leipzig <- function(gloss) {
 
   c(as.character(g), "\n")
 }
+
+#' @describeIn gloss_render Render in Word
+#'
+#' @import dplyr
+#' @export
+gloss_word <- function(gloss) {
+  # define source
+  source <- if (attr(gloss, "has_source")) attr(gloss, "source") else "_"
+
+  # Split lines and count characters
+  gloss_lines <- gloss_word_lines(unclass(gloss))
+
+  # Create sequence of tables for different lines
+  ft_lines <- purrr::imap(gloss_lines, function(g, i) {
+    if (i == length(gloss_lines)) {
+      gt <- gloss_table(g, attr(gloss, "translation"))
+    } else {
+      gt <- gloss_table(g)
+    }
+    flextable::flextable_to_rmd(gt, ft.align = "left", print = FALSE)
+  }) %>% unlist()
+
+  structure(
+    c(
+      sprintf("(@%s) %s\n", attr(gloss, "label"), source),
+      ft_lines
+    ),
+    class = "gloss"
+  )
+}
+
 
 #' @describeIn gloss_render Render glosses from a dataframe
 #'

@@ -30,8 +30,8 @@ tooltip <- function(x, title) {
 #' ex_gloss <- "DET.M.SG example in Spanish"
 #' gloss_linetooltip(ex_sp, ex_gloss)
 gloss_linetooltip <- function(original, parsed) {
-  original <- gloss_linesplit(ignore_latex(original))
-  parsed <- gloss_linesplit(ignore_latex(parsed))
+  original <- gloss_linesplit(latex2html(original))
+  parsed <- gloss_linesplit(latex2html(parsed))
   stopifnot(length(original) == length(parsed))
   purrr::map2(original, parsed, ~ tooltip(.x, .y))
 }

@@ -11,7 +11,10 @@ test_that("Classes are correct", {
   expect_s3_class(my_gloss, "gloss_data")
   expect_s3_class(gloss_pdf(my_gloss), "gloss")
   expect_s3_class(gloss_html(my_gloss), "gloss")
+  expect_s3_class(gloss_word(my_gloss), "gloss")
   expect_error(gloss_pdf(ex_sp))
+  expect_error(gloss_html(ex_sp))
+  expect_error(gloss_word(ex_sp))
 })
 
 # Test pdf ----
@@ -68,4 +71,16 @@ test_that("source is rendered", {
     gloss_html(source_gloss)[[2]],
     "<p class=\\\"gloss__line--original\\\">\\(Author:year\\)</p>"
     )
+})
+
+# Test word
+test_that("gloss label renders in word", {
+  word <- gloss_word(my_gloss)
+  expect_length(word, 2)
+  expect_match(word[[1]], "^\\(@ex1\\) _\\n$")
+  expect_match(
+    word[[2]],
+    "^```\\{=html\\}\\n<div class=\\\"tabwid tabwid_left\\\"><style>"
+    )
+  expect_match(gloss_word(source_gloss)[[1]], "^\\(@\\) \\(Author:year\\)\\n$")
 })

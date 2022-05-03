@@ -1,11 +1,5 @@
-#' Ignore latex notation
-#'
-#' Replace most of the latex notation with with HTML equivalent
-#'
-#' @param string Latex string to parse
-#'
-#' @return Character vector
-ignore_latex <- function(string) {
+#' @describeIn parse_latex Convert to HTML
+latex2html <- function(string) {
   # TODO refine for replacement instead of removal
   string <- gsub(latex_tag("textit"), "*\\1*", string)
   string <- gsub(latex_tag("em"), "*\\1*", string)

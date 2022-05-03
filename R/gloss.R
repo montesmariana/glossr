@@ -64,9 +64,12 @@ create_gloss <- function(
 #' @export
 as_gloss <- function(...) {
   gloss <- create_gloss(...)
-  if (getOption("glossr.output", "leipzig") == "latex") {
-    g <- gloss_pdf(gloss)
+  output <- getOption("glossr.output", "leipzig")
+  if (output == "latex") {
+    gloss_pdf(gloss)
+  } else if (output == "word") {
+    gloss_word(gloss)
   } else {
-    g <- gloss_html(gloss)
+    gloss_html(gloss)
   }
 }

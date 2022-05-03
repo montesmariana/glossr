@@ -11,8 +11,13 @@ knit_print.gloss <- function(x, ...) {
     knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("expex")))
   } else if (output == "leipzig") {
     knitr::asis_output(x, meta = list(use_leipzig()))
+  } else if (output == "word") {
+    knitr::asis_output(x)
   } else {
-    knitr::asis_output(x, meta = list(rmarkdown::html_dependency_jquery(), use_tooltip()))
+    knitr::asis_output(x, meta = list(
+      rmarkdown::html_dependency_jquery(),
+      use_tooltip())
+      )
   }
 }
 
