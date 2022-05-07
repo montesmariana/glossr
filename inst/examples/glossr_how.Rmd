@@ -2,12 +2,10 @@
 title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
-output: bookdown::pdf_document2
-vignette: >
-  %\VignetteIndexEntry{Using the glossr package}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-bibliography: ["../inst/REFERENCES.bib", "../inst/packages.bib"]
+output:
+  rmdformats::readthedown:
+    highlight: kate
+bibliography: ["../REFERENCES.bib", "../packages.bib"]
 ---
 
 ```{r, include = FALSE}
@@ -16,7 +14,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
-# devtools::load_all()
+devtools::load_all()
 ```
 
 # Introduction
@@ -32,7 +30,7 @@ You can start using `glossr` in an R Markdown file by calling the library and th
 and `officedown::rdocx_document`, which renders [an MS Word file]((https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)) [@R-bookdown; @R-officedown].
 
 ```{r setup}
-library(glossr)
+# library(glossr)
 ```
 
 ```{r useglossr}
@@ -122,3 +120,5 @@ If you are familiar with these tools and would like to suggests expansions or co
 
 
 # References
+
+
