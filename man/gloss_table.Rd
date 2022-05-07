@@ -4,12 +4,10 @@
 \alias{gloss_table}
 \title{Create table from a gloss}
 \usage{
-gloss_table(gloss_output, translation = NULL)
+gloss_table(gloss_output)
 }
 \arguments{
 \item{gloss_output}{Gloss lines as a table for Word}
-
-\item{translation}{(Optional) Text for free translation}
 }
 \value{
 \code{\link[flextable]{flextable}} object

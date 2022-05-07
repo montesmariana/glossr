@@ -9,7 +9,7 @@ gloss_format_words(text, formatting)
 \arguments{
 \item{text}{Character vector of length 1.}
 
-\item{formatting}{Latex formatting code, e.g. `textit` or `textsc`.}
+\item{formatting}{Latex formatting code, e.g. \code{textit} or \code{textsc}.}
 }
 \value{
 Reformatted string

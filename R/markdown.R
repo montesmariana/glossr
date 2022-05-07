@@ -7,6 +7,7 @@
 #' @export
 knit_print.gloss <- function(x, ...) {
   output <- getOption("glossr.output")
+  validate_output(output)
   if (output == "latex") {
     knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("expex")))
   } else if (output == "leipzig") {

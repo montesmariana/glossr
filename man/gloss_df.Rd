@@ -4,13 +4,15 @@
 \alias{gloss_df}
 \title{Render gloss from a dataframe}
 \usage{
-gloss_df(df)
+gloss_df(df, output_format = getOption("glossr.output", "latex"))
 }
 \arguments{
 \item{df}{Dataframe one row per gloss. Columns \code{translation},
 \code{source} and \code{label} have special meaning
 (see \code{\link{new_gloss_data}}); all the others will be interpreted as
 lines to align in the order given.}
+
+\item{output_format}{(Optional) Whether it will use latex, word or html format.}
 }
 \value{
 Object of class \code{gloss} with the original input as \code{data} attribute.
