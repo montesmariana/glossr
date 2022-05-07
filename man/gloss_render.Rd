@@ -8,7 +8,6 @@
 \alias{gloss_tooltip}
 \alias{gloss_leipzig}
 \alias{gloss_word}
-\alias{gloss_df}
 \title{Render a gloss}
 \usage{
 gloss_pdf(gloss)
@@ -20,22 +19,17 @@ gloss_tooltip(gloss)
 gloss_leipzig(gloss)
 
 gloss_word(gloss)
-
-gloss_df(df)
 }
 \arguments{
 \item{gloss}{Object of class \code{gloss_data}}
-
-\item{df}{Dataframe one row per gloss. Columns \code{translation},
-\code{source} and \code{label} have special meaning
-(see \code{\link{create_gloss}}); all the others will be interpreted as
-lines to align in the order given.}
 }
 \value{
 Object of class \code{gloss}
 }
 \description{
-Render a gloss
+This functions are output-specific and can be used to check the specific output
+  of certain calls, but are not meant to be used in an R Markdown file. Instead,
+  use \code{\link{as_gloss}} or \code{\link{gloss_df}}.
 }
 \section{Functions}{
 \itemize{
@@ -48,15 +42,13 @@ Render a gloss
 \item \code{gloss_leipzig}: Leipzig.js engine
 
 \item \code{gloss_word}: Render in Word
-
-\item \code{gloss_df}: Render glosses from a dataframe
 }}
 
 \examples{
 ex_sp <- "Un ejemplo en español"
 ex_gloss <- "DET.M.SG example in Spanish"
 ex_trans <- "An example in Spanish"
-my_gloss <- create_gloss(ex_sp, ex_gloss, translation = ex_trans, label="ex1")
+my_gloss <- new_gloss_data(list(ex_sp, ex_gloss), translation = ex_trans, label="ex1")
 gloss_pdf(my_gloss)
 
 gloss_html(my_gloss)

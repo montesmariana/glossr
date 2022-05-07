@@ -1,10 +1,11 @@
 ex_sp <- "Un ejemplo en español"
 ex_gloss <- "DET.M.SG example in Spanish"
 ex_trans <- "An example in Spanish."
-my_gloss <- create_gloss(ex_sp, ex_gloss, translation = ex_trans, label = "ex1")
-no_trans <- create_gloss(ex_sp, ex_gloss, label = "ex2")
-bare_gloss <- create_gloss(ex_sp, ex_gloss)
-source_gloss <- create_gloss(ex_sp, ex_gloss, source = "(Author:year)")
+gloss_lines <- list(ex_sp, ex_gloss)
+my_gloss <- new_gloss_data(gloss_lines, translation = ex_trans, label = "ex1")
+no_trans <- new_gloss_data(gloss_lines, label = "ex2")
+bare_gloss <- new_gloss_data(gloss_lines)
+source_gloss <- new_gloss_data(gloss_lines, source = "(Author:year)")
 
 # Test classes
 test_that("Classes are correct", {
@@ -73,10 +74,10 @@ test_that("source is rendered", {
     )
 })
 
-# Test word
+# Test word ----
 test_that("gloss label renders in word", {
   word <- gloss_word(my_gloss)
-  expect_length(word, 2)
+  expect_length(word, 3)
   expect_match(word[[1]], "^\\(@ex1\\) _\\n$")
   expect_match(
     word[[2]],
