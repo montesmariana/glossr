@@ -15,3 +15,26 @@ set_default <- function(x, default = "") {
 #' @return Character vector
 #' @name parse_latex
 NULL
+
+#' Validate output format
+#'
+#' @param output Character string with output format required.
+#'
+#' @return Invisible, the output. It also sets it as the 'glossr.output' option.
+#' @export
+validate_output <- function(output = c("word", "latex", "leipzig", "tooltip", "html", "pdf")) {
+  output <- tryCatch(
+    error = function(cnd) {
+      warning(
+      "The output format '", output, "' is not supported.\
+      Switching to default 'latex'.",
+      call. = FALSE)
+      output <- "latex"
+      },
+    match.arg(output)
+    )
+  if (output == "html") output <- "leipzig"
+  if (output == "pdf") output <- "latex"
+  options("glossr.output" = output)
+  invisible(output)
+}
