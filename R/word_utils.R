@@ -59,25 +59,19 @@ reset_max <- function(m, c, l) {
 #' Create table from a gloss
 #'
 #' @param gloss_output Gloss lines as a table for Word
-#' @param translation (Optional) Text for free translation
-#'
+
 #' @return \code{\link[flextable]{flextable}} object
 #' @import flextable
 #' @export
-gloss_table <- function(gloss_output, translation = NULL) {
+gloss_table <- function(gloss_output) {
   # TODO add formatting
-  ft <- flextable(gloss_output) %>%
+  flextable(gloss_output) %>%
     delete_part("header") %>%
     border_remove() %>%
     padding(padding = 0) %>%
     line_spacing(space = 1.5) %>%
     padding(j = 1, padding.left = 30) %>%
     autofit()
-  if (is.null(translation)) {
-    ft
-  } else {
-    ft %>% footnote(value = as_paragraph(translation), ref_symbols = "\t\t")
-  }
 }
 
 #' @describeIn parse_latex Convert to Word
