@@ -1,3 +1,11 @@
+# glossr 0.4.0
+
+- New and better error messages.
+
+- The translation is Word output now spans as long as the content (it might be too long and the user might have to shorten the table).
+
+- `add_gloss()` and `gloss_df()` have a new `output_format` argument to set a specific format.
+
 # glossr 0.3.0
 
 - Add `gloss_word()` function and utility functions to generate Word output using `flextable::flextable()`.
