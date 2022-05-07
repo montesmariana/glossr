@@ -4,7 +4,7 @@
 #'   to different words in a row.
 #'
 #' @param text Character vector of length 1.
-#' @param formatting Latex formatting code, e.g. `textit` or `textsc`.
+#' @param formatting Latex formatting code, e.g. \code{textit} or \code{textsc}.
 #'
 #' @return Reformatted string
 #' @export
@@ -33,18 +33,25 @@ gloss_format_words <- function(text, formatting) {
 #' @return Character vector including the frame for a list of glosses.
 #' @export
 gloss_list <- function(glist, listlabel = NULL) {
+  if (!inherits(glist, "gloss")) {
+    stop("`gloss_list` needs an object of class `gloss`, \
+         please use `as_gloss()` or `gloss_df()` first.",
+         call. = FALSE)
+  }
   output <- getOption("glossr.output", "latex")
+  clean_gloss <- unclass(glist)
+  attr(clean_gloss, "data") <- NULL
 
   if (output == "latex") {
     llabel <- if (is.null(listlabel)) "" else sprintf("\\label{%s}", listlabel)
-    glist <- stringr::str_replace(glist, "\\\\ex", "\\\\a")
-    glist <- glist[glist != "\\xe \n"]
-    g <- c(
+    clean_gloss <- stringr::str_replace(clean_gloss, "\\\\ex", "\\\\a")
+    clean_gloss <- clean_gloss[clean_gloss != "\\xe \n"]
+    clean_gloss <- c(
       sprintf("\\pex%s \n", llabel),
-      glist,
+      clean_gloss,
       sprintf("\\xe \n")
     )
-    structure(g, class = "gloss")
+    new_gloss(attr(glist, "data"), clean_gloss)
   } else {
     glist
   }
