@@ -7,7 +7,7 @@
 
         <meta name="author" content="Mariana Montes" />
     
-        <meta name="date" content="2022-05-07" />
+        <meta name="date" content="2022-05-09" />
     
     <title>Using the glossr package</title>
 
@@ -1463,7 +1463,7 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
 
 });
 </script>
-        <style type="text/css">.gloss--glossed:after {clear: left;content: '';display: block;}ul.gloss--glossed,ol.gloss--glossed {padding-left: 0;}ul.gloss--glossed li,ol.gloss--glossed li {list-style-type: none;}.gloss__abbr {font-variant: small-caps;font-variant-numeric: oldstyle-nums;text-transform: lowercase;}.gloss__word {float: left;margin-bottom: 1em;margin-right: 1em;}.gloss__word p {margin: 0;}.gloss--no-space .gloss__word {margin-right: 0;}.gloss--no-space .gloss__word.gloss__word--spacer {margin-right: 1.5em;}.gloss__words:first-child,.gloss--glossed li:first-child {margin-top: 1em;}.gloss--glossed li:last-child {margin-bottom: 1em;}.gloss__word .gloss__line:first-child {font-style: italic;}.gloss__line--original {font-weight: bold;margin-bottom: 1em;}.gloss__line--free,.gloss__line--no-align {clear: left;}.gloss__line--hidden {display: none;}</style>
+        <style type="text/css">.gloss--glossed:after {clear: left;content: '';display: block;}ul.gloss--glossed,ol.gloss--glossed {padding-left: 0;}ul.gloss--glossed li,ol.gloss--glossed li {list-style-type: none;}.gloss__abbr {font-variant: small-caps;font-variant-numeric: oldstyle-nums;text-transform: lowercase;}.gloss__word {float: left;margin-bottom: 1em;margin-right: 1em;}.gloss__word p {margin: 0;}.gloss--no-space .gloss__word {margin-right: 0;}.gloss--no-space .gloss__word.gloss__word--spacer {margin-right: 1.5em;}.gloss__words:first-child,.gloss--glossed li:first-child {margin-top: 1em;}.gloss--glossed li:last-child {margin-bottom: 1em;}.gloss__line--original {margin-bottom: 1em;}.gloss__line--free,.gloss__line--no-align {clear: left;}.gloss__line--hidden {display: none;}</style>
         <script>/*! leipzig.js v0.8.0 | ISC License | github.com/bdchauvette/leipzig.js */
 (function (global, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -2248,7 +2248,7 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
                   <p class="author"><span class="glyphicon glyphicon-user"></span> Mariana
 Montes</p>
-                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-05-07</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-05-09</p>
           </div>
    </div>
      
@@ -2286,8 +2286,11 @@ renders <a href="(https://github.com/montesmariana/glossr/raw/main/inst/pdf/glos
 MS Word file</a> <span class="citation">(Xie 2022; Gohel and Ross
 2022)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(glossr)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_glossr</span>()</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Setting up the `leipzig` engine.</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_glossr</span>(<span class="at">styling =</span> <span class="fu">list</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="st">&quot;i&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Setting up the `leipzig` engine.</span></span></code></pre></div>
 </div>
 <div id="basic-usage" class="section level1">
 <h1>Basic usage</h1>
@@ -2297,7 +2300,7 @@ currently four named, optional arguments that will be treated
 specially:</p>
 <ul>
 <li><p><code>label</code> will be interpreted as the label for
-cross-references;</p></li>
+cross-references with some;</p></li>
 <li><p><code>source</code> will be interpreted as text for a non-aligned
 first line, e.g. a reference to the source of your example;</p></li>
 <li><p><code>translation</code> will be interpreted as text for a free
@@ -2316,7 +2319,8 @@ reproduced in the order given, but only up to 3 lines are allowed.</p>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code></pre></div>
 <ol class="example" style="list-style-type: decimal">
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;}</style>
+<div data-gloss>
 <p class="gloss__line--original">
  
 </p>

@@ -3,6 +3,8 @@ title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
 output:
+  bookdown::pdf_document2: default
+  officedown::rdocx_document: default
   rmdformats::readthedown:
     highlight: kate
 bibliography: ["../REFERENCES.bib", "../packages.bib"]
@@ -34,14 +36,17 @@ and `officedown::rdocx_document`, which renders [an MS Word file]((https://githu
 ```
 
 ```{r useglossr}
-use_glossr()
+use_glossr(styling = list(
+  source = "b",
+  first = "i"
+))
 ```
 
 # Basic usage
 
 When you want to include an example, create a gloss with `as_gloss()` and call it inside a normal chunk. There are currently four named, optional arguments that will be treated specially:
 
-- `label` will be interpreted as the label for cross-references;
+- `label` will be interpreted as the label for cross-references with some;
 
 - `source` will be interpreted as text for a non-aligned first line, e.g. a reference to the source of your example;
 

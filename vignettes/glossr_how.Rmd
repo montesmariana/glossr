@@ -36,7 +36,10 @@ library(glossr)
 ```
 
 ```{r useglossr}
-use_glossr()
+use_glossr(styling = list(
+  source = "b", # source line in bold
+  first = "i" # first line in italics
+))
 ```
 
 # Basic usage

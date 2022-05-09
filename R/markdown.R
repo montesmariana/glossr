@@ -13,7 +13,7 @@ knit_print.gloss <- function(x, ...) {
       "exskip=0pt",
       "belowglpreambleskip=0pt",
       "aboveglftskip=0pt",
-      paste0("everyglpreamble=", format_pdf("source")),
+      paste0("everyglpreamble=", format_pdf("preamble")),
       paste0("everygla=", format_pdf("a")),
       paste0("everyglb=", format_pdf("b")),
       paste0("everyglc=", format_pdf("c")),
