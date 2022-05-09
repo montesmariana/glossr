@@ -117,6 +117,11 @@ gloss_leipzig <- function(gloss) {
       leipzig_script()
     )
     options("glossr.first_leipzig" = FALSE)
+  } else {
+    g <- htmltools::tagList(
+      format_html(),
+      g
+    )
   }
 
   c(as.character(g), "\n")

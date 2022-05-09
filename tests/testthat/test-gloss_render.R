@@ -46,7 +46,7 @@ test_that("gloss label with source renders in pdf", {
 test_that("gloss label renders in html", {
   html <- gloss_html(my_gloss)
   expect_match(html[[1]], "\\(@ex1\\)")
-  expect_match(html[[2]], "^<div data-gloss=\\\"\\\">\\n")
+  expect_match(html[[2]], "^<style>.*<div data-gloss=\\\"\\\">\\n")
   expect_match(html[[2]], ".*\\n</div>")
   expect_match(
     html[[2]],

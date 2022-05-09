@@ -37,7 +37,7 @@ use_glossr <- function(
   }
   check_packages(output)
   options("glossr.output" = output)
-  options("glossr.first_leipzig" = TRUE)
+  # options("glossr.first_leipzig" = TRUE)
   set_style_options(styling = styling)
   message(sprintf("Setting up the `%s` engine.", output))
 }

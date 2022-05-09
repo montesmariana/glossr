@@ -121,7 +121,7 @@ format_html <- function() {
   style <- purrr::imap_chr(levels, function(css_class, level) {
     format <- getOption(sprintf("glossr.format.%s", level))
     if (is.null(format)) {
-      ""
+      sprintf("%s {font-style:normal;font-weight:normal}", css_class)
     } else if (format %in% style_options("i")) {
       sprintf("%s {font-style:italic;}", css_class)
     } else if (format %in% style_options("b")) {
