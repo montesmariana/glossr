@@ -12,6 +12,8 @@
 #' @examples
 #' gloss_format_words("Many words to apply italics on.", "textit")
 gloss_format_words <- function(text, formatting) {
+  if (formatting %in% style_options("i")) formatting <- "textit"
+  if (formatting %in% style_options("b")) formatting <- "textbf"
   gloss_linesplit(text) %>%
     purrr::map_chr(~ sprintf("\\%s{%s}", formatting, .x)) %>%
     purrr::map_chr(~ ifelse(
@@ -54,5 +56,23 @@ gloss_list <- function(glist, listlabel = NULL) {
     new_gloss(attr(glist, "data"), clean_gloss)
   } else {
     glist
+  }
+}
+
+#' Read Latex formatting options
+#'
+#' @param level Gloss line to format
+#'
+#' @return Key for expex
+format_pdf <- function(level) {
+  format <- getOption(sprintf("glossr.format.%s", level))
+  if (is.null(format)) {
+    NULL
+  } else if (format %in% style_options("i")) {
+    "\\it"
+  } else if (format %in% style_options("b")) {
+    "\\bf"
+  } else {
+    NULL
   }
 }

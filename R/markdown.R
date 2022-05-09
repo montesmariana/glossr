@@ -9,7 +9,21 @@ knit_print.gloss <- function(x, ...) {
   output <- getOption("glossr.output")
   validate_output(output)
   if (output == "latex") {
-    knitr::asis_output(x, meta = list(rmarkdown::latex_dependency("expex")))
+    latex_params = c(
+      "exskip=0pt",
+      "belowglpreambleskip=0pt",
+      "aboveglftskip=0pt",
+      paste0("everyglpreamble=", format_pdf("source")),
+      paste0("everygla=", format_pdf("a")),
+      paste0("everyglb=", format_pdf("b")),
+      paste0("everyglc=", format_pdf("c")),
+      paste0("everyglft=", format_pdf("translation"))
+    )
+    knitr::asis_output(
+      c(
+        sprintf("\\lingset{%s}", paste(latex_params, collapse = ",")),
+        x),
+      meta = list(rmarkdown::latex_dependency("expex")))
   } else if (output == "leipzig") {
     knitr::asis_output(x, meta = list(use_leipzig()))
   } else if (output == "word") {
