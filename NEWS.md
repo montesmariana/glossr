@@ -1,3 +1,7 @@
+# glossr 0.5.0
+
+- The default styling of the lines has no italics or bold but it is possible to define a consistent style (italics or bold) for each of the elements of a gloss. See `vignette('styling')`.
+
 # glossr 0.4.0
 
 - New and better error messages.

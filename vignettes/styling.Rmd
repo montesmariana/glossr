@@ -1,0 +1,98 @@
+---
+title: "Styling glosses"
+author: "Mariana Montes"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_captions: yes
+vignette: >
+  %\VignetteIndexEntry{Styling glosses}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+By default, glosses produced with `glossr` don't have italics or bold (this may change in the future, by user request). However, it is fairly easy to adapt that at the document level.
+
+The formatting of different lines is stored in `options()`, with variables starting with "glossr.format.":
+
+- `glossr.format.preamble` indicates the styling for the (optional) first line, where the "source" variable is rendered.
+
+- `glossr.format.a` indicates the styling of the first gloss line.
+
+- `glossr.format.b` indicates the styling of the second gloss line.
+
+- `glossr.format.c` indicates the styling of the third gloss line.
+
+- `glossr.format.translation` indicates the styling of the translation line.
+
+Each of these options can either take a value setting italics ("i", "it", "italics" or "textit") or one setting boldface ("b" "bf", "bold", "textbf").
+
+If you're familiar with `options()`, you can set your preference by entering something like this in a chunk:
+
+```{r, eval = FALSE}
+options(glossr.format.a = "i") # italics in the first line
+```
+
+Alternatively, `use_glossr()` offers a friendlier interface with a wider variety of names, so you can choose the mnemonic that works for you.
+The argument "styling" must be a named list, with a key pointing to the line you want to style and the same range of values mentioned above.
+
+- `source` and `preamble` are both valid names to set the format of the first optional line, where the `source` variable is rendered.
+
+- `a` and `first` are both valid names for the first gloss line.
+
+- `b` and `second` are both valid names for the second gloss line.
+
+- `c` and `third` are both valid names for the third gloss line.
+
+- `ft`, `trans` and `translation` are all valid names for the free translation line.
+
+If you would like to add other alternatives, let me know!
+
+As an example, if you run the following chunk:
+
+```{r, eval=FALSE}
+library(glossr)
+use_glossr(styling = list(
+  source = "b",
+  first = "i"
+))
+```
+
+...you will set all first lines to italics and the sources to boldface. The next one, on the other hand:
+
+```{r, eval = FALSE}
+use_glossr(styling = list(
+  first = "i",
+  trans = "i"
+))
+```
+
+Will set the first line and the free translation in italics.
+
+You can always annul a setting by typing `options(glossr.format.a = NULL)`, for example. But this set-up is meant to encourage/enforce you to keep the same style across a given file.
+
+Finally, the `styling` argument can also take another element, "trans_quotes" (also to be set as `options(glossr.trans.quotes = "whatever")`) to define the character you want to surround your translation with. By default, this is double quotes, but you might want to select single quotes instead, or remove them altogether. The following chunk of code sets italics in the first line and single quotes for the translation:
+
+```{r, eval = FALSE}
+use_glossr(styling = list(
+  first = "i",
+  trans_quotes = "'"
+))
+```
+
+And the following removes quotes altogether:
+
+```{r, eval = FALSE}
+use_glossr(styling = list(
+  first = "i",
+  trans_quotes = ""
+))
+```
+
