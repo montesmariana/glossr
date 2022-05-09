@@ -4,13 +4,15 @@
 \alias{use_glossr}
 \title{Use glossr}
 \usage{
-use_glossr(html_format = NULL)
+use_glossr(html_format = NULL, styling = list())
 }
 \arguments{
 \item{html_format}{Whether the html output should use leipzig.js or tooltips.}
+
+\item{styling}{Named list of styling options for specific elements of glosses.}
 }
 \value{
-Set glossr.output option
+Set options
 }
 \description{
 Call in a setup chunk.

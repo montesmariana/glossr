@@ -8,10 +8,12 @@
 \usage{
 latex2html(string)
 
-latex2word(string)
+latex2word(string, is_cell = TRUE)
 }
 \arguments{
 \item{string}{Latex string to parse}
+
+\item{is_cell}{For word output, whether to style raw text or a cell}
 }
 \value{
 Character vector

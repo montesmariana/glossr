@@ -108,8 +108,11 @@ gloss_leipzig <- function(gloss) {
     `data-gloss` = "",
     .noWS = "outside"
   )
+  first_it <- ".gloss__word .gloss__line:first-child {font-style:italic;}"
+  orig_bf <- ".gloss__line--original {}"
   if (is_first) {
     g <- htmltools::tagList(
+      format_html(),
       g,
       leipzig_script()
     )
@@ -132,18 +135,18 @@ gloss_word <- function(gloss) {
   gloss_lines <- gloss_word_lines(unclass(gloss))
   if (attr(gloss, "has_translation")) {
     translation <- data.frame(translation = attr(gloss, "translation"))
-    gloss_lines[[length(gloss_lines) + 1]] <- translation
+    gloss_lines[[length(gloss_lines) + 1]] <- gloss_table(translation, TRUE)
   }
 
 
   # Create sequence of tables for different lines
   ft_lines <- purrr::map(gloss_lines, function(g) {
-    gloss_table(g) %>%
-      flextable::flextable_to_rmd(ft.align = "left", print = FALSE)
+    g <- if (inherits(g, "flextable")) g else gloss_table(g)
+    flextable::flextable_to_rmd(g, ft.align = "left", print = FALSE)
   }) %>% unlist()
 
   gloss_print <- c(
-    sprintf("(@%s) %s\n", attr(gloss, "label"), source),
+    sprintf("(@%s) %s\n", attr(gloss, "label"), format_word_source(source)),
     ft_lines
     )
   new_gloss(gloss, gloss_print)
