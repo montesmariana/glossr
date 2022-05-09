@@ -10,4 +10,4 @@
 ^pkgdown$
 ^\.github$
 ^inst/figures/dev$
-^inst/pdf$
+^inst/examples$

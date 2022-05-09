@@ -13,13 +13,12 @@ LazyData: true
 Imports: 
     tibble,
     dplyr,
-    flextable,
-    htmltools,
     knitr,
     magrittr,
     purrr,
     rlang,
     stringr,
+    flextable,
     tidyr
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
@@ -28,7 +27,9 @@ Suggests:
     bookdown,
     officedown,
     testthat,
-    rmarkdown
+    rmarkdown,
+    officer,
+    htmltools
 Depends: 
     R (>= 2.10)
 URL: https://montesmariana.github.io/glossr/, https://github.com/montesmariana/glossr
