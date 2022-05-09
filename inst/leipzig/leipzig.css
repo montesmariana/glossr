@@ -47,12 +47,8 @@ ol.gloss--glossed li {
   margin-bottom: 1em;
 }
 
-.gloss__word .gloss__line:first-child {
-  font-style: italic;
-}
 
 .gloss__line--original {
-  font-weight: bold;
   margin-bottom: 1em;
 }
 

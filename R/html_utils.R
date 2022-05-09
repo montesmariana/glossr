@@ -107,3 +107,30 @@ leipzig_script <- function() {
   )
 }
 
+#' Read HTML formatting options
+#'
+#' @return Style tag
+format_html <- function() {
+  levels <- c(
+    preamble = ".gloss__line--original",
+    a = ".gloss__word .gloss__line:first-child",
+    b = ".gloss__word .gloss__line--2",
+    c = ".gloss__word .gloss__line--3",
+    translation = ".gloss__line--free")
+
+  style <- purrr::imap_chr(levels, function(css_class, level) {
+    format <- getOption(sprintf("glossr.format.%s", level))
+    if (is.null(format)) {
+      ""
+    } else if (format %in% style_options("i")) {
+      sprintf("%s {font-style:italic;}", css_class)
+    } else if (format %in% style_options("b")) {
+      sprintf("%s {font-weight: bold;}", css_class)
+    } else {
+      ""
+    }
+  })
+  htmltools::tags$style(trimws(paste(style, collapse = " ")))
+
+}
+
