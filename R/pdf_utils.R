@@ -14,13 +14,14 @@
 gloss_format_words <- function(text, formatting) {
   if (formatting %in% style_options("i")) formatting <- "textit"
   if (formatting %in% style_options("b")) formatting <- "textbf"
-  gloss_linesplit(text) %>%
+  split_line <- gloss_linesplit(text) %>%
     purrr::map_chr(~ sprintf("\\%s{%s}", formatting, .x)) %>%
     purrr::map_chr(~ ifelse(
       stringr::str_detect(.x, " "),
       sprintf("{%s}", .x),
       .x)) %>%
     paste(collapse = " ")
+  gsub("\\s+", " ", split_line)
 }
 
 #' Sublist glosses
