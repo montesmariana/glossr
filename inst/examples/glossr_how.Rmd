@@ -3,10 +3,11 @@ title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
 output:
-  bookdown::pdf_document2: default
-  officedown::rdocx_document: default
   rmdformats::readthedown:
     highlight: kate
+  officedown::rdocx_document: default
+  bookdown::pdf_document2:
+    latex_engine: xelatex
 bibliography: ["../REFERENCES.bib", "../packages.bib"]
 ---
 
@@ -58,8 +59,8 @@ All other values will be interpreted as lines to be aligned and reproduced in th
 
 ```{r, first-gloss}
 my_gloss <- as_gloss(
-  "Hace calor/frío",
-  "make-3SG-PRS heat/cold-N-A",
+  "Hace $\\emptyset$ calor/frío",
+  "make-3SG-PRS $\\emptyset$ heat/cold-N-A",
   translation = "'It is hot/cold'",
   label = "my-label"
 )

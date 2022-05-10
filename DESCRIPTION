@@ -1,7 +1,7 @@
 Package: glossr
 Type: Package
 Title: Use interlinear glosses in R Markdown
-Version: 0.5.0
+Version: 0.5.1
 Author: Mariana Montes
 Maintainer: Mariana Montes <mariana.montes@kuleuven.be>
 Description: Read examples with interlinear glosses from files

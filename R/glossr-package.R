@@ -106,8 +106,11 @@ set_style_options <- function(styling = list()) {
   if ("trans_quotes" %in% names(styling)) {
     style_opts$glossr.trans.quotes = styling$trans_quotes
   }
+  if ("par_spacing" %in% names(styling)) {
+    style_opts$glossr.par.spacing = styling$par_spacing
+  }
   options(style_opts)
-  extra <- setdiff(names(styling), c(names(variables), "trans_quotes"))
+  extra <- setdiff(names(styling), c(names(variables), "trans_quotes", "par_spacing"))
   for (e in extra) {
     warning(sprintf("'%s' is not a valid style option.", e),
             call. = FALSE)

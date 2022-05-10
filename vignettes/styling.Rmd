@@ -78,7 +78,9 @@ Will set the first line and the free translation in italics.
 
 You can always annul a setting by typing `options(glossr.format.a = NULL)`, for example. But this set-up is meant to encourage/enforce you to keep the same style across a given file.
 
-Finally, the `styling` argument can also take another element, "trans_quotes" (also to be set as `options(glossr.trans.quotes = "whatever")`) to define the character you want to surround your translation with. By default, this is double quotes, but you might want to select single quotes instead, or remove them altogether. The following chunk of code sets italics in the first line and single quotes for the translation:
+Moreover, the `styling` argument can take two other elements.
+
+First, "trans_quotes" (also to be set as `options(glossr.trans.quotes = "whatever")`) defines the character you want to surround your translation with. By default, this is double quotes, but you might want to select single quotes instead, or remove them altogether. The following chunk of code sets italics in the first line and single quotes for the translation:
 
 ```{r, eval = FALSE}
 use_glossr(styling = list(
@@ -96,3 +98,4 @@ use_glossr(styling = list(
 ))
 ```
 
+Finally, "par_spacing" (also to be set as `options(glossr.par.spacing = 0)`) defines the space above and below the glosses, which by default is 0. Depending on the normal settings of your template, you might want to add more spacing.

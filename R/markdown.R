@@ -10,7 +10,7 @@ knit_print.gloss <- function(x, ...) {
   validate_output(output)
   if (output == "latex") {
     latex_params = c(
-      "exskip=0pt",
+      sprintf("exskip=%dpt", getOption("glossr.par.spacing", 0)),
       "belowglpreambleskip=0pt",
       "aboveglftskip=0pt",
       paste0("everyglpreamble=", format_pdf("preamble")),
@@ -19,11 +19,12 @@ knit_print.gloss <- function(x, ...) {
       paste0("everyglc=", format_pdf("c")),
       paste0("everyglft=", format_pdf("translation"))
     )
+    for_xelatex <- c("\\let\\expexgla\\gla", "\\AtBeginDocument{\\let\\gla\\expexgla}")
     knitr::asis_output(
       c(
         sprintf("\\lingset{%s}", paste(latex_params, collapse = ",")),
         x),
-      meta = list(rmarkdown::latex_dependency("expex")))
+      meta = list(rmarkdown::latex_dependency("expex", extra_lines = for_xelatex)))
   } else if (output == "leipzig") {
     knitr::asis_output(x, meta = list(use_leipzig()))
   } else if (output == "word") {

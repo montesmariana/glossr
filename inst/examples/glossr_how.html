@@ -7,7 +7,7 @@
 
         <meta name="author" content="Mariana Montes" />
     
-        <meta name="date" content="2022-05-09" />
+        <meta name="date" content="2022-05-10" />
     
     <title>Using the glossr package</title>
 
@@ -2248,7 +2248,7 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
                   <p class="author"><span class="glyphicon glyphicon-user"></span> Mariana
 Montes</p>
-                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-05-09</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-05-10</p>
           </div>
    </div>
      
@@ -2312,23 +2312,23 @@ vignette showing this.</p></li>
 <p>All other values will be interpreted as lines to be aligned and
 reproduced in the order given, but only up to 3 lines are allowed.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_gloss <span class="ot">&lt;-</span> <span class="fu">as_gloss</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Hace calor/frío&quot;</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;make-3SG-PRS heat/cold-N-A&quot;</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Hace $</span><span class="sc">\\</span><span class="st">emptyset$ calor/frío&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;make-3SG-PRS $</span><span class="sc">\\</span><span class="st">emptyset$ heat/cold-N-A&quot;</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">translation =</span> <span class="st">&quot;&#39;It is hot/cold&#39;&quot;</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;my-label&quot;</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code></pre></div>
 <ol class="example" style="list-style-type: decimal">
-<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;}</style>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
 <div data-gloss>
 <p class="gloss__line--original">
  
 </p>
 <p>
-Hace calor/frío
+Hace ∅ calor/frío
 </p>
 <p>
-make-3SG-PRS heat/cold-N-A
+make-3SG-PRS ∅ heat/cold-N-A
 </p>
 <p class="gloss__line--free">
 “‘It is hot/cold’”
@@ -2376,7 +2376,8 @@ rows. Note that the values in the “label” column will be used as labels:
 <code>`r gloss(&quot;feel-icelandic&quot;)`</code> will return (2).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gloss_df</span>(<span class="fu">head</span>(glosses, <span class="dv">3</span>))</span></code></pre></div>
 <ol start="2" class="example" style="list-style-type: decimal">
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss>
 <p class="gloss__line--original">
 (Einarsson 1945:170)
 </p>
@@ -2390,7 +2391,8 @@ Mér er heitt/kalt
 “I am hot/cold.”
 </p>
 </div></li>
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss>
 <p class="gloss__line--original">
 (Pustet 2015:908)
 </p>
@@ -2404,7 +2406,8 @@ make.3SG.PRS heat/cold..N.A
 “It is hot/cold; literally: it makes heat/cold.”
 </p>
 </div></li>
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss>
 <p class="gloss__line--original">
 (Ross 1996:204)
 </p>
@@ -2435,7 +2438,8 @@ can use <code>`r gloss(&quot;jp&quot;)`</code> to reference (<span class="citati
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gloss_df</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gloss_list</span>(<span class="at">listlabel =</span> <span class="st">&quot;jp&quot;</span>)</span></code></pre></div>
 <ol start="5" class="example" style="list-style-type: decimal">
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss>
 <p class="gloss__line--original">
 (Shindo 2015:660)
 </p>
@@ -2452,7 +2456,8 @@ surround-PASS feeling NOM do-PST
 were surrounded by something heart warming.”
 </p>
 </div></li>
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss>
 <p class="gloss__line--original">
 (Shindo 2015:660)
 </p>
@@ -2489,7 +2494,8 @@ for the first line). For the wish list.</p>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code></pre></div>
 <ol start="7" class="example" style="list-style-type: decimal">
-<li><div data-gloss>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss>
 <p class="gloss__line--original">
  
 </p>

@@ -1,3 +1,9 @@
+# glossr 0.5.1
+
+- New option to add spacing above and below the glosses in PDF.
+
+- Read Latex coding of "zero" for HTML. (TODO figure out for Word.)
+
 # glossr 0.5.0
 
 - The default styling of the lines has no italics or bold but it is possible to define a consistent style (italics or bold) for each of the elements of a gloss. See `vignette('styling')`.
