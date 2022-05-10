@@ -4,6 +4,8 @@
 
 - Read Latex coding of "zero" for HTML. (TODO figure out for Word.)
 
+- Fix the expex latex dependency for compatibility with Xelatex.
+
 # glossr 0.5.0
 
 - The default styling of the lines has no italics or bold but it is possible to define a consistent style (italics or bold) for each of the elements of a gloss. See `vignette('styling')`.
