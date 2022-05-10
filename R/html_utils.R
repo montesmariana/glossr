@@ -1,10 +1,13 @@
 #' @describeIn parse_latex Convert to HTML
 latex2html <- function(string) {
   # TODO refine for replacement instead of removal
-  string <- gsub(latex_tag("textit"), "*\\1*", string)
-  string <- gsub(latex_tag("em"), "*\\1*", string)
-  string <- gsub(latex_tag("textbf"), "**\\1**", string)
-  sc_to_upper(string)
+  string <- gsub(latex_tag("textit"), "<em>\\1</em>", string)
+  string <- gsub(latex_tag("em"), "<em>\\1</em>", string)
+  string <- gsub(latex_tag("textbf"), "<strong>\\1</strong>", string)
+  string <- gsub("\\O", "&#8709;", string)
+  string <- gsub("\\$\\\\(emptyset|varnothing)\\$", "&#8709;", string)
+  string <- sc_to_upper(string)
+  htmltools::HTML(string)
 }
 
 
@@ -33,7 +36,7 @@ sc_to_upper <- function(string) {
 #'
 #' @returns Regex expression to extract tagged string.
 latex_tag <- function(tag) {
-  sprintf("\\\\%s\\{([^\\}]+)\\}", tag)
+  sprintf("\\\\%s\\{([^}]+)\\}", tag)
   }
 
 #' Split lines for HTML
