@@ -7,26 +7,25 @@
 
 <!-- badges: end -->
 
-The `glossr` package gives you tools to include interlinear glosses in your R Markdown file.
+The glossr package gives you tools to include interlinear glosses in your R Markdown file.
 If you are writing a linguistics paper and you want some interlinear glosses, this is for you!
 
-Maybe you already use `gb4e` and you're happy with your PDF files, good for you!
+Maybe you already use `gb4e` or `expex` and you're happy with your PDF files, good for you!
 But maybe you want to spice things up, have your examples in one file and read a dataframe
 to generate them on demand, instead of *typing* and *mistyping* and having your examples
-all over the place. If that's the case, `glossr` is for you!
+all over the place. If that's the case, glossr is for you!
 
-Or maybe you want HTML output to work? If you use `gb4e`, your examples disappear!
-Here `glossr` can most definitely help. It even offers a helper function for cross-references
+Or maybe you want HTML output to work? If you use `gb4e` or `expex`, your examples will disappear from the HTML output!
+Here glossr can most definitely help. It even offers a helper function for cross-references
 that work in both formats! In fact, I included two different HTML outputs: one using [leipzig.js](https://bdchauvette.net/leipzig.js)
 and a sadder one that *might* be more maleable and accessible, just less pro-looking.
 
-But please, don't take my word for it ---you can check the output in the following articles:
+If you also want Word output, glossr can also take care of it, generating invisible tables for the right alignment.
 
-- `vignette("glossr_pdf")` for the PDF glosses (which is not rendered in [the pkgdown site](https://montesmariana.github.io/glossr), but can be found [in the repo](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_pdf.pdf));
-
-- `vignette("glossr_leipzig")` for its leipzig.js counterpart, _where the only difference is the output format_;
-
-- and `vignette("glossr_tooltip")` for the sad original solution I came up with for HTML before I discovered leipzig.js.
+But please, don't take my word for it ---you can check the
+[PDF](https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.pdf),
+[HTML](https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.html) and
+[MS Word](https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.docx) outputs of `vignette("glossr_how")`.
 
 ## Installation
 
@@ -36,7 +35,15 @@ You can install the github development version with:
 remotes::install_github("montesmariana/glossr")
 ```
 
-One day I will get this to CRAN.
+I plan to upload this to CRAN in the near future.
+
+## Acknowledgements
+
+This package is possible thanks to the existence of other packages it has built on, mostly `{rmarkdown}`, `{htmltools}`, `{officedown}` and `{flextable}`, as well as [the `expex` package](https://ctan.org/pkg/expex?lang=en) for PDF output and [leipzig.js](https://bdchauvette.net/leipzig.js/) for the HTML output. The HexSticker was designed in [Krita](https://krita.org/en/) and rendered with `{hexSticker}`.
+
+I would also like to acknowledge the input and encouragement of Giulia Mazzola and Thomas Van Hoey, who shared ideas and tested the code as it evolved.
+
+Last but not least, I'd like to acknowledge the source of the examples in the small "dataset" provided by this package, taken from [Maria Koptjevskaja-Tamm's *The Linguistics of Temperature*](https://www.jbe-platform.com/content/books/9789027269171) (see `vignette("glossr")`).
 
 ## Questions and suggestions?
 

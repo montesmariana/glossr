@@ -37,7 +37,7 @@ Last but not least, I'd like to acknowledge the source of the examples in the sm
 
 # Alternatives
 
-Shortly before^[A few months earlier, but I didn't find out until a few days after.] this package, another R package came out to render glosses in R Markdown with HTML output: [lingglosses](https://agricolamz.github.io/lingglosses/). Unlike `glossr`, it is tailored for HTML, where it creates a table to render the glosses, much like `glossr` does for Word^[The markup is therefore different than the one given by leipzig.js]. It also allows grammaticality judgements, inline examples and sign language glosses, offers a list of abbreviations and generates a table from your glosses. In short, they have different focuses, so take a look and see what works for you :) 
+Shortly before^[A few months earlier, but I didn't find out until a few days after.] this package, another R package came out to render glosses in R Markdown with HTML output: [lingglosses](https://agricolamz.github.io/lingglosses/). Unlike glossr, it is tailored for HTML, where it creates a table to render the glosses, much like `glossr` does for Word^[The markup is therefore different than the one given by leipzig.js]. It also allows grammaticality judgements, inline examples and sign language glosses, offers a list of abbreviations and generates a table from your glosses. In short, they have different focuses, so take a look and see what works for you :) 
 
 # References
 

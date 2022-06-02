@@ -6,7 +6,7 @@ template:
 reference:
 - title: Show glosses
   desc: |
-    Functions to use in the R Markdown file
+    Functions to use only in the R Markdown file
   contents:
   - gloss
   - use_glossr
@@ -15,6 +15,7 @@ reference:
   desc: |
     Functions to turn strings into the right gloss format.
   contents:
+  - as_gloss
   - gloss_render
   - gloss_df
   - gloss_list
@@ -23,12 +24,27 @@ reference:
     Dataset used in vignettes.
   contents:
   - glosses
+- title: Styling
+  desc: |
+    Functions for general styling of the glosses
+  contents:
+  - set_style_options
+  - style_options
 - title: Helpers for Latex glosses
   desc: |
     Functions to help with Latex glosses
   contents:
   - gloss_format_words
-- title: Helpers for Latex html glosses
+- title: Under the hood
+  desc: |
+    Functions you might want to use for debugging
+  contents:
+  - new_gloss_data
+  - new_gloss
+  - format_html
+  - format_pdf
+  - format_word
+- title: Helpers for HTML glosses
   desc: |
     Dependencies and transformation from latex
   contents:
@@ -37,7 +53,6 @@ reference:
   - use_tooltip
   - gloss_linesplit
   - gloss_linetooltip
-  - ignore_latex
-  - latex_tag
+  - latex2html
   - sc_to_upper
   - tooltip
