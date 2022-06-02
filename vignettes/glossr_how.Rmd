@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
-devtools::load_all()
 ```
 
 # Introduction
@@ -31,7 +30,7 @@ You can start using `glossr` in an R Markdown file by calling the library and th
 `bookdown::html_document2`, which renders [an HTML file](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.html);
 and `officedown::rdocx_document`, which renders [an MS Word file]((https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)) [@R-bookdown; @R-officedown]. As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
 
-```{r setup, eval = FALSE}
+```{r setup}
 library(glossr)
 ```
 
