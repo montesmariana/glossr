@@ -37,7 +37,7 @@
     
     <a class="navbar-brand me-2" href="index.html">glossr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,10 +55,12 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/glossr_leipzig.html">Using the glossr package with leipzig.js</a>
-    <a class="dropdown-item" href="articles/glossr_pdf.html">Using the glossr package for PDF</a>
-    <a class="dropdown-item" href="articles/glossr_tooltip.html">Using the glossr package with tooltip</a>
+    <a class="dropdown-item" href="articles/glossr_how.html">Using the glossr package</a>
+    <a class="dropdown-item" href="articles/styling.html">Styling glosses</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -85,22 +87,25 @@
 </h1>
 </div>
 <!-- badges: start -->
-<!-- badges: end --><p>The <code>glossr</code> package gives you tools to include interlinear glosses in your R Markdown file. If you are writing a linguistics paper and you want some interlinear glosses, this is for you!</p>
-<p>Maybe you already use <code>gb4e</code> and you’re happy with your PDF files, good for you! But maybe you want to spice things up, have your examples in one file and read a dataframe to generate them on demand, instead of <em>typing</em> and <em>mistyping</em> and having your examples all over the place. If that’s the case, <code>glossr</code> is for you!</p>
-<p>Or maybe you want HTML output to work? If you use <code>gb4e</code>, your examples disappear! Here <code>glossr</code> can most definitely help. It even offers a helper function for cross-references that work in both formats! In fact, I included two different HTML outputs: one using <a href="https://bdchauvette.net/leipzig.js" class="external-link">leipzig.js</a> and a sadder one that <em>might</em> be more maleable and accessible, just less pro-looking.</p>
-<p>But please, don’t take my word for it —you can check the output in the following articles:</p>
-<ul>
-<li><p><code><a href="articles/glossr_pdf.html">vignette("glossr_pdf")</a></code> for the PDF glosses (which is not rendered in <a href="https://montesmariana.github.io/glossr">the pkgdown site</a>, but can be found <a href="https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_pdf.pdf" class="external-link">in the repo</a>);</p></li>
-<li><p><code><a href="articles/glossr_leipzig.html">vignette("glossr_leipzig")</a></code> for its leipzig.js counterpart, <em>where the only difference is the output format</em>;</p></li>
-<li><p>and <code><a href="articles/glossr_tooltip.html">vignette("glossr_tooltip")</a></code> for the sad original solution I came up with for HTML before I discovered leipzig.js.</p></li>
-</ul>
+<!-- badges: end --><p>The glossr package gives you tools to include interlinear glosses in your R Markdown file. If you are writing a linguistics paper and you want some interlinear glosses, this is for you!</p>
+<p>Maybe you already use <code>gb4e</code> or <code>expex</code> and you’re happy with your PDF files, good for you! But maybe you want to spice things up, have your examples in one file and read a dataframe to generate them on demand, instead of <em>typing</em> and <em>mistyping</em> and having your examples all over the place. If that’s the case, glossr is for you!</p>
+<p>Or maybe you want HTML output to work? If you use <code>gb4e</code> or <code>expex</code>, your examples will disappear from the HTML output! Here glossr can most definitely help. It even offers a helper function for cross-references that work in both formats! In fact, I included two different HTML outputs: one using <a href="https://bdchauvette.net/leipzig.js" class="external-link">leipzig.js</a> and a sadder one that <em>might</em> be more maleable and accessible, just less pro-looking.</p>
+<p>If you also want Word output, glossr can also take care of it, generating invisible tables for the right alignment.</p>
+<p>But please, don’t take my word for it —you can check the <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.pdf" class="external-link">PDF</a>, <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.html" class="external-link">HTML</a> and <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.docx" class="external-link">MS Word</a> outputs of <code><a href="articles/glossr_how.html">vignette("glossr_how")</a></code>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the github development version with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"montesmariana/glossr"</span><span class="op">)</span></code></pre></div>
-<p>One day I will get this to CRAN.</p>
+<p>I plan to upload this to CRAN in the near future.</p>
+</div>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
+<p>This package is possible thanks to the existence of other packages it has built on, mostly <a href="https://github.com/rstudio/rmarkdown" class="external-link">rmarkdown</a>, <a href="https://github.com/rstudio/htmltools" class="external-link">htmltools</a>, <a href="https://ardata-fr.github.io/officeverse/" class="external-link">officedown</a> and <a href="https://ardata-fr.github.io/flextable-book/" class="external-link">flextable</a>, as well as <a href="https://ctan.org/pkg/expex?lang=en" class="external-link">the <code>expex</code> package</a> for PDF output and <a href="https://bdchauvette.net/leipzig.js/" class="external-link">leipzig.js</a> for the HTML output. The HexSticker was designed in <a href="https://krita.org/en/" class="external-link">Krita</a> and rendered with <a href="https://github.com/GuangchuangYu/hexSticker" class="external-link">hexSticker</a>.</p>
+<p>I would also like to acknowledge the input and encouragement of Giulia Mazzola and Thomas Van Hoey, who shared ideas and tested the code as it evolved.</p>
+<p>Last but not least, I’d like to acknowledge the source of the examples in the small “dataset” provided by this package, taken from <a href="https://www.jbe-platform.com/content/books/9789027269171" class="external-link">Maria Koptjevskaja-Tamm’s <em>The Linguistics of Temperature</em></a> (see <code><a href="articles/glossr.html">vignette("glossr")</a></code>).</p>
 </div>
 <div class="section level2">
 <h2 id="questions-and-suggestions">Questions and suggestions?<a class="anchor" aria-label="anchor" href="#questions-and-suggestions"></a>

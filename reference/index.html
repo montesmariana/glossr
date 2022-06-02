@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">glossr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,12 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/glossr_leipzig.html">Using the glossr package with leipzig.js</a>
-    <a class="dropdown-item" href="../articles/glossr_pdf.html">Using the glossr package for PDF</a>
-    <a class="dropdown-item" href="../articles/glossr_tooltip.html">Using the glossr package with tooltip</a>
+    <a class="dropdown-item" href="../articles/glossr_how.html">Using the glossr package</a>
+    <a class="dropdown-item" href="../articles/styling.html">Styling glosses</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -54,7 +56,7 @@
     <div class="section level2">
       <h2 id="show-glosses">Show glosses<a class="anchor" aria-label="anchor" href="#show-glosses"></a></h2>
       
-      <p class="section-desc"></p><p>Functions to use in the R Markdown file</p>
+      <p class="section-desc"></p><p>Functions to use only in the R Markdown file</p>
 
       
     </div><div id="" class="section level2">
@@ -90,9 +92,19 @@
 
       <dl><dt>
           
-          <code><a href="gloss_render.html">gloss_pdf()</a></code> <code><a href="gloss_render.html">gloss_html()</a></code> <code><a href="gloss_render.html">gloss_tooltip()</a></code> <code><a href="gloss_render.html">gloss_leipzig()</a></code> <code><a href="gloss_render.html">as_gloss()</a></code> <code><a href="gloss_render.html">gloss_df()</a></code> 
+          <code><a href="as_gloss.html">as_gloss()</a></code> 
+        </dt>
+        <dd>Helper to create gloss objects</dd>
+      </dl><dl><dt>
+          
+          <code><a href="gloss_render.html">gloss_pdf()</a></code> <code><a href="gloss_render.html">gloss_html()</a></code> <code><a href="gloss_render.html">gloss_tooltip()</a></code> <code><a href="gloss_render.html">gloss_leipzig()</a></code> <code><a href="gloss_render.html">gloss_word()</a></code> 
         </dt>
         <dd>Render a gloss</dd>
+      </dl><dl><dt>
+          
+          <code><a href="gloss_df.html">gloss_df()</a></code> 
+        </dt>
+        <dd>Render gloss from a dataframe</dd>
       </dl><dl><dt>
           
           <code><a href="gloss_list.html">gloss_list()</a></code> 
@@ -115,6 +127,27 @@
         </dt>
         <dd>Examples of glosses</dd>
       </dl></div><div class="section level2">
+      <h2 id="styling">Styling<a class="anchor" aria-label="anchor" href="#styling"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions for general styling of the glosses</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="set_style_options.html">set_style_options()</a></code> 
+        </dt>
+        <dd>Set general styling options</dd>
+      </dl><dl><dt>
+          
+          <code><a href="style_options.html">style_options()</a></code> 
+        </dt>
+        <dd>List of styling options</dd>
+      </dl></div><div class="section level2">
       <h2 id="helpers-for-latex-glosses">Helpers for Latex glosses<a class="anchor" aria-label="anchor" href="#helpers-for-latex-glosses"></a></h2>
       
       <p class="section-desc"></p><p>Functions to help with Latex glosses</p>
@@ -131,9 +164,9 @@
         </dt>
         <dd>Apply latex formatting to many words</dd>
       </dl></div><div class="section level2">
-      <h2 id="helpers-for-latex-html-glosses">Helpers for Latex html glosses<a class="anchor" aria-label="anchor" href="#helpers-for-latex-html-glosses"></a></h2>
+      <h2 id="under-the-hood">Under the hood<a class="anchor" aria-label="anchor" href="#under-the-hood"></a></h2>
       
-      <p class="section-desc"></p><p>Dependencies and transformation from latex</p>
+      <p class="section-desc"></p><p>Functions you might want to use for debugging</p>
 
       
     </div><div id="" class="section level2">
@@ -143,49 +176,29 @@
 
       <dl><dt>
           
-          <code><a href="leipzig_script.html">leipzig_script()</a></code> 
+          <code><a href="new_gloss_data.html">new_gloss_data()</a></code> 
         </dt>
-        <dd>Script for leipzig.js</dd>
+        <dd>gloss_data class</dd>
       </dl><dl><dt>
           
-          <code><a href="use_leipzig.html">use_leipzig()</a></code> 
+          <code><a href="new_gloss.html">new_gloss()</a></code> 
         </dt>
-        <dd>HTML dependency for leipzig.js</dd>
+        <dd>gloss class</dd>
       </dl><dl><dt>
           
-          <code><a href="use_tooltip.html">use_tooltip()</a></code> 
+          <code><a href="format_html.html">format_html()</a></code> 
         </dt>
-        <dd>HTML dependency for tooltip format</dd>
+        <dd>Read HTML formatting options</dd>
       </dl><dl><dt>
           
-          <code><a href="gloss_linesplit.html">gloss_linesplit()</a></code> 
+          <code><a href="format_pdf.html">format_pdf()</a></code> 
         </dt>
-        <dd>Split lines for HTML</dd>
+        <dd>Read Latex formatting options</dd>
       </dl><dl><dt>
           
-          <code><a href="gloss_linetooltip.html">gloss_linetooltip()</a></code> 
+          <code><a href="format_word.html">format_word_glosses()</a></code> <code><a href="format_word.html">format_word_translation()</a></code> <code><a href="format_word.html">format_word_source()</a></code> 
         </dt>
-        <dd>Apply tooltip to a full gloss</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ignore_latex.html">ignore_latex()</a></code> 
-        </dt>
-        <dd>Ignore latex notation</dd>
-      </dl><dl><dt>
-          
-          <code><a href="latex_tag.html">latex_tag()</a></code> 
-        </dt>
-        <dd>Regex for a latex tag</dd>
-      </dl><dl><dt>
-          
-          <code><a href="sc_to_upper.html">sc_to_upper()</a></code> 
-        </dt>
-        <dd>Small caps to upper case</dd>
-      </dl><dl><dt>
-          
-          <code><a href="tooltip.html">tooltip()</a></code> 
-        </dt>
-        <dd>Add tooltip to one word</dd>
+        <dd>Read Word formatting options</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

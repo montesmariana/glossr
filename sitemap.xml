@@ -13,16 +13,13 @@
     <loc>https://montesmariana.github.io/glossr/articles/glossr.html</loc>
   </url>
   <url>
-    <loc>https://montesmariana.github.io/glossr/articles/glossr_leipzig.html</loc>
-  </url>
-  <url>
-    <loc>https://montesmariana.github.io/glossr/articles/glossr_pdf.html</loc>
-  </url>
-  <url>
-    <loc>https://montesmariana.github.io/glossr/articles/glossr_tooltip.html</loc>
+    <loc>https://montesmariana.github.io/glossr/articles/glossr_how.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/articles/styling.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/authors.html</loc>
@@ -31,7 +28,28 @@
     <loc>https://montesmariana.github.io/glossr/index.html</loc>
   </url>
   <url>
+    <loc>https://montesmariana.github.io/glossr/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/as_gloss.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/check_packages.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/format_html.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/format_pdf.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/format_word.html</loc>
+  </url>
+  <url>
     <loc>https://montesmariana.github.io/glossr/reference/gloss.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/gloss_df.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/reference/gloss_format_words.html</loc>
@@ -49,13 +67,16 @@
     <loc>https://montesmariana.github.io/glossr/reference/gloss_render.html</loc>
   </url>
   <url>
+    <loc>https://montesmariana.github.io/glossr/reference/gloss_table.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/gloss_word_lines.html</loc>
+  </url>
+  <url>
     <loc>https://montesmariana.github.io/glossr/reference/glosses.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/reference/glossr-package.html</loc>
-  </url>
-  <url>
-    <loc>https://montesmariana.github.io/glossr/reference/ignore_latex.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/reference/index.html</loc>
@@ -70,10 +91,31 @@
     <loc>https://montesmariana.github.io/glossr/reference/leipzig_script.html</loc>
   </url>
   <url>
+    <loc>https://montesmariana.github.io/glossr/reference/new_gloss.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/new_gloss_data.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/parse_latex.html</loc>
+  </url>
+  <url>
     <loc>https://montesmariana.github.io/glossr/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>https://montesmariana.github.io/glossr/reference/reset_max.html</loc>
+  </url>
+  <url>
     <loc>https://montesmariana.github.io/glossr/reference/sc_to_upper.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/set_default.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/set_style_options.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/style_options.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/reference/tooltip.html</loc>
@@ -86,5 +128,11 @@
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/reference/use_tooltip.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/validate_output.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/reference/word_knitr.html</loc>
   </url>
 </urlset>

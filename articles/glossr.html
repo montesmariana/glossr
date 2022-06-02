@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">glossr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,10 +51,12 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/glossr_leipzig.html">Using the glossr package with leipzig.js</a>
-    <a class="dropdown-item" href="../articles/glossr_pdf.html">Using the glossr package for PDF</a>
-    <a class="dropdown-item" href="../articles/glossr_tooltip.html">Using the glossr package with tooltip</a>
+    <a class="dropdown-item" href="../articles/glossr_how.html">Using the glossr package</a>
+    <a class="dropdown-item" href="../articles/styling.html">Styling glosses</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -82,7 +84,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>About glossr</h1>
                         <h4 data-toc-skip class="author">Mariana Montes</h4>
             
-            <h4 data-toc-skip class="date">2022-04-28</h4>
+            <h4 data-toc-skip class="date">2022-06-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/montesmariana/glossr/blob/HEAD/vignettes/glossr.Rmd" class="external-link"><code>vignettes/glossr.Rmd</code></a></small>
       <div class="d-none name"><code>glossr.Rmd</code></div>
@@ -92,11 +94,21 @@
     
 <p>Interlinear glosses are a way of writing linguistic examples in a language other than the language of the main text (typically English). They first have a couple of lines of vertically aligned bits (however words are split in the original language) with, normally, some morphological information, and finally they might close with a free translation of the example. Most often they follow the <a href="https://www.eva.mpg.de/lingua/resources/glossing-rules.php" class="external-link">Leipzig Glossing Rules</a>.</p>
 <p>R Markdown <span class="citation">(Allaire et al. 2022)</span> is an R package for literate programming, where you can weave together text and code. You can use R Markdown to write your papers, focusing on content rather than formatting, confident that the same source (pretty much) can turn into both a beautiful PDF file or a gorgeous web page with the minimum of effort. Yes, once you’re used to it, it’s not harder than writing in MS Word. I’ve <a href="https://www.marianamontes.me/post/academic-writing-in-r-markdown-i/" class="external-link">written a bit</a> about it in case you’re interested.</p>
-<p>Mixing R Markdown and interlinear glosses has proved challenging. This package offers you some wrapping functions that call <a href="https://ctan.org/pkg/gb4e?lang=en" class="external-link">the <code>gb4e</code></a> <span class="math inline">\(LaTeX\)</span> package for PDF output and <a href="https://bdchauvette.net/leipzig.js/" class="external-link">leipzig.js</a> for HTML output. You don’t really need to know any Latex or Javascript or HTML to take advantage of both of them.</p>
-<p>The package also takes care of cross-references, giving you a handy function <code><a href="../reference/gloss.html">gloss()</a></code> to sprinkle around your text every time you want to reference one of your examples. Go ahead and check out the articles, particularly <code><a href="../articles/glossr_leipzig.html">vignette("glossr_leipzig")</a></code> for HTML rendering and the <a href="https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_pdf.pdf" class="external-link">PDF version</a>.</p>
-<p>I’m sure there is a lot of functionality in both <code>gb4e</code> and leipzig.js that this package doesn’t cover… <em>yet</em>. Please, go ahead and report any problems, suggestions and tasks for the wishlist in <a href="https://github.com/montesmariana/glossr/issues" class="external-link">the issues section of the repository</a>. Or fork it and contribute if you’d like!</p>
+<p>Mixing R Markdown and interlinear glosses has proved challenging. This package offers you some wrapping functions that call <a href="https://ctan.org/pkg/expex?lang=en" class="external-link">the <code>expex</code></a> <span class="math inline">\(LaTeX\)</span> package for PDF output and <a href="https://bdchauvette.net/leipzig.js/" class="external-link">leipzig.js</a> for HTML output and generate <code><a href="https://davidgohel.github.io/flextable/reference/flextable.html" class="external-link">flextable::flextable()</a></code> tables for MS Word output. You don’t really need to know any Latex or Javascript or HTML to take advantage of both of them.</p>
+<p>The package also takes care of cross-references, giving you a handy function <code><a href="../reference/gloss.html">gloss()</a></code> to sprinkle around your text every time you want to reference one of your examples. Go ahead and check out the articles and <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/" class="external-link">the rendered versions</a> of <code><a href="../articles/glossr_how.html">vignette("glossr_how")</a></code>.</p>
+<p>I’m sure there is a lot of functionality in both <code>expex</code> and leipzig.js that this package doesn’t cover… <em>yet</em>. Please, go ahead and report any problems, suggestions and tasks for the wishlist in <a href="https://github.com/montesmariana/glossr/issues" class="external-link">the issues section of the repository</a>. Or fork it and contribute if you’d like!</p>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
 <p>While this is a matter I’ve wondered about for a while, it was really kicked off by Giulia Mazzola’s worries. I’m converting her to the R Markdown crowd and I couldn’t let her resolve weaken because of these small matters. Thank you for your encouragement and appreciation!</p>
+<p>I also want to thank Thomas Van Hoey for taking a look at the package, giving me suggestions and offering me examples.</p>
 <p>Last but not least, I’d like to acknowledge the source of the examples in the small “dataset” provided by this package. These glosses were taken from <span class="citation">Shindo (2015)</span> and <span class="citation">Pustet (2015)</span>. Any mistakes are mine.</p>
+</div>
+<div class="section level2">
+<h2 id="alternatives">Alternatives<a class="anchor" aria-label="anchor" href="#alternatives"></a>
+</h2>
+<p>Shortly before<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;A few months earlier, but I didn’t find out until a few days after.&lt;/p&gt;"><sup>1</sup></a> this package, another R package came out to render glosses in R Markdown with HTML output: <a href="https://agricolamz.github.io/lingglosses/" class="external-link">lingglosses</a>. Unlike glossr, it is tailored for HTML, where it creates a table to render the glosses, much like <code>glossr</code> does for Word<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The markup is therefore different than the one given by leipzig.js&lt;/p&gt;"><sup>2</sup></a>. It also allows grammaticality judgements, inline examples and sign language glosses, offers a list of abbreviations and generates a table from your glosses. In short, they have different focuses, so take a look and see what works for you :)</p>
+</div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
@@ -112,6 +124,7 @@
 </div>
 </div>
 </div>
+
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>

@@ -3,10 +3,9 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   glossr: glossr.html
-  glossr_leipzig: glossr_leipzig.html
-  glossr_pdf: glossr_pdf.html
-  glossr_tooltip: glossr_tooltip.html
-last_built: 2022-04-28T15:24Z
+  glossr_how: glossr_how.html
+  styling: styling.html
+last_built: 2022-06-02T15:23Z
 urls:
   reference: https://montesmariana.github.io/glossr/reference
   article: https://montesmariana.github.io/glossr/articles
