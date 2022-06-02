@@ -41,10 +41,19 @@ reference:
   - format_html
   - format_pdf
   - format_word
-- title: Helpers for HTML glosses
+- title: internal
   desc: |
-    Dependencies and transformation from latex
+    Internal functions
   contents:
+  - check_packages
+  - format_word
+  - gloss_table
+  - gloss_word_lines
+  - latex_tag
+  - reset_max
+  - set_default
+  - validate_output
+  - word_knitr
   - leipzig_script
   - use_leipzig
   - use_tooltip
@@ -53,4 +62,3 @@ reference:
   - latex2html
   - sc_to_upper
   - tooltip
-
