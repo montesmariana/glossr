@@ -17,4 +17,13 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Mariana Montes \email{montesmariana@gmail.com} (\href{https://orcid.org/0000-0002-3869-3207}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Benjamin Chauvette (Author of included leipzig.js library) [copyright holder]
+}
+
+}
 \keyword{internal}

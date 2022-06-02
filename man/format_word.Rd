@@ -19,7 +19,7 @@ format_word_source(source)
 \item{source}{Character vector with the source text.}
 }
 \value{
-Formated table or text
+Formatted table or text
 }
 \description{
 Read Word formatting options

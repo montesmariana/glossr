@@ -123,7 +123,7 @@ latex2word <- function(string, is_cell = TRUE) {
 #' @param source Character vector with the source text.
 #'
 #' @name format_word
-#' @return Formated table or text
+#' @return Formatted table or text
 NULL
 
 #' @describeIn format_word Format glosses

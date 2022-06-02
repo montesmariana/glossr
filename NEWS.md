@@ -35,4 +35,4 @@ be interpreted as lines to align (with a maximum of 3).
 
 - Adapt `gloss_pdf()` and `gloss_html()` to work with `gloss_data`.
 
-- The LateX package used for pdf now is `exPex` instead of `gb4e`. No need to add `\noautomath` anymore.
+- The LateX package used for pdf now is `exPex` instead of `gb4e`. No need to add `\noautomath`.

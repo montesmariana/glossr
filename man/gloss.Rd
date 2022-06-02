@@ -14,7 +14,7 @@ Character string with label reference
 }
 \description{
 Latex output uses \code{\@ref(label)} to reference examples,
-  whereas HTML output is based on pandocs examples, i.e. \code{(@label)}.
+  whereas HTML output is based on pandoc examples, i.e. \code{(@label)}.
   \code{`r gloss(label)`}, written inline in the text, will return the
   appropriate reference based on the selected output.
 }

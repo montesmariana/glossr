@@ -25,8 +25,7 @@ your examples will disappear from the HTML output! Here glossr can most
 definitely help. It even offers a helper function for cross-references
 that work in both formats! In fact, I included two different HTML
 outputs: one using [leipzig.js](https://bdchauvette.net/leipzig.js) and
-a sadder one that *might* be more maleable and accessible, just less
-pro-looking.
+a sadder one that *might* be more accessible, just less pro-looking.
 
 If you also want Word output, glossr can also take care of it,
 generating invisible tables for the right alignment.

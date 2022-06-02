@@ -3,6 +3,7 @@ title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
 output:
+  officedown::rdocx_document: default
   rmdformats::readthedown:
     highlight: kate
   bookdown::pdf_document2:
@@ -10,7 +11,6 @@ output:
     extra_dependencies:
         - fontspec
         - xeCJK
-  officedown::rdocx_document: default
 urlcolor: red
 bibliography: ["../REFERENCES.bib", "../packages.bib"]
 ---
@@ -128,7 +128,7 @@ my_gloss
 
 # About the formats
 
-The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HMTL rendering uses [leipzig.js 0.8.0](https://bdchauvette.net/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
+The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://bdchauvette.net/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 
