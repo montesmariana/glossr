@@ -2,7 +2,6 @@ url: https://montesmariana.github.io/glossr/
 template:
   bootstrap: 5
   bootswatch: pulse
-
 reference:
 - title: Show glosses
   desc: |
@@ -22,8 +21,7 @@ reference:
 - title: Dataset
   desc: |
     Dataset used in vignettes.
-  contents:
-  - glosses
+  contents: glosses
 - title: Styling
   desc: |
     Functions for general styling of the glosses
@@ -33,8 +31,7 @@ reference:
 - title: Helpers for Latex glosses
   desc: |
     Functions to help with Latex glosses
-  contents:
-  - gloss_format_words
+  contents: gloss_format_words
 - title: Under the hood
   desc: |
     Functions you might want to use for debugging
@@ -56,3 +53,4 @@ reference:
   - latex2html
   - sc_to_upper
   - tooltip
+
