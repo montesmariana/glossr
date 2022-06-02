@@ -11,3 +11,5 @@
 ^\.github$
 ^inst/figures/dev$
 ^inst/examples$
+^cran-comments.md$
+^README\.Rmd$
