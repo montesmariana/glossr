@@ -2,8 +2,18 @@ Package: glossr
 Type: Package
 Title: Use interlinear glosses in R Markdown
 Version: 0.5.1
-Author: Mariana Montes
-Maintainer: Mariana Montes <mariana.montes@kuleuven.be>
+Authors@R: c(
+  person(given = "Mariana",
+        family = "Montes",
+        email = "montesmariana@gmail.com",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0002-3869-3207")),
+  person(
+        given = "Benjamin",
+        family = "Chauvette",
+        role = "cph",
+        comment = "Author of included leipzig.js library"
+  ))
 Description: Read examples with interlinear glosses from files
     or from text and print them in a way compatible with both
     Latex and HTML outputs.
