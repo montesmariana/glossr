@@ -1,11 +1,11 @@
 test_that("italics is replaced", {
-  expect_match(latex2html("\\textit{something}"), "\\*something\\*")
-  expect_match(latex2html("\\em{something}"), "\\*something\\*")
-  expect_match(latex2html("\\textit{something} and \\em{another}"), "\\*something\\* and \\*another\\*")
+  expect_match(latex2html("\\textit{something}"), "<em>something</em>")
+  expect_match(latex2html("\\em{something}"), "<em>something</em>")
+  expect_match(latex2html("\\textit{something} and \\em{another}"), "<em>something</em> and <em>another</em>")
 })
 
 test_that("bold is replaced", {
-  expect_match(latex2html("\\textbf{something} in bold"), "\\*\\*something\\*\\* in bold")
+  expect_match(latex2html("\\textbf{something} in bold"), "<strong>something</strong> in bold")
 })
 
 test_that("small caps are replaced", {

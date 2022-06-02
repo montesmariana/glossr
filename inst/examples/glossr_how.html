@@ -7,7 +7,7 @@
 
         <meta name="author" content="Mariana Montes" />
     
-        <meta name="date" content="2022-05-10" />
+        <meta name="date" content="2022-06-02" />
     
     <title>Using the glossr package</title>
 
@@ -2248,7 +2248,7 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
                   <p class="author"><span class="glyphicon glyphicon-user"></span> Mariana
 Montes</p>
-                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-05-10</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-06-02</p>
           </div>
    </div>
      
@@ -2277,15 +2277,19 @@ I took that pain and packaged it so you don’t need to feel it.</p>
 calling the library and then <code>use_glossr()</code> to activate some
 background stuff. Mainly, this function informs all the other functions
 whether you are using <span class="math inline">\(LaTeX\)</span>, HTML<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> or
-neither, in which it assumes you have Word output. This vignette has
-been run in all three formats by changing the output format to
+neither, in which case it assumes you have Word output. This vignette
+has been run in all three formats by changing the output format to
 <code>bookdown::pdf_document2</code>, which renders <a href="https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.pdf">a
 PDF file</a>; <code>bookdown::html_document2</code>, which renders <a href="https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.html">an
 HTML file</a>; and <code>officedown::rdocx_document</code>, which
 renders <a href="(https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)">an
 MS Word file</a> <span class="citation">(Xie 2022; Gohel and Ross
-2022)</span>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(glossr)</span></span></code></pre></div>
+2022)</span>. As you can see in <code>vignette(&quot;styling&quot;)</code>,
+<code>use_glossr()</code> also takes some variables to set up
+document-wide styling options for specific parts of your glosses. The
+code below sets the name of the source to render in boldface and the
+first line of each gloss in italics.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glossr)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_glossr</span>(<span class="at">styling =</span> <span class="fu">list</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">&quot;b&quot;</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="st">&quot;i&quot;</span></span>
@@ -2300,46 +2304,51 @@ currently four named, optional arguments that will be treated
 specially:</p>
 <ul>
 <li><p><code>label</code> will be interpreted as the label for
-cross-references with some;</p></li>
+cross-references;</p></li>
 <li><p><code>source</code> will be interpreted as text for a non-aligned
 first line, e.g. a reference to the source of your example;</p></li>
 <li><p><code>translation</code> will be interpreted as text for a free
 translation;</p></li>
 <li><p><code>trans_glosses</code> indicates what character should
-surround the translation, by default <code>&quot;</code>. Coming soon: a
-vignette showing this.</p></li>
+surround the translation, by default <code>&quot;</code>. (See
+<code>vignette(&quot;styling&quot;)</code>.)</p></li>
 </ul>
 <p>All other values will be interpreted as lines to be aligned and
-reproduced in the order given, but only up to 3 lines are allowed.</p>
+reproduced in the order given, but only up to 3 lines are allowed.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_gloss <span class="ot">&lt;-</span> <span class="fu">as_gloss</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Hace $</span><span class="sc">\\</span><span class="st">emptyset$ calor/frío&quot;</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;make-3SG-PRS $</span><span class="sc">\\</span><span class="st">emptyset$ heat/cold-N-A&quot;</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">translation =</span> <span class="st">&quot;&#39;It is hot/cold&#39;&quot;</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;my-label&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;她 哇的一聲 大 哭起來，&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tā wā=de-yì-shēng dà kū-qǐlái,&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TSG waa.IDEO-LINK-one-sound big cry-inch&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">translation =</span> <span class="st">&quot;Waaaaa, she began to wail.&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;my-label&quot;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">&quot;ASBC (nº 100622)&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code></pre></div>
 <ol class="example" style="list-style-type: decimal">
 <li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
 <div data-gloss>
 <p class="gloss__line--original">
- 
+ASBC (nº 100622)
 </p>
 <p>
-Hace ∅ calor/frío
+她 哇的一聲 大 哭起來，
 </p>
 <p>
-make-3SG-PRS ∅ heat/cold-N-A
+tā wā=de-yì-shēng dà kū-qǐlái,
+</p>
+<p>
+TSG waa.IDEO-LINK-one-sound big cry-inch
 </p>
 <p class="gloss__line--free">
-“‘It is hot/cold’”
+“Waaaaa, she began to wail.”
 </p>
 </div>
 <script>document.addEventListener('DOMContentLoaded', function() {Leipzig({lastLineFree: false}).gloss();});</script></li>
 </ol>
 <p>The label given to <code>as_gloss()</code> allows you to
-cross-reference the example: in PDF this is
-<code>example (\@ref(my-label))</code>, whereas in HTML and Word this is
-<code>example (@my-label)</code>. What should YOU do?
+cross-reference the example: in PDF this looks like
+<code>example (\@ref(my-label))</code>, whereas in HTML and Word you
+would use <code>example (@my-label)</code>. What should YOU do?
 <code>gloss()</code> can be used inline to generate a reference for
 either PDF or HTML, depending on the output of your file: (1) in this
 case.</p>
@@ -2430,7 +2439,7 @@ On the one hand, <code>gloss_list()</code> allows you to nest a list of
 glosses and have both a reference for the list and for each individual
 item. <strong>This will not work in HTML or Word</strong>, which will
 just keep the numbering on the top level. But on PDF, given the function
-on some examples from <span class="citation">(Shindo 2015)</span>, we
+on some examples from <span class="citation">Shindo (2015)</span>, we
 can use <code>`r gloss(&quot;jp&quot;)`</code> to reference (<span class="citation">(<strong>jp?</strong>)</span>), or
 <code>`r gloss(&quot;heartwarming-jp&quot;)`</code> and
 <code>`r gloss(&quot;languid-jp&quot;)`</code> to reference (5) and (6).</p>
@@ -2452,7 +2461,7 @@ reply-while father and mother TOP heartwarming warm thing with
 surround-PASS feeling NOM do-PST
 </p>
 <p class="gloss__line--free">
-“While replying (to your question), Father and Mohter felt like they
+“While replying (to your question), Father and Mother felt like they
 were surrounded by something heart warming.”
 </p>
 </div></li>
@@ -2481,9 +2490,8 @@ individual element, this package offers you
 <code>gloss_format_words()</code>, which you can implement to the
 strings given to <code>as_gloss()</code>.</p>
 <p>Internally, <code>glossr</code> will try to parse <span class="math inline">\(LaTeX\)</span> formatting into HTML but currently
-it doesn’t parse it to Word or read HTML/markdown tags. Coming soon a
-vignette on applying formatting or changing the defaults (e.g. italics
-for the first line). For the wish list.</p>
+it doesn’t parse it to Word or read HTML/markdown tags. (But see
+<code>vignette(&quot;styling&quot;)</code>.)</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gloss_format_words</span>(<span class="st">&quot;A long piece of text&quot;</span>, <span class="st">&quot;textit&quot;</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;\\textit{A} \\textit{long} \\textit{piece} \\textit{of} \\textit{text}&quot;</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_gloss <span class="ot">&lt;-</span> <span class="fu">as_gloss</span>(</span>
@@ -2514,13 +2522,15 @@ make.3SG.PRS heat/cold.N.A
 <div id="about-the-formats" class="section level1">
 <h1>About the formats</h1>
 <p>The Latex output writes your glosses with the format required by the
-<a href="https://ctan.org/pkg/expex?lang=en">expex package</a>. The
+<a href="https://ctan.org/pkg/expex?lang=en">{expex} package</a>. The
 default HMTL rendering uses <a href="https://bdchauvette.net/leipzig.js/">leipzig.js 0.8.0</a> (and, of
 course, {htmltools} <span class="citation">(Cheng et al. 2021)</span> to
 read it with R). The Word output is an invisible table generated with
 {flextable} <span class="citation">(Gohel 2022)</span>. Note that if the
-table of glosses is short so will be the translation; you can fix this
-manually by widening the table.</p>
+translation is very long it could exceed the margins of the file in Word
+(as is the case of example (5)), and at least for the time being you
+need to fix it manually by selecting the translation and reducing the
+width of its cell.</p>
 <p>If you are familiar with these tools and would like to suggests
 expansions or contribute to the package, go ahead, I would love to hear
 from you!</p>
@@ -2563,6 +2573,13 @@ constantly write <em>leizpig</em> instead of <em>leipzig</em>.<a href="#fnref1" 
 implementation, with <a href="https://bdchauvette.net/leipzig.js/">leipzig.js</a>, or a “legacy”
 implementation with simple tooltips and up to two glossing lines; do so
 by running <code>use_glossr(&quot;tooltip&quot;)</code>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Note that if you use Chinese characters you will need to
+add some <span class="math inline">\(LaTeX\)</span> packages (namely
+{fontspec} and {xeCJK}). You can do that either by adding them to <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html">the
+<code>header-includes</code> section</a> or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html">to
+the <code>extra_dependencies</code> list</a> inside the
+<code>pdf_document</code> output section in your YAML. Thanks to Thomas
+Van Hoey for offering me the example and pointing this out.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 </div>

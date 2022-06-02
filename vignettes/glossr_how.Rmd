@@ -2,7 +2,7 @@
 title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
-output: bookdown::pdf_document2
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using the glossr package}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
-# devtools::load_all()
+devtools::load_all()
 ```
 
 # Introduction
@@ -26,19 +26,19 @@ The immediate solution for a $LaTeX$ output is to use a specific library, such a
 But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least *some* rendering) of your interlinear glosses in HTML as well... and why not, MS Word! This offers some challenges, because you would need to figure out *how* to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats.
 I took that pain and packaged it so you don't need to feel it.
 
-You can start using `glossr` in an R Markdown file by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$, HTML^[You can also choose between the default HTML implementation, with [leipzig.js](https://bdchauvette.net/leipzig.js/), or a "legacy" implementation with simple tooltips and up to two glossing lines; do so by running `use_glossr("tooltip")`.] or neither, in which it assumes you have Word output. This vignette has been run in all three formats by changing the output format to
+You can start using `glossr` in an R Markdown file by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$, HTML^[You can also choose between the default HTML implementation, with [leipzig.js](https://bdchauvette.net/leipzig.js/), or a "legacy" implementation with simple tooltips and up to two glossing lines; do so by running `use_glossr("tooltip")`.] or neither, in which case it assumes you have Word output. This vignette has been run in all three formats by changing the output format to
 `bookdown::pdf_document2`, which renders [a PDF file](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.pdf);
 `bookdown::html_document2`, which renders [an HTML file](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.html);
-and `officedown::rdocx_document`, which renders [an MS Word file]((https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)) [@R-bookdown; @R-officedown].
+and `officedown::rdocx_document`, which renders [an MS Word file]((https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)) [@R-bookdown; @R-officedown]. As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
 
-```{r setup}
+```{r setup, eval = FALSE}
 library(glossr)
 ```
 
 ```{r useglossr}
 use_glossr(styling = list(
-  source = "b", # source line in bold
-  first = "i" # first line in italics
+  source = "b",
+  first = "i"
 ))
 ```
 
@@ -52,21 +52,25 @@ When you want to include an example, create a gloss with `as_gloss()` and call i
 
 - `translation` will be interpreted as text for a free translation;
 
-- `trans_glosses` indicates what character should surround the translation, by default `"`. Coming soon: a vignette showing this.
+- `trans_glosses` indicates what character should surround the translation, by default `"`. (See `vignette("styling")`.)
 
-All other values will be interpreted as lines to be aligned and reproduced in the order given, but only up to 3 lines are allowed.
+All other values will be interpreted as lines to be aligned and reproduced in the order given, but only up to 3 lines are allowed.[^chinese_extra]
+
+[^chinese_extra]: Note that if you use Chinese characters you will need to add some $LaTeX$ packages (namely {fontspec} and {xeCJK}). You can do that either by adding them to [the `header-includes` section](https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html) or [to the `extra_dependencies` list](https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html) inside the `pdf_document` output section in your YAML. Thanks to Thomas Van Hoey for offering me the example and pointing this out.
 
 ```{r, first-gloss}
 my_gloss <- as_gloss(
-  "Hace calor/frío",
-  "make-3SG-PRS heat/cold-N-A",
-  translation = "'It is hot/cold'",
-  label = "my-label"
+  "她 哇的一聲 大 哭起來，",
+  "tā wā=de-yì-shēng dà kū-qǐlái,",
+  "TSG waa.IDEO-LINK-one-sound big cry-inch",
+  translation = "Waaaaa, she began to wail.",
+  label = "my-label",
+  source = "ASBC (nº 100622)"
 )
 my_gloss
 ```
 
-The label given to `as_gloss()` allows you to cross-reference the example: in PDF this is `example (\@ref(my-label))`, whereas in HTML and Word this is `example (@my-label)`. What should YOU do? `gloss()` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: `r gloss("my-label")` in this case.
+The label given to `as_gloss()` allows you to cross-reference the example: in PDF this looks like `example (\@ref(my-label))`, whereas in HTML and Word you would use `example (@my-label)`. What should YOU do? `gloss()` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: `r gloss("my-label")` in this case.
 
 If you have many examples, you might want to keep them in their own file, if you don't have them like that already. `glossr` offers a small dataset for testing, called `data(glosses)`.
 
@@ -90,7 +94,7 @@ gloss_df(head(glosses, 3))
 
 # PDF-only features
 
-This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item. **This will not work in HTML or Word**, which will just keep the numbering on the top level. But on PDF, given the function on some examples from [@shindo_2015], we can use `` `r knitr::inline_expr('gloss("jp")')` `` to reference `r gloss("jp")`, or `` `r knitr::inline_expr('gloss("heartwarming-jp")')` `` and `` `r knitr::inline_expr('gloss("languid-jp")')` `` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
+This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item. **This will not work in HTML or Word**, which will just keep the numbering on the top level. But on PDF, given the function on some examples from @shindo_2015, we can use `` `r knitr::inline_expr('gloss("jp")')` `` to reference `r gloss("jp")`, or `` `r knitr::inline_expr('gloss("heartwarming-jp")')` `` and `` `r knitr::inline_expr('gloss("languid-jp")')` `` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
 
 ```{r, jp-gloss}
 filter(glosses, endsWith(label, "jp")) %>% 
@@ -100,7 +104,7 @@ filter(glosses, endsWith(label, "jp")) %>%
 
 Finally, it might be the case that you want to apply $LaTeX$ formatting to a long string of elements for your first lines of glosses, e.g. set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you `gloss_format_words()`, which you can implement to the strings given to `as_gloss()`.
 
-Internally, `glossr` will try to parse $LaTeX$ formatting into HTML but currently it doesn't parse it to Word or read HTML/markdown tags. Coming soon a vignette on applying formatting or changing the defaults (e.g. italics for the first line). For the wish list.
+Internally, `glossr` will try to parse $LaTeX$ formatting into HTML but currently it doesn't parse it to Word or read HTML/markdown tags. (But see `vignette("styling")`.)
 
 ```{r, format-words}
 gloss_format_words("A long piece of text", "textit")
@@ -119,9 +123,12 @@ my_gloss
 
 # About the formats
 
-The Latex output writes your glosses with the format required by the [expex package](https://ctan.org/pkg/expex?lang=en). The default HMTL rendering uses [leipzig.js 0.8.0](https://bdchauvette.net/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the table of glosses is short so will be the translation; you can fix this manually by widening the table.
+The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HMTL rendering uses [leipzig.js 0.8.0](https://bdchauvette.net/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 
 
 # References
+
+
+

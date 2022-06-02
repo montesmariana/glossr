@@ -4,7 +4,7 @@ latex2html <- function(string) {
   string <- gsub(latex_tag("textit"), "<em>\\1</em>", string)
   string <- gsub(latex_tag("em"), "<em>\\1</em>", string)
   string <- gsub(latex_tag("textbf"), "<strong>\\1</strong>", string)
-  string <- gsub("\\O", "&#8709;", string)
+  string <- gsub("\\\\O", "&#8709;", string)
   string <- gsub("\\$\\\\(emptyset|varnothing)\\$", "&#8709;", string)
   string <- sc_to_upper(string)
   htmltools::HTML(string)
