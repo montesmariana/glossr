@@ -8,7 +8,7 @@
 <meta name="description" content="Read examples with interlinear glosses from files
     or from text and print them in a way compatible with both
     Latex and HTML outputs.">
-<title>Use interlinear glosses in R Markdown • glossr</title>
+<title>Use Interlinear Glosses in R Markdown • glossr</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -19,7 +19,7 @@
 <link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Use interlinear glosses in R Markdown">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Use Interlinear Glosses in R Markdown">
 <meta property="og:description" content="Read examples with interlinear glosses from files
     or from text and print them in a way compatible with both
     Latex and HTML outputs.">
@@ -89,21 +89,38 @@
 <!-- badges: start -->
 <p>The glossr package gives you tools to include interlinear glosses in your R Markdown file. If you are writing a linguistics paper and you want some interlinear glosses, this is for you!</p>
 <p>Maybe you already use <code>gb4e</code> or <code>expex</code> and you’re happy with your PDF files, good for you! But maybe you want to spice things up, have your examples in one file and read a dataframe to generate them on demand, instead of <em>typing</em> and <em>mistyping</em> and having your examples all over the place. If that’s the case, glossr is for you!</p>
-<p>Or maybe you want HTML output to work? If you use <code>gb4e</code> or <code>expex</code>, your examples will disappear from the HTML output! Here glossr can most definitely help. It even offers a helper function for cross-references that work in both formats! In fact, I included two different HTML outputs: one using <a href="https://bdchauvette.net/leipzig.js" class="external-link">leipzig.js</a> and a sadder one that <em>might</em> be more maleable and accessible, just less pro-looking.</p>
+<p>Or maybe you want HTML output to work? If you use <code>gb4e</code> or <code>expex</code>, your examples will disappear from the HTML output! Here glossr can most definitely help. It even offers a helper function for cross-references that work in both formats! In fact, I included two different HTML outputs: one using <a href="https://github.com/bdchauvette/leipzig.js/" class="external-link">leipzig.js</a> and a sadder one that <em>might</em> be more accessible, just less pro-looking.</p>
 <p>If you also want Word output, glossr can also take care of it, generating invisible tables for the right alignment.</p>
-<p>But please, don’t take my word for it —you can check the <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.pdf" class="external-link">PDF</a>, <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.html" class="external-link">HTML</a> and <a href="https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.docx" class="external-link">MS Word</a> outputs of <code><a href="articles/glossr_how.html">vignette("glossr_how")</a></code>.</p>
+<p>But please, don’t take my word for it —you can check the PDF, HTML and MS Word outputs of <code><a href="articles/glossr_how.html">vignette("glossr_how")</a></code> <a href="https://github.com/montesmariana/glossr/tree/main/inst/examples" class="external-link">stored in the repository</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the github development version with:</p>
+<p>You can install the development version of glossr from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"montesmariana/glossr"</span><span class="op">)</span></code></pre></div>
-<p>I plan to upload this to CRAN in the near future.</p>
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"montesmariana/glossr"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>This is a basic example; check <code><a href="articles/glossr_how.html">vignette("glossr_how")</a></code> for more examples and their output.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://montesmariana.github.io/glossr/">glossr</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/use_glossr.html">use_glossr</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">my_gloss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/as_gloss.html">as_gloss</a></span><span class="op">(</span>
+  <span class="st">"她 哇的一聲 大 哭起來，"</span>,
+  <span class="st">"tā wā=de-yì-shēng dà kū-qǐlái,"</span>,
+  <span class="st">"TSG waa.IDEO-LINK-one-sound big cry-inch"</span>,
+  translation <span class="op">=</span> <span class="st">"Waaaaa, she began to wail."</span>,
+  label <span class="op">=</span> <span class="st">"my-label"</span>,
+  source <span class="op">=</span> <span class="st">"ASBC (nº 100622)"</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
-<p>This package is possible thanks to the existence of other packages it has built on, mostly <a href="https://github.com/rstudio/rmarkdown" class="external-link">rmarkdown</a>, <a href="https://github.com/rstudio/htmltools" class="external-link">htmltools</a>, <a href="https://ardata-fr.github.io/officeverse/" class="external-link">officedown</a> and <a href="https://ardata-fr.github.io/flextable-book/" class="external-link">flextable</a>, as well as <a href="https://ctan.org/pkg/expex?lang=en" class="external-link">the <code>expex</code> package</a> for PDF output and <a href="https://bdchauvette.net/leipzig.js/" class="external-link">leipzig.js</a> for the HTML output. The HexSticker was designed in <a href="https://krita.org/en/" class="external-link">Krita</a> and rendered with <a href="https://github.com/GuangchuangYu/hexSticker" class="external-link">hexSticker</a>.</p>
+<p>This package is possible thanks to the existence of other packages it has built on, mostly <a href="https://github.com/rstudio/rmarkdown" class="external-link">rmarkdown</a>, <a href="https://github.com/rstudio/htmltools" class="external-link">htmltools</a>, <a href="https://ardata-fr.github.io/officeverse/" class="external-link">officedown</a> and <a href="https://ardata-fr.github.io/flextable-book/" class="external-link">flextable</a>, as well as <a href="https://ctan.org/pkg/expex?lang=en" class="external-link">the <code>expex</code> package</a> for PDF output and <a href="https://github.com/bdchauvette/leipzig.js/" class="external-link">leipzig.js</a> for the HTML output. The HexSticker was designed in <a href="https://krita.org/en/" class="external-link">Krita</a> and rendered with <a href="https://github.com/GuangchuangYu/hexSticker" class="external-link">hexSticker</a>.</p>
 <p>I would also like to acknowledge the input and encouragement of Giulia Mazzola and Thomas Van Hoey, who shared ideas and tested the code as it evolved.</p>
 <p>Last but not least, I’d like to acknowledge the source of the examples in the small “dataset” provided by this package, taken from <a href="https://www.jbe-platform.com/content/books/9789027269171" class="external-link">Maria Koptjevskaja-Tamm’s <em>The Linguistics of Temperature</em></a> (see <code><a href="articles/glossr.html">vignette("glossr")</a></code>).</p>
 </div>
@@ -139,7 +156,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Mariana Montes <br><small class="roles"> Maintainer </small>  </li>
+<li>Mariana Montes <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-3869-3207" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
