@@ -24,18 +24,16 @@ Or maybe you want HTML output to work? If you use `gb4e` or `expex`,
 your examples will disappear from the HTML output! Here glossr can most
 definitely help. It even offers a helper function for cross-references
 that work in both formats! In fact, I included two different HTML
-outputs: one using [leipzig.js](https://bdchauvette.net/leipzig.js) and
-a sadder one that *might* be more accessible, just less pro-looking.
+outputs: one using
+[leipzig.js](https://github.com/bdchauvette/leipzig.js/) and a sadder
+one that *might* be more accessible, just less pro-looking.
 
 If you also want Word output, glossr can also take care of it,
 generating invisible tables for the right alignment.
 
-But please, don’t take my word for it —you can check the
-[PDF](https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.pdf),
-[HTML](https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.html)
-and [MS
-Word](https://github.com/montesmariana/glossr/raw/main/inst/examples/glossr_how.docx)
-outputs of `vignette("glossr_how")`.
+But please, don’t take my word for it —you can check the PDF, HTML and
+MS Word outputs of `vignette("glossr_how")` [stored in the
+repository](https://github.com/montesmariana/glossr/tree/main/inst/examples).
 
 ## Installation
 
@@ -72,9 +70,9 @@ This package is possible thanks to the existence of other packages it
 has built on, mostly `{rmarkdown}`, `{htmltools}`, `{officedown}` and
 `{flextable}`, as well as [the `expex`
 package](https://ctan.org/pkg/expex?lang=en) for PDF output and
-[leipzig.js](https://bdchauvette.net/leipzig.js/) for the HTML output.
-The HexSticker was designed in [Krita](https://krita.org/en/) and
-rendered with `{hexSticker}`.
+[leipzig.js](https://github.com/bdchauvette/leipzig.js/) for the HTML
+output. The HexSticker was designed in [Krita](https://krita.org/en/)
+and rendered with `{hexSticker}`.
 
 I would also like to acknowledge the input and encouragement of Giulia
 Mazzola and Thomas Van Hoey, who shared ideas and tested the code as it

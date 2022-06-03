@@ -3,7 +3,6 @@ title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
 output:
-  officedown::rdocx_document: default
   rmdformats::readthedown:
     highlight: kate
   bookdown::pdf_document2:
@@ -11,6 +10,7 @@ output:
     extra_dependencies:
         - fontspec
         - xeCJK
+  officedown::rdocx_document: default
 urlcolor: red
 bibliography: ["../REFERENCES.bib", "../packages.bib"]
 ---
@@ -31,10 +31,10 @@ The immediate solution for a $LaTeX$ output is to use a specific library, such a
 But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least *some* rendering) of your interlinear glosses in HTML as well... and why not, MS Word! This offers some challenges, because you would need to figure out *how* to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats.
 I took that pain and packaged it so you don't need to feel it.
 
-You can start using `glossr` in an R Markdown file by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$, HTML^[You can also choose between the default HTML implementation, with [leipzig.js](https://bdchauvette.net/leipzig.js/), or a "legacy" implementation with simple tooltips and up to two glossing lines; do so by running `use_glossr("tooltip")`.] or neither, in which case it assumes you have Word output. This vignette has been run in all three formats by changing the output format to
-`bookdown::pdf_document2`, which renders [a PDF file](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.pdf);
-`bookdown::html_document2`, which renders [an HTML file](https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.html);
-and `officedown::rdocx_document`, which renders [an MS Word file]((https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)) [@R-bookdown; @R-officedown]. As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
+You can start using `glossr` in an R Markdown file by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$, HTML^[You can also choose between the default HTML implementation, with [leipzig.js](https://github.com/bdchauvette/leipzig.js/), or a "legacy" implementation with simple tooltips and up to two glossing lines; do so by running `use_glossr("tooltip")`.] or neither, in which case it assumes you have Word output. This vignette has been run in [all three formats](https://github.com/montesmariana/glossr/tree/main/inst/examples) by changing the output format to
+`bookdown::pdf_document2`, which renders a PDF file;
+`bookdown::html_document2` and `rmdformats::readthedown`, which render HTML files;
+and `officedown::rdocx_document`, which renders an MS Word file [@R-bookdown; @R-officedown; @R-rmdformats]. As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
 
 ```{r setup}
 library(glossr)
@@ -128,7 +128,7 @@ my_gloss
 
 # About the formats
 
-The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://bdchauvette.net/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
+The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 

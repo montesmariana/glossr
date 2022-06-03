@@ -1,6 +1,6 @@
 Package: glossr
 Type: Package
-Title: Use interlinear glosses in R Markdown
+Title: Use Interlinear Glosses in R Markdown
 Version: 0.5.1
 Authors@R: c(
   person(given = "Mariana",

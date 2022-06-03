@@ -7,7 +7,7 @@
 
         <meta name="author" content="Mariana Montes" />
     
-        <meta name="date" content="2022-06-02" />
+        <meta name="date" content="2022-06-03" />
     
     <title>Using the glossr package</title>
 
@@ -1894,7 +1894,7 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
                   <p class="author"><span class="glyphicon glyphicon-user"></span> Mariana
 Montes</p>
-                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-06-02</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2022-06-03</p>
           </div>
    </div>
      
@@ -1924,12 +1924,13 @@ calling the library and then <code>use_glossr()</code> to activate some
 background stuff. Mainly, this function informs all the other functions
 whether you are using <span class="math inline">\(LaTeX\)</span>, HTML<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> or
 neither, in which case it assumes you have Word output. This vignette
-has been run in all three formats by changing the output format to
-<code>bookdown::pdf_document2</code>, which renders <a href="https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.pdf">a
-PDF file</a>; <code>bookdown::html_document2</code>, which renders <a href="https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.html">an
-HTML file</a>; and <code>officedown::rdocx_document</code>, which
-renders <a href="(https://github.com/montesmariana/glossr/raw/main/inst/pdf/glossr_how.word)">an
-MS Word file</a> <span class="citation">(Xie 2022; Gohel and Ross
+has been run in <a href="https://github.com/montesmariana/glossr/tree/main/inst/examples">all
+three formats</a> by changing the output format to
+<code>bookdown::pdf_document2</code>, which renders a PDF file;
+<code>bookdown::html_document2</code> and
+<code>rmdformats::readthedown</code>, which render HTML files; and
+<code>officedown::rdocx_document</code>, which renders an MS Word file
+<span class="citation">(Xie 2022; Gohel and Ross 2022; Barnier
 2022)</span>. As you can see in <code>vignette(&quot;styling&quot;)</code>,
 <code>use_glossr()</code> also takes some variables to set up
 document-wide styling options for specific parts of your glosses. The
@@ -2169,14 +2170,14 @@ make.3SG.PRS heat/cold.N.A
 <h1>About the formats</h1>
 <p>The Latex output writes your glosses with the format required by the
 <a href="https://ctan.org/pkg/expex?lang=en">{expex} package</a>. The
-default HTML rendering uses <a href="https://bdchauvette.net/leipzig.js/">leipzig.js 0.8.0</a> (and, of
-course, {htmltools} <span class="citation">(Cheng et al. 2021)</span> to
-read it with R). The Word output is an invisible table generated with
-{flextable} <span class="citation">(Gohel 2022)</span>. Note that if the
-translation is very long it could exceed the margins of the file in Word
-(as is the case of example (5)), and at least for the time being you
-need to fix it manually by selecting the translation and reducing the
-width of its cell.</p>
+default HTML rendering uses <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js 0.8.0</a>
+(and, of course, {htmltools} <span class="citation">(Cheng et al.
+2021)</span> to read it with R). The Word output is an invisible table
+generated with {flextable} <span class="citation">(Gohel 2022)</span>.
+Note that if the translation is very long it could exceed the margins of
+the file in Word (as is the case of example (5)), and at least for the
+time being you need to fix it manually by selecting the translation and
+reducing the width of its cell.</p>
 <p>If you are familiar with these tools and would like to suggests
 expansions or contribute to the package, go ahead, I would love to hear
 from you!</p>
@@ -2184,6 +2185,10 @@ from you!</p>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-rmdformats" class="csl-entry">
+Barnier, Julien. 2022. <em>Rmdformats: HTML Output Formats and Templates
+for ’Rmarkdown’ Documents</em>. <a href="https://CRAN.R-project.org/package=rmdformats">https://CRAN.R-project.org/package=rmdformats</a>.
+</div>
 <div id="ref-R-htmltools" class="csl-entry">
 Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie,
 and Jeff Allen. 2021. <em>Htmltools: Tools for HTML</em>. <a href="https://github.com/rstudio/htmltools">https://github.com/rstudio/htmltools</a>.
@@ -2216,9 +2221,9 @@ with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">http
 say that this package would have taken a few hours less if I didn’t
 constantly write <em>leizpig</em> instead of <em>leipzig</em>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>You can also choose between the default HTML
-implementation, with <a href="https://bdchauvette.net/leipzig.js/">leipzig.js</a>, or a “legacy”
-implementation with simple tooltips and up to two glossing lines; do so
-by running <code>use_glossr(&quot;tooltip&quot;)</code>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+implementation, with <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js</a>, or a
+“legacy” implementation with simple tooltips and up to two glossing
+lines; do so by running <code>use_glossr(&quot;tooltip&quot;)</code>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Note that if you use Chinese characters you will need to
 add some <span class="math inline">\(LaTeX\)</span> packages (namely
 {fontspec} and {xeCJK}). You can do that either by adding them to <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html">the
