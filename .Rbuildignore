@@ -13,3 +13,4 @@
 ^inst/examples$
 ^cran-comments.md$
 ^README\.Rmd$
+^CRAN-SUBMISSION$

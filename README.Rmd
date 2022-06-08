@@ -41,8 +41,13 @@ But please, don't take my word for it ---you can check the PDF, HTML and MS Word
 
 ## Installation
 
+Install glossr via CRAN:
 
-You can install the development version of glossr from [GitHub](https://github.com/) with:
+```r
+install.packages("glossr")
+```
+
+You can also install the development version of glossr from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

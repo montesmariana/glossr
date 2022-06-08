@@ -23,7 +23,7 @@ R Markdown [@R-rmarkdown] is an R package for literate programming, where you ca
 
 Mixing R Markdown and interlinear glosses has proved challenging. This package offers you some wrapping functions that call [the `expex`](https://ctan.org/pkg/expex?lang=en) $LaTeX$ package for PDF output and [leipzig.js](https://github.com/bdchauvette/leipzig.js/) for HTML output and generate `flextable::flextable()` tables for MS Word output. You don't really need to know any Latex or Javascript or HTML to take advantage of both of them.
 
-The package also takes care of cross-references, giving you a handy function `gloss()` to sprinkle around your text every time you want to reference one of your examples. Go ahead and check out the articles and [the rendered versions](https://github.com/montesmariana/glossr/raw/main/inst/examples/) of `vignette("glossr_how")`.
+The package also takes care of cross-references, giving you a handy function `gloss()` to sprinkle around your text every time you want to reference one of your examples. Go ahead and check out the articles and [the rendered versions](https://github.com/montesmariana/glossr/tree/main/inst/examples/) of `vignette("glossr_how")`.
 
 I'm sure there is a lot of functionality in both `expex` and leipzig.js that this package doesn't cover... *yet*. Please, go ahead and report any problems, suggestions and tasks for the wishlist in [the issues section of the repository](https://github.com/montesmariana/glossr/issues). Or fork it and contribute if you'd like!
 

@@ -37,7 +37,13 @@ repository](https://github.com/montesmariana/glossr/tree/main/inst/examples).
 
 ## Installation
 
-You can install the development version of glossr from
+Install glossr via CRAN:
+
+``` r
+install.packages("glossr")
+```
+
+You can also install the development version of glossr from
 [GitHub](https://github.com/) with:
 
 ``` r
