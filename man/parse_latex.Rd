@@ -23,8 +23,8 @@ Parse latex
 }
 \section{Functions}{
 \itemize{
-\item \code{latex2html}: Convert to HTML
+\item \code{latex2html()}: Convert to HTML
 
-\item \code{latex2word}: Convert to Word
+\item \code{latex2word()}: Convert to Word
+
 }}
-

@@ -16,7 +16,7 @@ Reformatted string
 }
 \description{
 Facilitates applying the same latex formatting
-  to different words in a row.
+to different words in a row.
 }
 \examples{
 gloss_format_words("Many words to apply italics on.", "textit")

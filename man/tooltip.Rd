@@ -12,7 +12,7 @@ tooltip(x, title)
 \item{title}{Text of the tooltip}
 }
 \value{
-`shiny.tag` with attributes for a tooltip
+\code{\link[htmltools:builder]{shiny.tag}} with attributes for a tooltip
 }
 \description{
 Add tooltip to one word

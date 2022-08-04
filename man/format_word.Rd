@@ -14,7 +14,7 @@ format_word_translation(ft)
 format_word_source(source)
 }
 \arguments{
-\item{ft}{\code{\link[flextable]{flextable}} for gloss lines or translation}
+\item{ft}{\code{\link[flextable:flextable]{flextable::flextable}} for gloss lines or translation}
 
 \item{source}{Character vector with the source text.}
 }
@@ -26,10 +26,10 @@ Read Word formatting options
 }
 \section{Functions}{
 \itemize{
-\item \code{format_word_glosses}: Format glosses
+\item \code{format_word_glosses()}: Format glosses
 
-\item \code{format_word_translation}: Format translation
+\item \code{format_word_translation()}: Format translation
 
-\item \code{format_word_source}: Format source text
+\item \code{format_word_source()}: Format source text
+
 }}
-

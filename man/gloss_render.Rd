@@ -12,38 +12,40 @@
 \usage{
 gloss_pdf(gloss)
 
-gloss_html(gloss)
+gloss_html(gloss, numbering = TRUE)
 
-gloss_tooltip(gloss)
+gloss_tooltip(gloss, numbering = TRUE)
 
-gloss_leipzig(gloss)
+gloss_leipzig(gloss, numbering = TRUE)
 
-gloss_word(gloss)
+gloss_word(gloss, numbering = TRUE)
 }
 \arguments{
-\item{gloss}{Object of class \code{gloss_data}}
+\item{gloss}{Object of class \code{\link{gloss_data}}}
+
+\item{numbering}{Whether the gloss should be numbered (in HTML and Word).}
 }
 \value{
-Object of class \code{gloss}
+Object of class \code{\link[=new_gloss]{gloss}}.
 }
 \description{
-This functions are output-specific and can be used to check the specific output
-  of certain calls, but are not meant to be used in an R Markdown file. Instead,
-  use \code{\link{as_gloss}} or \code{\link{gloss_df}}.
+These functions are output-specific and can be used to check the specific output
+of certain calls, but are not meant to be used in an R Markdown file. Instead,
+use \code{\link[=as_gloss]{as_gloss()}} or \code{\link[=gloss_df]{gloss_df()}}.
 }
 \section{Functions}{
 \itemize{
-\item \code{gloss_pdf}: Render in PDF
+\item \code{gloss_pdf()}: Render in PDF
 
-\item \code{gloss_html}: Render in HTML
+\item \code{gloss_html()}: Render in HTML
 
-\item \code{gloss_tooltip}: Tooltip rendering for HTML
+\item \code{gloss_tooltip()}: Tooltip rendering for HTML
 
-\item \code{gloss_leipzig}: Leipzig.js engine
+\item \code{gloss_leipzig()}: Leipzig.js engine
 
-\item \code{gloss_word}: Render in Word
+\item \code{gloss_word()}: Render in Word
+
 }}
-
 \examples{
 ex_sp <- "Un ejemplo en español"
 ex_gloss <- "DET.M.SG example in Spanish"

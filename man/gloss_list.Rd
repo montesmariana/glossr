@@ -7,8 +7,8 @@
 gloss_list(glist, listlabel = NULL)
 }
 \arguments{
-\item{glist}{Concatenation of \code{gloss} objects, e.g.
-as output of \code{\link{gloss_df}}.}
+\item{glist}{Concatenation of \code{\link{gloss}} objects, e.g.
+as output of \code{\link[=gloss_df]{gloss_df()}}.}
 
 \item{listlabel}{Label for the full list (optional)}
 }
@@ -16,6 +16,6 @@ as output of \code{\link{gloss_df}}.}
 Character vector including the frame for a list of glosses.
 }
 \description{
-Takes a series of glosses from \code{\link{gloss_render}}
-  and puts them in a list within one example for PDF output.
+Takes a series of glosses from \code{\link[=gloss_render]{gloss_render()}}
+and puts them in a list within one example for PDF output.
 }

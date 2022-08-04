@@ -7,15 +7,15 @@
 new_gloss(input, output)
 }
 \arguments{
-\item{input}{A \code{gloss_data} object.}
+\item{input}{A \code{\link{gloss_data}} object.}
 
 \item{output}{How the gloss must be printed, depending on the output.}
 }
 \value{
-Object of class \code{gloss}
+Object of class \code{gloss}.
 }
 \description{
 The \code{gloss} class contains how a gloss will be printed and its original input
-(Object of class \code{\link{new_gloss_data}}) as \code{data} attribute.
-It also has a \code{\link[knitr]{knit_print}} method for rendering in R Markdown.
+(Object of class \code{\link{gloss_data}}) as \code{data} attribute.
+It also has a \code{\link[knitr:knit_print]{knitr::knit_print()}} method for rendering in R Markdown (and Quarto).
 }

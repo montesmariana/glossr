@@ -2,7 +2,7 @@
 % Please edit documentation in R/gloss.R
 \name{as_gloss}
 \alias{as_gloss}
-\title{Helper to create gloss objects}
+\title{Helper to create \code{gloss} objects}
 \usage{
 as_gloss(
   ...,
@@ -10,7 +10,8 @@ as_gloss(
   translation = NULL,
   label = NULL,
   trans_quotes = getOption("glossr.trans.quotes", "\\""),
-  output_format = getOption("glossr.output", "latex")
+  output_format = getOption("glossr.output", "latex"),
+  numbering = getOption("glossr.numbering", TRUE)
 )
 }
 \arguments{
@@ -25,25 +26,26 @@ as_gloss(
 \item{trans_quotes}{(Optional) Quotes to surround the free translation with.}
 
 \item{output_format}{(Optional) Whether it will use latex, word or html format.}
+
+\item{numbering}{(Optional) Whether the gloss should be numbered (in Word and HTML).}
 }
 \value{
-Object of class \code{gloss}, ready to be printed based on the chosen output format,
-  and with a \code{gloss_data} object as \code{data} attribute (or, in the case of calls via
-  \code{\link{gloss_df}}, the original input as \code{data}.
+Object of class \code{\link[=new_gloss]{gloss}}, ready to be printed based on the chosen output format,
+and with a \code{\link{gloss_data}} object as \code{data} attribute (or, in the case of calls via
+\code{\link[=gloss_df]{gloss_df()}}, the original input as\code{data}).
 }
 \description{
 Based on a character vectors and up to three label arguments,
 create an object where those arguments are attributes.
 These are:
-\describe{
-   \item{source}{Where the text comes from. This will be printed
-   in the first line of the example, without word alignment.}
-   \item{translation}{Free translation. This will be printed as the
-   last line of the example, without word alignment and in quotation
-   marks if so desired.}
-   \item{label}{Named label of the example, for cross-references.}
-   \item{lengths}{This is computed within the function, not provider, and
-   it's the number of items identified in each gloss line.}
+\itemize{
+\item \strong{source}: Where the text comes from. This will be printed in the first
+line of the example, without word alignment.
+\item \strong{translation}: Free translation. This will be printed as the last line
+of the example, without word alignment and in quotation marks if so desired.
+\item \strong{label}: Named label of the example, for cross-references.
+\item \strong{lengths}: This is computed within the function, not provider, and
+it's the number of items identified in each gloss line.
 }
 }
 \examples{

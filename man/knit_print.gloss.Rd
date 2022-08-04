@@ -9,8 +9,8 @@
 \arguments{
 \item{x}{Object to print}
 
-\item{...}{Other options for knit_print}
+\item{...}{Other options}
 }
 \description{
-Print method for glosses
+This method print \code{\link[=new_gloss]{gloss}} objects with \code{{knitr}}.
 }

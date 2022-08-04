@@ -13,7 +13,7 @@ gloss_linetooltip(original, parsed)
 \item{parsed}{Text to show as tooltip when hovering}
 }
 \value{
-List of `shiny.tag`
+List of \code{\link[htmltools:builder]{shiny.tag}}
 }
 \description{
 Apply tooltip to a full gloss
