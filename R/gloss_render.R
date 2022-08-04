@@ -1,10 +1,11 @@
 #' Render a gloss
 #'
-#' This functions are output-specific and can be used to check the specific output
+#' These functions are output-specific and can be used to check the specific output
 #'   of certain calls, but are not meant to be used in an R Markdown file. Instead,
 #'   use \code{\link{as_gloss}} or \code{\link{gloss_df}}.
 #'
 #' @param gloss Object of class \code{gloss_data}
+#' @param numbering Whether the gloss should be numbered (in HTML and Word).
 #'
 #' @return Object of class \code{gloss}
 #' @name gloss_render
@@ -56,17 +57,19 @@ gloss_pdf <- function(gloss) {
 
 #' @describeIn gloss_render Render in HTML
 #' @export
-gloss_html <- function(gloss) {
+gloss_html <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
   output <- getOption("glossr.output", "leipzig")
   func <- if (output == "tooltip") gloss_tooltip else gloss_leipzig
-  g <- c(sprintf("(@%s) ", attr(gloss, "label")), func(gloss))
+  g <- c(
+    if (numbering) sprintf("(@%s) ", attr(gloss, "label")) else NULL,
+    func(gloss, numbering))
   new_gloss(gloss, g)
 }
 
 #' @describeIn gloss_render Tooltip rendering for HTML
 #' @export
-gloss_tooltip <- function(gloss) {
+gloss_tooltip <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
   trans_part <- if (!attr(gloss, "has_translation")) {
     ""}
@@ -83,12 +86,18 @@ gloss_tooltip <- function(gloss) {
 
 #' @describeIn gloss_render Leipzig.js engine
 #' @export
-gloss_leipzig <- function(gloss) {
+gloss_leipzig <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
   is_first <- getOption("glossr.first_leipzig", TRUE)
 
   # define source
-  source <- if (attr(gloss, "has_source")) attr(gloss, "source") else htmltools::HTML("&#160;")
+  source <- if (attr(gloss, "has_source")) {
+    htmltools::p(attr(gloss, "source"), class = "gloss__line--original")
+  } else if (numbering) {
+    htmltools::p(htmltools::HTML("&#160;"), class = "gloss__line--original")
+  } else {
+    NULL
+  }
 
   # define glosses
   gloss_list <- purrr::map(gloss, ~ htmltools::p(latex2html(.x)))
@@ -99,9 +108,10 @@ gloss_leipzig <- function(gloss) {
   } else {
     NULL
   }
+
   g <- htmltools::div(
     htmltools::tagList(
-      htmltools::p(source, class = "gloss__line--original"),
+      source,
       gloss_list,
       translation
     ),
@@ -131,10 +141,14 @@ gloss_leipzig <- function(gloss) {
 #'
 #' @import dplyr
 #' @export
-gloss_word <- function(gloss) {
+gloss_word <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
-  # define source
-  source <- if (attr(gloss, "has_source")) attr(gloss, "source") else "_"
+
+  if (numbering) {
+    # define source
+    source <- if (attr(gloss, "has_source")) attr(gloss, "source") else "_"
+    label <- sprintf("(@%s) ", attr(gloss, "label"))
+  }
 
   # Split lines and count characters
   gloss_lines <- gloss_word_lines(unclass(gloss))
@@ -151,7 +165,7 @@ gloss_word <- function(gloss) {
   }) %>% unlist()
 
   gloss_print <- c(
-    sprintf("(@%s) %s\n", attr(gloss, "label"), format_word_source(source)),
+    if (numbering) paste0(label, format_word_source(source), "\n") else NULL,
     ft_lines
     )
   new_gloss(gloss, gloss_print)
@@ -177,7 +191,8 @@ gloss_word <- function(gloss) {
 #'   label = "label"
 #' )
 #' gloss_df(my_gloss)
-gloss_df <- function(df, output_format = getOption("glossr.output", "latex")) {
+gloss_df <- function(df, output_format = getOption("glossr.output", "latex"),
+                     numbering = getOption("glossr.numbering", TRUE)) {
   if (!inherits(df, "data.frame")) {
     stop("`gloss_df` requires a `data.frame` object.",
          call. = FALSE)
@@ -186,6 +201,6 @@ gloss_df <- function(df, output_format = getOption("glossr.output", "latex")) {
     stop("`gloss_df` has received an empty dataframe.",
          call. = FALSE)
   }
-  g <- unlist(purrr::pmap(df, as_gloss, output_format = output_format))
+  g <- unlist(purrr::pmap(df, as_gloss, output_format = output_format, numbering = numbering))
   new_gloss(df, g)
 }

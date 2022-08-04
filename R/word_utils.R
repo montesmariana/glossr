@@ -2,6 +2,7 @@
 #'
 #' @param gloss_lines Unclassed content of a \code{gloss_data} object
 #'
+#' @noRd
 #' @return List of tibbles to print
 #' @import dplyr
 #' @importFrom rlang .data
@@ -44,6 +45,7 @@ gloss_word_lines <- function(gloss_lines) {
 #'
 #' Helper for \code{\link{gloss_word}}
 #'
+#' @noRd
 #' @param m Maximum number of characters for a slot
 #' @param c Cumulative sum of maximums
 #' @param l Current line
@@ -61,6 +63,7 @@ reset_max <- function(m, c, l) {
 #' @param gloss_output Gloss lines as a table for Word
 #' @param is_translation Whether the table is for the free translation line.
 #'
+#' @noRd
 #' @return \code{\link[flextable]{flextable}} object
 #' @import flextable
 #' @importFrom rlang .data
@@ -179,6 +182,7 @@ format_word_source <- function(source) {
 #' @param bold Whether the word should be in bold
 #' @param italic Whether the word should be in italics
 #'
+#' @noRd
 #' @return Knitr-ready text
 word_knitr <- function(text, bold = FALSE, italic = FALSE) {
   text <- officer::to_wml(

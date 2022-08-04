@@ -23,7 +23,7 @@ use_glossr <- function(
   opt <- getOption("glossr.output")
   if (knitr::is_latex_output()) {
     output <- "latex"
-  } else if (!knitr::is_html_output()) {
+  } else if (!knitr::is_html_output() && is.null(html_format)) {
     output <- "word"
   } else if (is.null(opt)) {
     output <- if (is.null(html_format)) "leipzig" else match.arg(html_format, html_formats)
@@ -64,6 +64,7 @@ use_glossr <- function(
 #'   \item{c|third}{The third line of the glosses if it exists.}
 #'   \item{ft|trans|translation}{The line of the glosses where the free \code{translation}
 #'   is rendered.}
+#'   \item{numbering}{Whether the glosses should be numbered (in HTML and Word).}
 #' }
 #' Each of these items can take one of a few values:
 #' \itemize{
@@ -86,7 +87,8 @@ set_style_options <- function(styling = list()) {
     c = "c", third = "c",
     translation = "translation",
     ft = "translation",
-    trans = "translation"
+    trans = "translation",
+    numbering = TRUE
     )
   style_opts <- list()
   for (v in names(variables)) {
@@ -109,8 +111,11 @@ set_style_options <- function(styling = list()) {
   if ("par_spacing" %in% names(styling)) {
     style_opts$glossr.par.spacing = styling$par_spacing
   }
+  if ("numbering" %in% names(styling)) {
+    style_opts$glossr.numbering = styling$numbering
+  }
   options(style_opts)
-  extra <- setdiff(names(styling), c(names(variables), "trans_quotes", "par_spacing"))
+  extra <- setdiff(names(styling), c(names(variables), "trans_quotes", "par_spacing", "numbering"))
   for (e in extra) {
     warning(sprintf("'%s' is not a valid style option.", e),
             call. = FALSE)

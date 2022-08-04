@@ -79,6 +79,7 @@ new_gloss_data <- function(
 #' @param label (Optional) Example label
 #' @param trans_quotes (Optional) Quotes to surround the free translation with.
 #' @param output_format (Optional) Whether it will use latex, word or html format.
+#' @param numbering (Optional) Whether the gloss should be numbered (in Word and HTML).
 #'
 #' @return Object of class \code{gloss}, ready to be printed based on the chosen output format,
 #'   and with a \code{gloss_data} object as \code{data} attribute (or, in the case of calls via
@@ -97,7 +98,8 @@ as_gloss <- function(...,
                      translation = NULL,
                      label = NULL,
                      trans_quotes = getOption("glossr.trans.quotes", '"'),
-                     output_format = getOption("glossr.output", "latex")
+                     output_format = getOption("glossr.output", "latex"),
+                     numbering = getOption("glossr.numbering", TRUE)
                      ) {
   validate_output(output_format)
   gloss <- new_gloss_data(
@@ -108,9 +110,9 @@ as_gloss <- function(...,
   if (output_format == "latex") {
     gloss_pdf(gloss)
   } else if (output_format == "word") {
-    gloss_word(gloss)
+    gloss_word(gloss, numbering = numbering)
   } else {
-    gloss_html(gloss)
+    gloss_html(gloss, numbering = numbering)
   }
 }
 

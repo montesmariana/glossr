@@ -2,7 +2,7 @@
 #'
 #' @param x Variable to define
 #' @param default Default value
-#'
+#' @noRd
 #' @return New value
 set_default <- function(x, default = "") {
   if (is.null(x) || is.na(x) || !is.character(x) || nchar(x) == 0) default else x
@@ -21,6 +21,7 @@ NULL
 #'
 #' @param output Character string with output format required.
 #'
+#' @noRd
 #' @return Invisible, the output. It also sets it as the 'glossr.output' option.
 validate_output <- function(output = c("word", "latex", "leipzig", "tooltip", "html", "pdf")) {
   output <- tryCatch(
@@ -43,6 +44,7 @@ validate_output <- function(output = c("word", "latex", "leipzig", "tooltip", "h
 #'
 #' @param format \code{i} for italics and \code{b} for bold
 #'
+#' @noRd
 #' @return Character vector with the ways that a certain format (italics or bold) can be specified.
 style_options <- function(format = c("i", "b")) {
   switch(
@@ -56,6 +58,7 @@ style_options <- function(format = c("i", "b")) {
 #'
 #' Calls \code{\link{requireNamespace}} with the required packages.
 #'
+#' @noRd
 #' @param output_format Word, Leipzig or Tooltip, desired format
 check_packages <- function(output_format) {
   if (output_format == "word") {

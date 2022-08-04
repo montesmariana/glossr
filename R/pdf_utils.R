@@ -63,7 +63,7 @@ gloss_list <- function(glist, listlabel = NULL) {
 #' Read Latex formatting options
 #'
 #' @param level Gloss line to format
-#'
+#' @noRd
 #' @return Key for expex
 format_pdf <- function(level) {
   format <- getOption(sprintf("glossr.format.%s", level))

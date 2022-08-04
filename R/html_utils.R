@@ -17,6 +17,7 @@ latex2html <- function(string) {
 #'
 #' @param string String with a LaTeX small caps tag
 #'
+#' @noRd
 #' @return Character vector of length one
 sc_to_upper <- function(string) {
   replaced <- gsub(
@@ -34,6 +35,7 @@ sc_to_upper <- function(string) {
 #'
 #' @param tag Latex tag
 #'
+#' @noRd
 #' @returns Regex expression to extract tagged string.
 latex_tag <- function(tag) {
   sprintf("\\\\%s\\{([^}]+)\\}", tag)
@@ -46,6 +48,7 @@ latex_tag <- function(tag) {
 #'
 #' @param line Character string to split.
 #'
+#' @noRd
 #' @return Character vector of elements.
 gloss_linesplit <- function(line) {
   first_split <- stringr::str_replace_all(
@@ -67,6 +70,7 @@ gloss_linesplit <- function(line) {
 
 #' HTML dependency for leipzig.js
 #'
+#' @noRd
 #' @return \code{\link[htmltools]{htmlDependency}}
 #' @export
 use_leipzig <- function() {
@@ -82,6 +86,7 @@ use_leipzig <- function() {
 
 #' HTML dependency for tooltip format
 #'
+#' @noRd
 #' @return \code{\link[htmltools]{htmlDependency}}
 #' @export
 use_tooltip <- function() {
@@ -99,6 +104,7 @@ use_tooltip <- function() {
 #'
 #' To append after the first gloss.
 #'
+#' @noRd
 #' @return \code{\link[htmltools]{tag}}
 #' @export
 leipzig_script <- function() {
@@ -112,6 +118,7 @@ leipzig_script <- function() {
 
 #' Read HTML formatting options
 #'
+#' @noRd
 #' @return Style tag
 format_html <- function() {
   levels <- c(
