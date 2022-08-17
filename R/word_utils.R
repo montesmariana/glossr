@@ -1,6 +1,6 @@
 #' Process elements of gloss lines for word
 #'
-#' @param gloss_lines Unclassed content of a \code{gloss_data} object
+#' @param gloss_lines Unclassed content of a [`gloss_data`] object
 #'
 #' @noRd
 #' @return List of tibbles to print
@@ -43,7 +43,7 @@ gloss_word_lines <- function(gloss_lines) {
 
 #' Divide lines for Word
 #'
-#' Helper for \code{\link{gloss_word}}
+#' Helper for [gloss_word()]
 #'
 #' @noRd
 #' @param m Maximum number of characters for a slot
@@ -64,10 +64,9 @@ reset_max <- function(m, c, l) {
 #' @param is_translation Whether the table is for the free translation line.
 #'
 #' @noRd
-#' @return \code{\link[flextable]{flextable}} object
+#' @return [`flextable::flextable`] object
 #' @import flextable
 #' @importFrom rlang .data
-#' @export
 gloss_table <- function(gloss_output, is_translation = FALSE) {
   ft <- flextable(gloss_output) %>%
     delete_part("header") %>%
@@ -122,7 +121,7 @@ latex2word <- function(string, is_cell = TRUE) {
 
 #' Read Word formatting options
 #'
-#' @param ft \code{\link[flextable]{flextable}} for gloss lines or translation
+#' @param ft [`flextable::flextable`] for gloss lines or translation
 #' @param source Character vector with the source text.
 #'
 #' @name format_word

@@ -1,9 +1,9 @@
 #' Examples of glosses
 #'
 #' A dataset containing five glossing examples extracted from Koptjevskaja-Tamm (2015)'s
-#' \emph{The Linguistics of Temperature} and chapters within.
+#' *The Linguistics of Temperature* and chapters within.
 #'
-#' @format A \code{tibble} with 5 rows and 6 variables:
+#' @format A [`tibble::tibble`] with 5 rows and 6 variables:
 #' \describe{
 #'   \item{original}{The text in the original language.}
 #'   \item{parsed}{The text with translations to English or morphological annotation per word or expression,

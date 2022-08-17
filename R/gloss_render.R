@@ -2,12 +2,12 @@
 #'
 #' These functions are output-specific and can be used to check the specific output
 #'   of certain calls, but are not meant to be used in an R Markdown file. Instead,
-#'   use \code{\link{as_gloss}} or \code{\link{gloss_df}}.
+#'   use [as_gloss()] or [gloss_df()].
 #'
-#' @param gloss Object of class \code{gloss_data}
+#' @param gloss Object of class [`gloss_data`]
 #' @param numbering Whether the gloss should be numbered (in HTML and Word).
 #'
-#' @return Object of class \code{gloss}
+#' @return Object of class [`gloss`][new_gloss()].
 #' @name gloss_render
 #'
 #' @encoding UTF-8
@@ -174,13 +174,13 @@ gloss_word <- function(gloss, numbering = TRUE) {
 
 #' Render gloss from a dataframe
 #'
-#' @param df Dataframe one row per gloss. Columns \code{translation},
-#'   \code{source} and \code{label} have special meaning
-#'   (see \code{\link{new_gloss_data}}); all the others will be interpreted as
+#' @param df Dataframe one row per gloss. Columns `translation`,
+#'   `source` and `label` have special meaning
+#'   (see [as_gloss()]); all the others will be interpreted as
 #'   lines to align in the order given.
 #' @inheritParams as_gloss
 #'
-#' @return Object of class \code{gloss} with the original input as \code{data} attribute.
+#' @return Object of class [`gloss`][new_gloss()] with the original input as `data` attribute.
 #' @export
 #'
 #' @examples

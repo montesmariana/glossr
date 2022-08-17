@@ -45,34 +45,29 @@ use_glossr <- function(
 
 #' Set general styling options
 #'
-#' This is a helper function to set \code{\link{options}} that control style characteristics
-#' for glosses across the full document. It is called within \code{\link{use_glossr}}
+#' This is a helper function to set [options()] that control style characteristics
+#' for glosses across the full document. It is called within [use_glossr()]
 #' but can be overridden later but setting the appropriate options.
 #'
 #' There are two types of settings that can be provided in the list.
-#' First, \code{trans_quotes} sets the characters that must surround the free translation in a gloss.
+#' First, `trans_quotes` sets the characters that must surround the free translation in a gloss.
 #' If no value is specified, it will be double quotes. There are no real restrictions
 #' for this value.
 #'
 #' Second, the following elements can set general styling instructions for different
-#' sections of a gloss, formatting them completely in italics OR bold. The items with a \code{|}
+#' sections of a gloss, formatting them completely in italics OR bold. The items with a `|`
 #' indicate that various names are possible.
-#' \describe{
-#'   \item{source|preamble}{The line of the glosses where the \code{source} is rendered.}
-#'   \item{a|first}{The first line of the glosses, with the original language text.}
-#'   \item{b|second}{The second line of the glosses.}
-#'   \item{c|third}{The third line of the glosses if it exists.}
-#'   \item{ft|trans|translation}{The line of the glosses where the free \code{translation}
-#'   is rendered.}
-#'   \item{numbering}{Whether the glosses should be numbered (in HTML and Word).}
-#' }
-#' Each of these items can take one of a few values:
-#' \itemize{
-#'    \item \code{i}, \code{it}, \code{italics}, \code{textit} set italics.
-#'    \item \code{b}, \code{bf}, \code{bold}, \code{textbf} set boldface.
-#' }
+#' - **source|preamble**: The line of the glosses where the `source` is rendered.
+#' - **a|first**: The first line of the glosses, with the original language text.
+#' - **b|second**: The second line of the glosses.
+#' - **c|third**: The third line of the glosses if it exists.
+#' - **ft|trans|translation**: The line of the glosses where the free `translation`
+#'  is rendered.
+#' **numbering**: Whether the glosses should be numbered (in HTML and Word).
 #'
-#' #TODO create vignette
+#' Each of these items can take one of a few values:
+#' - `i`, `it`, `italics` and `textit` set italics.
+#' - `b`, `bf`, `bold` and `textbf` set boldface.
 #'
 #' @param styling Named list of styling options for specific elements of glosses.
 #'

@@ -42,7 +42,7 @@ validate_output <- function(output = c("word", "latex", "leipzig", "tooltip", "h
 
 #' List of styling options
 #'
-#' @param format \code{i} for italics and \code{b} for bold
+#' @param format `i` for italics and `b` for bold
 #'
 #' @noRd
 #' @return Character vector with the ways that a certain format (italics or bold) can be specified.
@@ -56,7 +56,7 @@ style_options <- function(format = c("i", "b")) {
 
 #' Check if required packages are installed
 #'
-#' Calls \code{\link{requireNamespace}} with the required packages.
+#' Calls [requireNamespace()] with the required packages.
 #'
 #' @noRd
 #' @param output_format Word, Leipzig or Tooltip, desired format

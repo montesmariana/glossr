@@ -71,8 +71,7 @@ gloss_linesplit <- function(line) {
 #' HTML dependency for leipzig.js
 #'
 #' @noRd
-#' @return \code{\link[htmltools]{htmlDependency}}
-#' @export
+#' @return [htmltools::htmlDependency]
 use_leipzig <- function() {
   htmltools::htmlDependency(
     name = "leipzig",
@@ -87,8 +86,7 @@ use_leipzig <- function() {
 #' HTML dependency for tooltip format
 #'
 #' @noRd
-#' @return \code{\link[htmltools]{htmlDependency}}
-#' @export
+#' @return [htmltools::htmlDependency]
 use_tooltip <- function() {
   htmltools::htmlDependency(
     name = "tooltip",
@@ -105,8 +103,7 @@ use_tooltip <- function() {
 #' To append after the first gloss.
 #'
 #' @noRd
-#' @return \code{\link[htmltools]{tag}}
-#' @export
+#' @return [`htmltools::tag`]
 leipzig_script <- function() {
   htmltools::tags$script(
     paste0(

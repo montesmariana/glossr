@@ -4,7 +4,7 @@
 #'   to different words in a row.
 #'
 #' @param text Character vector of length 1.
-#' @param formatting Latex formatting code, e.g. \code{textit} or \code{textsc}.
+#' @param formatting Latex formatting code, e.g. `textit` or `textsc`.
 #'
 #' @return Reformatted string
 #' @export
@@ -26,11 +26,11 @@ gloss_format_words <- function(text, formatting) {
 
 #' Sublist glosses
 #'
-#' Takes a series of glosses from \code{\link{gloss_render}}
+#' Takes a series of glosses from [gloss_render()]
 #'   and puts them in a list within one example for PDF output.
 #'
-#' @param glist Concatenation of \code{gloss} objects, e.g.
-#'   as output of \code{\link{gloss_df}}.
+#' @param glist Concatenation of [`gloss`] objects, e.g.
+#'   as output of [gloss_df()].
 #' @param listlabel Label for the full list (optional)
 #'
 #' @return Character vector including the frame for a list of glosses.

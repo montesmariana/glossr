@@ -1,22 +1,20 @@
-#' gloss_data class
+#' `gloss_data` class
 #'
 #' Based on a character vectors and up to three label arguments,
 #' create an object where those arguments are attributes.
 #' These are:
-#' \describe{
-#'    \item{source}{Where the text comes from. This will be printed
-#'    in the first line of the example, without word alignment.}
-#'    \item{translation}{Free translation. This will be printed as the
-#'    last line of the example, without word alignment and in quotation
-#'    marks if so desired.}
-#'    \item{label}{Named label of the example, for cross-references.}
-#'    \item{lengths}{This is computed within the function, not provider, and
-#'    it's the number of items identified in each gloss line.}
-#' }
+#' - **source**: Where the text comes from. This will be printed in the first
+#'   line of the example, without word alignment.
+#' - **translation**: Free translation. This will be printed as the last line
+#'   of the example, without word alignment and in quotation marks if so desired.
+#' - **label**: Named label of the example, for cross-references.
+#' - **lengths**: This is computed within the function, not provider, and
+#'  it's the number of items identified in each gloss line.
+#'
 #' This function is mostly for internal use, but may be useful for debugging or
 #' checking the output of specific calls. Normally, it's best to use
-#' \code{\link{as_gloss}} or \code{\link{gloss_df}}.
-#' Note that, unlike \code{\link{as_gloss}}, \code{new_gloss_data} requires a list
+#' [as_gloss()] or [gloss_df()].
+#' Note that, unlike [as_gloss()], `new_gloss_data` requires a list
 #' of gloss lines.
 #'
 #' @param gloss_lines Lines for glossing, as a list
@@ -25,7 +23,8 @@
 #' @param label (Optional) Example label
 #' @param trans_quotes (Optional) Quotes to surround the free translation with.
 #'
-#' @return Object of class \code{gloss_data}
+#' @name gloss_data
+#' @return Object of class `gloss_data`
 #' @export
 new_gloss_data <- function(
     gloss_lines,
@@ -57,33 +56,18 @@ new_gloss_data <- function(
   )
 }
 
-#' Helper to create gloss objects
+#' Helper to create `gloss` objects
 #'
-#' Based on a character vectors and up to three label arguments,
-#' create an object where those arguments are attributes.
-#' These are:
-#' \describe{
-#'    \item{source}{Where the text comes from. This will be printed
-#'    in the first line of the example, without word alignment.}
-#'    \item{translation}{Free translation. This will be printed as the
-#'    last line of the example, without word alignment and in quotation
-#'    marks if so desired.}
-#'    \item{label}{Named label of the example, for cross-references.}
-#'    \item{lengths}{This is computed within the function, not provider, and
-#'    it's the number of items identified in each gloss line.}
-#' }
+#' @inherit gloss_data description
 #'
 #' @param ... Lines for glossing
-#' @param source (Optional) Source of example
-#' @param translation (Optional) Free translation
-#' @param label (Optional) Example label
-#' @param trans_quotes (Optional) Quotes to surround the free translation with.
+#' @inheritParams gloss_data
 #' @param output_format (Optional) Whether it will use latex, word or html format.
 #' @param numbering (Optional) Whether the gloss should be numbered (in Word and HTML).
 #'
-#' @return Object of class \code{gloss}, ready to be printed based on the chosen output format,
-#'   and with a \code{gloss_data} object as \code{data} attribute (or, in the case of calls via
-#'   \code{\link{gloss_df}}, the original input as \code{data}.
+#' @return Object of class [`gloss`][new_gloss()], ready to be printed based on the chosen output format,
+#'   and with a [`gloss_data`] object as `data` attribute (or, in the case of calls via
+#'   [gloss_df()], the original input as`data`).
 #' @export
 #' @examples
 #' ex_sp <- "Un ejemplo en español"
@@ -118,14 +102,14 @@ as_gloss <- function(...,
 
 #' gloss class
 #'
-#' The \code{gloss} class contains how a gloss will be printed and its original input
-#' (Object of class \code{\link{new_gloss_data}}) as \code{data} attribute.
-#' It also has a \code{\link[knitr]{knit_print}} method for rendering in R Markdown.
+#' The `gloss` class contains how a gloss will be printed and its original input
+#' (Object of class [`gloss_data`]) as `data` attribute.
+#' It also has a [knitr::knit_print()] method for rendering in R Markdown (and Quarto).
 #'
-#' @param input A \code{gloss_data} object.
+#' @param input A [`gloss_data`] object.
 #' @param output How the gloss must be printed, depending on the output.
 #'
-#' @return Object of class \code{gloss}
+#' @return Object of class `gloss`.
 #' @export
 new_gloss <- function(input, output){
   structure(

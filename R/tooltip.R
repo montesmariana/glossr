@@ -3,7 +3,7 @@
 #' @param x Word or expression
 #' @param title Text of the tooltip
 #'
-#' @return `shiny.tag` with attributes for a tooltip
+#' @return [`shiny.tag`][htmltools::tag()] with attributes for a tooltip
 #' @export
 #'
 #' @examples
@@ -18,10 +18,10 @@ tooltip <- function(x, title) {
 
 #' Apply tooltip to a full gloss
 #'
-#' @param original Text to show in the \code{tooltip} rendering.
+#' @param original Text to show in the `tooltip` rendering.
 #' @param parsed Text to show as tooltip when hovering
 #'
-#' @return List of `shiny.tag`
+#' @return List of [`shiny.tag`][htmltools::tag()]
 #' @export
 #'
 #' @encoding UTF-8

@@ -1,7 +1,9 @@
 #' Print method for glosses
 #'
+#' This method print [`gloss`][new_gloss()] objects with `{knitr}`.
+#'
 #' @param x Object to print
-#' @param ... Other options for knit_print
+#' @param ... Other options
 #' @importFrom knitr knit_print
 #' @exportS3Method knitr::knit_print gloss
 #' @export
@@ -47,6 +49,7 @@ knit_print.gloss <- function(x, ...) {
 #' @param label Label for reference
 #'
 #' @return Character string with label reference
+#' @noMd
 #' @export
 gloss <- function(label) {
   output <- getOption("glossr.output", "latex")

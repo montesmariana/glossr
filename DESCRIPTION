@@ -30,7 +30,7 @@ Imports:
     stringr,
     flextable,
     tidyr
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Suggests: 
@@ -45,3 +45,4 @@ Depends:
 URL: https://montesmariana.github.io/glossr/,
     https://github.com/montesmariana/glossr
 Language: en-GB
+Roxygen: list(markdown = TRUE)
