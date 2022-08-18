@@ -7,6 +7,9 @@
     <loc>https://montesmariana.github.io/glossr/dev/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://montesmariana.github.io/glossr/dev/articles/gloss_factory.html</loc>
+  </url>
+  <url>
     <loc>https://montesmariana.github.io/glossr/dev/articles/glossr.html</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/dev/reference/gloss_df.html</loc>
+  </url>
+  <url>
+    <loc>https://montesmariana.github.io/glossr/dev/reference/gloss_factory.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/dev/reference/gloss_format_words.html</loc>
