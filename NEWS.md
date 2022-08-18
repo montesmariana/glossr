@@ -1,8 +1,10 @@
-# (development version)
+# glossr (development version)
 
 - It is possible to create glosses in Quarto documents.
 
 - New examples with Quarto slides and documents.
+
+- New `gloss_factory()` function and `vignette("gloss_factory")`
 
 # glossr 0.5.1
 

@@ -29,7 +29,8 @@ Imports:
     rlang,
     stringr,
     flextable,
-    tidyr
+    tidyr,
+    cli
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 VignetteBuilder: knitr

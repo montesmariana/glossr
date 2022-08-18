@@ -20,6 +20,7 @@ reference:
   - gloss_render
   - gloss_df
   - gloss_list
+  - gloss_factory
 - title: Dataset
   desc: |
     Dataset used in vignettes.

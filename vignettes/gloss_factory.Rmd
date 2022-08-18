@@ -1,0 +1,104 @@
+---
+title: "Using dataframes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using dataframes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The glossr package encourages you to keep your examples in one dataframe that you can extract glosses from. You can filter it based on the label names or any other variables and print a series of glosses next to each other with one call.
+
+If you like this feature and you have, for example, a dataframe called `glosses`, you might find yourself calling variations of `gloss_df(filter(glosses, "my-label"))` multiple times in a text. This vignette will show you how to work with `gloss_factory()` so that you only need to type `my_gloss("my-label")` instead. In addition, this function performs some validation on your dataset to avoid undesired output.
+
+```{r setup}
+library(glossr)
+library(dplyr)
+library(stringr)
+use_glossr()
+data(glosses)
+```
+
+# Create a gloss factory
+
+The first thing you need to do is assign the value of your `gloss_factory()` call to a short variable that works for you. I recommend trying this in the console, and then calling it in a setup R chunk that doesn't print messages or warnings.
+
+```{r fact1}
+by_label <- gloss_factory(glosses)
+```
+
+By default, `gloss_factory()` prints a few messages after checking the dataframe that was provided: it checks whether there are "source", "translation" and "label" columns and which would be the remaining columns with content for the text lines. Notice how here it includes the `language` column in the group of aligned lines, which we don't want, so we would prefer to remove it.
+
+If any of the other columns were not present, it would print a warning. These are just warnings: maybe it's exactly what you are expecting, and that's ok.
+
+```{r fact2}
+by_label <- glosses %>% select(-language, -translation) %>% gloss_factory()
+```
+
+If there were too many text columns, it would also warn you:
+
+```{r fact3}
+by_label <- glosses %>% rename(trans = translation) %>% gloss_factory()
+```
+
+We can either remove the columns from the dataframe before giving it to `gloss_factory()` or add its name to the `ignore_columns` argument. This allows us to use the column for filtering without `gloss_df()` finding out of its existence. Other kinds of modifications, however, would have to be performed before.
+
+```{r fact4}
+modified_glosses <- mutate(glosses, source = paste0("(", source, ")"))
+by_label <- gloss_factory(modified_glosses, ignore_columns = "language")
+```
+
+`gloss_factory()` [function factory](https://adv-r.hadley.nz/function-factories.html): its output is a function.
+
+```{r print-func}
+class(by_label)
+```
+
+This means that you call `gloss_factory()` once at the beginning, and then your created function as many times as you need. Here the function is called `by_label()`, but you can choose the name that suits you best. As you can see below, `by_label("heartwarming-jp")` is equivalent to `gloss_df(filter(modified_glosses, label == "heartwarming-jp"))`.
+
+```{r lab1}
+by_label("heartwarming-jp")
+```
+
+# Filter by label or id
+
+By default, the function created by `gloss_factory()` will take a label or set of labels and use it for filtering. Unlike `filter()`, however, you can keep the order of your items!
+
+```{r lab2}
+by_label("heartwarming-jp", "languid-jp", "feel-dutch")
+```
+
+You could also set a different column for your ids with the `id_column` argument. `gloss_factory()` will warn you if the values are not unique (in case you were expecting them to).
+
+```{r lab3}
+by_language <- gloss_factory(modified_glosses, id_column = "language", ignore_columns = "language")
+by_language("Icelandic")
+```
+
+You will also get a warning if one of your requested ids is not in your dataset.
+
+```{r lab4}
+by_language("Japanese", "Mandarin")
+```
+
+# Filter with other conditional statements
+
+While filtering by label name might be a common circumstance, you might want a bit more freedom. It is possible to create a different function with the `use_conditionals` argument. In that case, the new function will take whatever conditionals you want to ask and send them to `dplyr::filter()`.
+
+```{r cond1}
+by_cond <- gloss_factory(modified_glosses, use_conditionals = TRUE, ignore_columns = "language")
+by_cond(str_ends(label, "jp"))
+```
+
+# Many factories?
+
+One of the advantages of a function factory is that you can create a function tailored to the dataset you're working with here. You don't need to call your dataset constantly and you save in typing.
+
+In addition, you could have multiple factories in one project. Within a file, you may create a `by_label()` and a `by_cond()` functions to work with label and conditional filtering, whatever suits you best at any time. Or you could also have a `dutch_gloss()` and `chinese_gloss()`, for example, each using a different dataset!
