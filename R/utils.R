@@ -17,10 +17,8 @@ set_default <- function(x, default = "") {
 validate_output <- function(output = c("word", "latex", "leipzig", "tooltip", "html", "pdf")) {
   output <- tryCatch(
     error = function(cnd) {
-      warning(
-      "The output format '", output, "' is not supported.\
-      Switching to default 'latex'.",
-      call. = FALSE)
+      cli::cli_warn(c("The output format {.var {output}} is not supported. ",
+                              "Switching to default {.var latex}."))
       output <- "latex"
       },
     match.arg(output)

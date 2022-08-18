@@ -192,12 +192,10 @@ gloss_word <- function(gloss, numbering = TRUE) {
 gloss_df <- function(df, output_format = getOption("glossr.output", "latex"),
                      numbering = getOption("glossr.numbering", TRUE)) {
   if (!inherits(df, "data.frame")) {
-    stop("`gloss_df` requires a `data.frame` object.",
-         call. = FALSE)
+    cli::cli_abort("{.fun gloss_df} requires a {.cls data.frame} object.")
   }
   if (nrow(df) == 0) {
-    stop("`gloss_df` has received an empty dataframe.",
-         call. = FALSE)
+    cli::cli_abort("{.fun gloss_df} has received an empty dataframe.")
   }
   g <- unlist(purrr::pmap(df, as_gloss, output_format = output_format, numbering = numbering))
   new_gloss(df, g)

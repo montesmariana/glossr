@@ -28,15 +28,15 @@ data(glosses)
 
 # Create a gloss factory
 
-The first thing you need to do is assign the value of your `gloss_factory()` call to a short variable that works for you. I recommend trying this in the console, and then calling it in a setup R chunk that doesn't print messages or warnings.
+The first thing you need to do is assign the return value of `gloss_factory()` to a short variable that works for you. I recommend trying this in the console, and then calling it in a setup R chunk that doesn't print messages or warnings.
 
 ```{r fact1}
 by_label <- gloss_factory(glosses)
 ```
 
-By default, `gloss_factory()` prints a few messages after checking the dataframe that was provided: it checks whether there are "source", "translation" and "label" columns and which would be the remaining columns with content for the text lines. Notice how here it includes the `language` column in the group of aligned lines, which we don't want, so we would prefer to remove it.
+By default (unless `verbose = FALSE`), `gloss_factory()` prints a few messages after checking the dataframe that was provided: it checks whether there are `source`, `translation` and `label` columns ("not aligned", because they are printed as running text) and which would be the remaining columns with content for the text lines ("aligned", because they are aligned to each other word by word). Notice how here it includes the `language` column in the group of aligned lines, which we don't want, so we would prefer to remove it.
 
-If any of the other columns were not present, it would print a warning. These are just warnings: maybe it's exactly what you are expecting, and that's ok.
+If any of the expected columns (`source`, `translation` or `label`) were not present, it would print a warning. These are just warnings: maybe it's exactly what *you* are expecting, and that's ok.
 
 ```{r fact2}
 by_label <- glosses %>% select(-language, -translation) %>% gloss_factory()
@@ -48,14 +48,14 @@ If there were too many text columns, it would also warn you:
 by_label <- glosses %>% rename(trans = translation) %>% gloss_factory()
 ```
 
-We can either remove the columns from the dataframe before giving it to `gloss_factory()` or add its name to the `ignore_columns` argument. This allows us to use the column for filtering without `gloss_df()` finding out of its existence. Other kinds of modifications, however, would have to be performed before.
+We can either remove the extra column from the dataframe before giving it to `gloss_factory()` or add its name to the `ignore_columns` argument. This allows us to use the column for filtering without `gloss_df()` finding out of its existence. Other kinds of modifications, however, would have to be performed beforehand.
 
 ```{r fact4}
 modified_glosses <- mutate(glosses, source = paste0("(", source, ")"))
 by_label <- gloss_factory(modified_glosses, ignore_columns = "language")
 ```
 
-`gloss_factory()` [function factory](https://adv-r.hadley.nz/function-factories.html): its output is a function.
+`gloss_factory()` is a [function factory](https://adv-r.hadley.nz/function-factories.html): its output is a function.
 
 ```{r print-func}
 class(by_label)
@@ -69,7 +69,7 @@ by_label("heartwarming-jp")
 
 # Filter by label or id
 
-By default, the function created by `gloss_factory()` will take a label or set of labels and use it for filtering. Unlike `filter()`, however, you can keep the order of your items!
+By default, the function created by `gloss_factory()` will take a label or set of labels and use it for filtering. In principle, the call below is equivalent to `gloss_df(filter(modified_glosses, label %in% c("heartwarming-jp", "languid-jp", "feel-dutch")))`. However, unlike `filter()`, it keeps the requested order of your items!
 
 ```{r lab2}
 by_label("heartwarming-jp", "languid-jp", "feel-dutch")

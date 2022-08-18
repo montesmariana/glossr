@@ -39,7 +39,7 @@ use_glossr <- function(
   options("glossr.output" = output)
   # options("glossr.first_leipzig" = TRUE)
   set_style_options(styling = styling)
-  message(sprintf("Setting up the `%s` engine.", output))
+  cli::cli_alert_info("Setting up the {.emph {output}} engine.")
 }
 
 
@@ -82,24 +82,28 @@ set_style_options <- function(styling = list()) {
     c = "c", third = "c",
     translation = "translation",
     ft = "translation",
-    trans = "translation",
-    numbering = TRUE
+    trans = "translation"
     )
   style_opts <- list()
+  bad_styling <- c()
   for (v in names(variables)) {
     if (v %in% names(styling)) {
       if (!styling[[v]] %in% c(style_options("i"), style_options("b"))) {
-        msg_template <- "The '%s' option is not supported, please provide one of {%s} for italics or one of {%s} for bold."
-        warning(sprintf(msg_template,
-                        styling[[v]],
-                        paste(style_options("i"), collapse = ", "),
-                        paste(style_options("b"), collapse = ", ")),
-                call. = FALSE)
+        bad_styling <- c(bad_styling, styling[[v]])
       } else {
         style_opts[[paste0("glossr.format.", variables[[v]])]] <- styling[[v]]
       }
     }
   }
+  styling_vars <- styling[names(styling) %in% names(variables)]
+  if (any(!styling_vars %in% c(style_options("i"), style_options("b")))) {
+    i_options <- cli::cli_vec(style_options("i"), list(vec_last = " or "))
+    b_options <- cli::cli_vec(style_options("b"), list(vec_last = " or "))
+    bad_options <- cli::cli_vec(bad_styling)
+    cli::cli_warn(c("!" = "Please provide one of {.emph {i_options}} for italics or one of {.emph {b_options}} for boldface.",
+                    "The following option{?s} {?is/are} not supported: {.var {bad_options}}."))
+  }
+
   if ("trans_quotes" %in% names(styling)) {
     style_opts$glossr.trans.quotes = styling$trans_quotes
   }
@@ -112,7 +116,6 @@ set_style_options <- function(styling = list()) {
   options(style_opts)
   extra <- setdiff(names(styling), c(names(variables), "trans_quotes", "par_spacing", "numbering"))
   for (e in extra) {
-    warning(sprintf("'%s' is not a valid style option.", e),
-            call. = FALSE)
-    }
+    cli::cli_warn(c("!" = "{.var {e}} is not a valid style option and was ignored."))
+  }
 }

@@ -37,9 +37,8 @@ gloss_format_words <- function(text, formatting) {
 #' @export
 gloss_list <- function(glist, listlabel = NULL) {
   if (!inherits(glist, "gloss")) {
-    stop("`gloss_list` needs an object of class `gloss`, \
-         please use `as_gloss()` or `gloss_df()` first.",
-         call. = FALSE)
+    cli::cli_abort(c("{.fun gloss_list} needs an object of class {.cls gloss}",
+                     "please use {.fun as_gloss} or {.fun gloss_df} first."))
   }
   output <- getOption("glossr.output", "latex")
   clean_gloss <- unclass(glist)

@@ -34,8 +34,7 @@ new_gloss_data <- function(
     trans_quotes = getOption("glossr.trans.quotes", '"')
 ) {
   if (!inherits(gloss_lines, "list")) {
-    stop("The gloss lines must be provided as a list.",
-         call. = FALSE)
+    cli::cli_abort("The gloss lines must be provided as a list.")
   }
   gloss_lines <- unname(purrr::map_chr(gloss_lines, as.character))
   lengths <- purrr::map_dbl(gloss_lines, ~ length(gloss_linesplit(.x)))
