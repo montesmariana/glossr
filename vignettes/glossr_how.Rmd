@@ -25,10 +25,12 @@ The immediate solution for a $LaTeX$ output is to use a specific library, such a
 But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least *some* rendering) of your interlinear glosses in HTML as well... and why not, MS Word! This offers some challenges, because you would need to figure out *how* to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats.
 I took that pain and packaged it so you don't need to feel it.
 
-You can start using `glossr` in an R Markdown file by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$, HTML^[You can also choose between the default HTML implementation, with [leipzig.js](https://github.com/bdchauvette/leipzig.js/), or a "legacy" implementation with simple tooltips and up to two glossing lines; do so by running `use_glossr("tooltip")`.] or neither, in which case it assumes you have Word output. This vignette has been run in [all three formats](https://github.com/montesmariana/glossr/tree/main/inst/examples) by changing the output format to
+You can start using glossr in an R Markdown file by calling the library and then `use_glossr()` to activate some background stuff. Mainly, this function informs all the other functions whether you are using $LaTeX$, HTML^[You can also choose between the default HTML implementation, with [leipzig.js](https://github.com/bdchauvette/leipzig.js/), or a "legacy" implementation with simple tooltips and up to two glossing lines; do so by running `use_glossr("tooltip")`.] or neither, in which case it assumes you have Word output. This vignette has been run in [all three formats](https://github.com/montesmariana/glossr/tree/main/inst/examples) by changing the output format to
 `bookdown::pdf_document2`, which renders a PDF file;
 `bookdown::html_document2` and `rmdformats::readthedown`, which render HTML files;
-and `officedown::rdocx_document`, which renders an MS Word file [@R-bookdown; @R-officedown; @R-rmdformats]. As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
+and `officedown::rdocx_document`, which renders an MS Word file [@R-bookdown; @R-officedown; @R-rmdformats]. You can also use glossr in [Quarto](https://quarto.org/) documents and create slides!
+
+As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
 
 ```{r setup}
 library(glossr)
@@ -69,7 +71,7 @@ my_gloss <- as_gloss(
 my_gloss
 ```
 
-The label given to `as_gloss()` allows you to cross-reference the example: in PDF this looks like `example (\@ref(my-label))`, whereas in HTML and Word you would use `example (@my-label)`. What should YOU do? `gloss()` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: `r gloss("my-label")` in this case.
+The label given to `as_gloss()` allows you to cross-reference the example: in PDF this looks like `example (\ref{my-label})`, whereas in HTML and Word you would use `example (@my-label)`. What should YOU do? `gloss()` can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: `r gloss("my-label")` in this case.
 
 If you have many examples, you might want to keep them in their own file, if you don't have them like that already. `glossr` offers a small dataset for testing, called `data(glosses)`.
 

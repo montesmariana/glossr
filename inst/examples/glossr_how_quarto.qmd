@@ -2,28 +2,20 @@
 title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
-output:
-  bookdown::pdf_document2:
-    latex_engine: xelatex
-    extra_dependencies:
-        - fontspec
-        - xeCJK
-    keep_tex: true
-  rmdformats::readthedown:
-    highlight: kate
-  officedown::rdocx_document: default
-urlcolor: red
+format:
+  html:
+    toc: true
+  pdf:
+    include-in-header: 
+      text: |
+        \usepackage{fontspec}
+        \usepackage{xeCJK}
+    keep-tex: true
+  docx:
+    highlight-style: github
 bibliography: ["../REFERENCES.bib", "../packages.bib"]
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  echo = TRUE
-)
-# devtools::load_all()
-```
 
 # Introduction
 
@@ -37,7 +29,8 @@ You can start using `glossr` in an R Markdown file by calling the library and th
 `bookdown::html_document2` and `rmdformats::readthedown`, which render HTML files;
 and `officedown::rdocx_document`, which renders an MS Word file [@R-bookdown; @R-officedown; @R-rmdformats]. As you can see in `vignette("styling")`, `use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
 
-```{r setup}
+```{r}
+#| label: setup
 library(glossr)
 ```
 

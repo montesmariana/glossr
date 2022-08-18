@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mariana Montes">
+<meta name="dcterms.date" content="2022-08-18">
+
+<title>Using the glossr package</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="glossr_how_quarto_files/libs/clipboard/clipboard.min.js"></script>
+<script src="glossr_how_quarto_files/libs/quarto-html/quarto.js"></script>
+<script src="glossr_how_quarto_files/libs/quarto-html/popper.min.js"></script>
+<script src="glossr_how_quarto_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="glossr_how_quarto_files/libs/quarto-html/anchor.min.js"></script>
+<link href="glossr_how_quarto_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="glossr_how_quarto_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="glossr_how_quarto_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="glossr_how_quarto_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="glossr_how_quarto_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="glossr_how_quarto_files/libs/leipzig-0.8.0/leipzig.css" rel="stylesheet">
+<script src="glossr_how_quarto_files/libs/leipzig-0.8.0/leipzig.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic usage</a></li>
+  <li><a href="#pdf-only-features" id="toc-pdf-only-features" class="nav-link" data-scroll-target="#pdf-only-features">PDF-only features</a></li>
+  <li><a href="#about-the-formats" id="toc-about-the-formats" class="nav-link" data-scroll-target="#about-the-formats">About the formats</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using the glossr package</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mariana Montes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 18, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>What about (1)?</p>
+<ol class="example" type="1">
+<li>ASBC (nº 100622) // 她 哇的一聲 大 哭起來， // tā wā=de-yì-shēng dà kū-qǐlái, // TSG waa.IDEO-LINK-one-sound big cry-inch // “Waaaaa, she began to wail.” // </li>
+</ol>
+<p>And (2)?</p>
+<ol start="2" class="example" type="1">
+<li>Another example</li>
+</ol>
+<p>And (3)?</p>
+<ol start="3" class="example" type="1">
+<li>她 哇的一聲 大 哭起來， // tā wā=de-yì-shēng dà kū-qǐlái, // TSG waa.IDEO-LINK-one-sound big cry-inch // “Waaaaa, she began to wail.” // </li>
+</ol>
+<p>Here is <a href="#fig-myfig">Figure&nbsp;1</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-myfig" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="glossr_how_quarto_files/figure-html/fig-myfig-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 1: Some figure</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The {glossr} package offers useful functions to recreate interlinear glosses in R Markdown texts. The immediate solution for a <span class="math inline">\(LaTeX\)</span> output is to use a specific library, such as {gb4e} (the one I knew when this package was born) or {expex} (the one this package uses now). If PDF output is enough for you, you can still use this package to automatically print them in an R-chunk, minimizing typos<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and even generate them automatically from a dataframe with your examples! But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least <em>some</em> rendering) of your interlinear glosses in HTML as well… and why not, MS Word! This offers some challenges, because you would need to figure out <em>how</em> to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats. I took that pain and packaged it so you don’t need to feel it.</p>
+<p>You can start using <code>glossr</code> in an R Markdown file by calling the library and then <code>use_glossr()</code> to activate some background stuff. Mainly, this function informs all the other functions whether you are using <span class="math inline">\(LaTeX\)</span>, HTML<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> or neither, in which case it assumes you have Word output. This vignette has been run in <a href="https://github.com/montesmariana/glossr/tree/main/inst/examples">all three formats</a> by changing the output format to <code>bookdown::pdf_document2</code>, which renders a PDF file; <code>bookdown::html_document2</code> and <code>rmdformats::readthedown</code>, which render HTML files; and <code>officedown::rdocx_document</code>, which renders an MS Word file <span class="citation" data-cites="R-bookdown R-officedown R-rmdformats">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2022</a>; <a href="#ref-R-officedown" role="doc-biblioref">Gohel and Ross 2022</a>; <a href="#ref-R-rmdformats" role="doc-biblioref">Barnier 2022</a>)</span>. As you can see in <code>vignette("styling")</code>, <code>use_glossr()</code> also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Loading glossr</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(glossr)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_glossr</span>(<span class="at">styling =</span> <span class="fu">list</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">"b"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="st">"i"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting up the `leipzig` engine.</code></pre>
+</div>
+</div>
+</section>
+<section id="basic-usage" class="level1">
+<h1>Basic usage</h1>
+<p>When you want to include an example, create a gloss with <code>as_gloss()</code> and call it inside a normal chunk. There are currently four named, optional arguments that will be treated specially:</p>
+<ul>
+<li><p><code>label</code> will be interpreted as the label for cross-references;</p></li>
+<li><p><code>source</code> will be interpreted as text for a non-aligned first line, e.g.&nbsp;a reference to the source of your example;</p></li>
+<li><p><code>translation</code> will be interpreted as text for a free translation;</p></li>
+<li><p><code>trans_glosses</code> indicates what character should surround the translation, by default <code>"</code>. (See <code>vignette("styling")</code>.)</p></li>
+</ul>
+<p>All other values will be interpreted as lines to be aligned and reproduced in the order given, but only up to 3 lines are allowed.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_gloss <span class="ot">&lt;-</span> <span class="fu">as_gloss</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"她 哇的一聲 大 哭起來，"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tā wā=de-yì-shēng dà kū-qǐlái,"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TSG waa.IDEO-LINK-one-sound big cry-inch"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">translation =</span> <span class="st">"Waaaaa, she began to wail."</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"my-label"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">"ASBC (nº 100622)"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<ol start="4" class="example" type="1">
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+ASBC (nº 100622)
+</p>
+<p>
+她 哇的一聲 大 哭起來，
+</p>
+<p>
+tā wā=de-yì-shēng dà kū-qǐlái,
+</p>
+<p>
+TSG waa.IDEO-LINK-one-sound big cry-inch
+</p>
+<p class="gloss__line--free">
+“Waaaaa, she began to wail.”
+</p>
+</div>
+<script>document.addEventListener('DOMContentLoaded', function() {Leipzig({lastLineFree: false}).gloss();});</script></li>
+</ol>
+</div>
+</div>
+<p>The label given to <code>as_gloss()</code> allows you to cross-reference the example: in PDF this looks like <code>example (\@ref(my-label))</code>, whereas in HTML and Word you would use <code>example (@my-label)</code>. What should YOU do? <code>gloss()</code> can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: (4) in this case.</p>
+<p>If you have many examples, you might want to keep them in their own file, if you don’t have them like that already. <code>glossr</code> offers a small dataset for testing, called <code>data(glosses)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for select() and filter()</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(glosses)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>glosses <span class="ot">&lt;-</span> glosses <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(original, parsed, translation, label, source) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">paste0</span>(<span class="st">"("</span>, source, <span class="st">")"</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>glosses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  original                                           parsed trans…¹ label source
+  &lt;chr&gt;                                              &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; 
+1 Mér er heitt/kalt                                  "\\te… I am h… feel… (Eina…
+2 Hace calor/frío                                    "make… It is … amb-… (Pust…
+3 Ik heb het koud                                    "\\te… I am c… feel… (Ross…
+4 Kotae-nagara otousan to okaasan wa honobonoto ata… "repl… While … hear… (Shin…
+5 Ainiku sonna shumi wa nai. Tsumetai-none. Kedaru-… "unfo… Unfort… lang… (Shin…
+# … with abbreviated variable name ¹​translation</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>glosses<span class="sc">$</span>label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "feel-icelandic"  "amb-spanish"     "feel-dutch"      "heartwarming-jp"
+[5] "languid-jp"     </code></pre>
+</div>
+</div>
+<p>Assuming you have them in a table with columns matching the arguments of <code>as_gloss()</code>, you can give it to <code>gloss_df()</code> directly and it will do the job. That is: columns named “translation”, “source”, “label” and “trans_glosses” will be interpreted as those arguments, and all the others will be read as lines to align regardless of their column names. This table has more columns than we need, so we will only select the right ones and print the glosses of the first three rows. Note that the values in the “label” column will be used as labels: <code>`r gloss("feel-icelandic")`</code> will return (5).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gloss_df</span>(<span class="fu">head</span>(glosses, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<ol start="5" class="example" type="1">
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+(Einarsson 1945:170)
+</p>
+<p>
+Mér er heitt/kalt
+</p>
+<p>
+1SG.DAT COP.1SG.PRS hot/cold.A
+</p>
+<p class="gloss__line--free">
+“I am hot/cold.”
+</p>
+</div></li>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+(Pustet 2015:908)
+</p>
+<p>
+Hace calor/frío
+</p>
+<p>
+make.3SG.PRS heat/cold..N.A
+</p>
+<p class="gloss__line--free">
+“It is hot/cold; literally: it makes heat/cold.”
+</p>
+</div></li>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+(Ross 1996:204)
+</p>
+<p>
+Ik heb het koud
+</p>
+<p>
+1SG have 3SG COLD.A
+</p>
+<p class="gloss__line--free">
+“I am cold; literally: I have it cold.”
+</p>
+</div></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="pdf-only-features" class="level1">
+<h1>PDF-only features</h1>
+<p>This package also offers a few extensions when working on PDF output. On the one hand, <code>gloss_list()</code> allows you to nest a list of glosses and have both a reference for the list and for each individual item. <strong>This will not work in HTML or Word</strong>, which will just keep the numbering on the top level. But on PDF, given the function on some examples from <span class="citation" data-cites="shindo_2015">Shindo (<a href="#ref-shindo_2015" role="doc-biblioref">2015</a>)</span>, we can use <code>`r gloss("jp")`</code> to reference (<span class="citation" data-cites="jp">(<a href="#ref-jp" role="doc-biblioref"><strong>jp?</strong></a>)</span>), or <code>`r gloss("heartwarming-jp")`</code> and <code>`r gloss("languid-jp")`</code> to reference (8) and (9).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(glosses, <span class="fu">endsWith</span>(label, <span class="st">"jp"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gloss_df</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gloss_list</span>(<span class="at">listlabel =</span> <span class="st">"jp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<ol start="8" class="example" type="1">
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+(Shindo 2015:660)
+</p>
+<p>
+Kotae-nagara otousan to okaasan wa honobonoto atatakai2 mono ni tsutsum-areru kimochi ga shi-ta.
+</p>
+<p>
+reply-while father and mother TOP heartwarming warm thing with surround-PASS feeling NOM do-PST
+</p>
+<p class="gloss__line--free">
+“While replying (to your question), Father and Mother felt like they were surrounded by something heart warming.”
+</p>
+</div></li>
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+(Shindo 2015:660)
+</p>
+<p>
+Ainiku sonna shumi wa nai. Tsumetai-none. Kedaru-souna koe da-tta.
+</p>
+<p>
+unfortunately such interest TOP not.exist cold-EMPH languid-seem voice COP-PST
+</p>
+<p class="gloss__line--free">
+“Unfortunately I never have such an interest. You are so cold. (Her) voice sounded languid.”
+</p>
+</div></li>
+</ol>
+</div>
+</div>
+<p>Finally, it might be the case that you want to apply <span class="math inline">\(LaTeX\)</span> formatting to a long string of elements for your first lines of glosses, e.g.&nbsp;set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you <code>gloss_format_words()</code>, which you can implement to the strings given to <code>as_gloss()</code>.</p>
+<p>Internally, <code>glossr</code> will try to parse <span class="math inline">\(LaTeX\)</span> formatting into HTML but currently it doesn’t parse it to Word or read HTML/markdown tags. (But see <code>vignette("styling")</code>.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gloss_format_words</span>(<span class="st">"A long piece of text"</span>, <span class="st">"textit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "\\textit{A} \\textit{long} \\textit{piece} \\textit{of} \\textit{text}"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>my_gloss <span class="ot">&lt;-</span> <span class="fu">as_gloss</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">original =</span> <span class="fu">gloss_format_words</span>(<span class="st">"Hace calor/frío"</span>, <span class="st">"textbf"</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsed =</span> <span class="st">"make.3SG.PRS heat/cold.N.A"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">translation =</span> <span class="st">"'It is hot/cold'"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"formatted"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>my_gloss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<ol start="10" class="example" type="1">
+<li><style>.gloss__line--original {font-weight: bold;} .gloss__word .gloss__line:first-child {font-style:italic;} .gloss__word .gloss__line--2 {font-style:normal;font-weight:normal} .gloss__word .gloss__line--3 {font-style:normal;font-weight:normal} .gloss__line--free {font-style:normal;font-weight:normal}</style>
+<div data-gloss="">
+<p class="gloss__line--original">
+&nbsp;
+</p>
+<p>
+<strong>Hace</strong> <strong>calor/frío</strong>
+</p>
+<p>
+make.3SG.PRS heat/cold.N.A
+</p>
+<p class="gloss__line--free">
+“‘It is hot/cold’”
+</p>
+</div></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="about-the-formats" class="level1">
+<h1>About the formats</h1>
+<p>The Latex output writes your glosses with the format required by the <a href="https://ctan.org/pkg/expex?lang=en">{expex} package</a>. The default HTML rendering uses <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js 0.8.0</a> (and, of course, {htmltools} <span class="citation" data-cites="R-htmltools">(<a href="#ref-R-htmltools" role="doc-biblioref">Cheng et al. 2021</a>)</span> to read it with R). The Word output is an invisible table generated with {flextable} <span class="citation" data-cites="R-flextable">(<a href="#ref-R-flextable" role="doc-biblioref">Gohel 2022</a>)</span>. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example (8)), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.</p>
+<p>If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!</p>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-R-rmdformats" class="csl-entry" role="doc-biblioentry">
+Barnier, Julien. 2022. <em>Rmdformats: HTML Output Formats and Templates for ’Rmarkdown’ Documents</em>. <a href="https://CRAN.R-project.org/package=rmdformats">https://CRAN.R-project.org/package=rmdformats</a>.
+</div>
+<div id="ref-R-htmltools" class="csl-entry" role="doc-biblioentry">
+Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie, and Jeff Allen. 2021. <em>Htmltools: Tools for HTML</em>. <a href="https://github.com/rstudio/htmltools">https://github.com/rstudio/htmltools</a>.
+</div>
+<div id="ref-R-flextable" class="csl-entry" role="doc-biblioentry">
+Gohel, David. 2022. <em>Flextable: Functions for Tabular Reporting</em>. <a href="https://CRAN.R-project.org/package=flextable">https://CRAN.R-project.org/package=flextable</a>.
+</div>
+<div id="ref-R-officedown" class="csl-entry" role="doc-biblioentry">
+Gohel, David, and Noam Ross. 2022. <em>Officedown: Enhanced r Markdown Format for Word and PowerPoint</em>. <a href="https://CRAN.R-project.org/package=officedown">https://CRAN.R-project.org/package=officedown</a>.
+</div>
+<div id="ref-shindo_2015" class="csl-entry" role="doc-biblioentry">
+Shindo, Mika. 2015. <span>“Subdomains of Temperature Concepts in <span>Japanese</span>.”</span> In <em>The <span>Linguistics</span> of <span>Temperature</span></em>, edited by Maria Koptjevskaja-Tamm, 639–65. Typological <span>Studies</span> in <span>Language</span>. <span>Amsterdam</span>: <span>John Benjamins Publishing Company</span>.
+</div>
+<div id="ref-R-bookdown" class="csl-entry" role="doc-biblioentry">
+Xie, Yihui. 2022. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
+</div>
+</div></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>Most of my code is designed to avoid typos. Let’s just say that this package would have taken a few hours less if I didn’t constantly write <em>leizpig</em> instead of <em>leipzig</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>You can also choose between the default HTML implementation, with <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js</a>, or a “legacy” implementation with simple tooltips and up to two glossing lines; do so by running <code>use_glossr("tooltip")</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Note that if you use Chinese characters you will need to add some <span class="math inline">\(LaTeX\)</span> packages (namely {fontspec} and {xeCJK}). You can do that either by adding them to <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html">the <code>header-includes</code> section</a> or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html">to the <code>extra_dependencies</code> list</a> inside the <code>pdf_document</code> output section in your YAML. Thanks to Thomas Van Hoey for offering me the example and pointing this out.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

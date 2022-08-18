@@ -1,0 +1,180 @@
+---
+title: "Using the glossr package"
+author: "Mariana Montes"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    logo: "logo.png"
+    theme: simple
+bibliography: ["../REFERENCES.bib", "../packages.bib"]
+---
+
+## What is glossr?
+
+The {glossr} package offers useful functions to recreate interlinear glosses in R Markdown (or Quarto!) texts.
+
+```{r}
+#| label: ex-gloss
+library(glossr)
+use_glossr()
+my_gloss <- as_gloss(
+  "她 哇的一聲 大 哭起來，",
+  "tā wā=de-yì-shēng dà kū-qǐlái,",
+  "TSG waa.IDEO-LINK-one-sound big cry-inch",
+  translation = "Waaaaa, she began to wail.",
+  label = "my-label",
+  source = "ASBC (nº 100622)"
+)
+my_gloss
+```
+
+## Start glossr
+
+You can start using glossr in an R Markdown or Quarto file by calling the library and then `use_glossr()` to activate some background stuff.
+
+```{r}
+#| label: setup
+#| echo: true
+#| eval: false
+library(glossr)
+use_glossr()
+```
+
+## Styling
+
+`use_glossr()` also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
+
+```{r}
+#| label: useglossr
+#| echo: true
+use_glossr(styling = list(
+  source = "b",
+  first = "i"
+))
+```
+
+::: footer
+
+See [vignette](https://montesmariana.github.io/glossr/articles/styling.html)
+
+:::
+
+## Basic usage
+
+Call `as_gloss()` inside an R chunk. There are four named, optional arguments that will be treated specially:
+
+::: {.incremental}
+
+- `label`: for cross-references
+
+- `source`: text for a non-aligned first line
+
+- `translation`: free translation
+
+- `trans_glosses`: character to surround translations
+
+:::
+
+. . .
+
+All other values will be interpreted as lines to be aligned and reproduced in the order given, but only up to 3 lines are allowed.
+
+## Example
+
+```{r}
+#| label: first-gloss
+#| echo: true
+#| code-line-numbers: "|2|3|4|5|6|7|"
+my_gloss <- as_gloss(
+  "她 哇的一聲 大 哭起來，", # first aligned line
+  "tā wā=de-yì-shēng dà kū-qǐlái,", # second aligned line
+  "TSG waa.IDEO-LINK-one-sound big cry-inch", # third aligned line
+  translation = "Waaaaa, she began to wail.", # free translation
+  label = "my-label", # label for cross-references
+  source = "ASBC (nº 100622)" # first not-aligned line
+)
+my_gloss
+```
+
+## Cross reference
+
+The label given to `as_gloss()` allows you to cross-reference the example: in PDF this looks like `example (\ref{my-label})`, whereas in HTML and Word you would use `example (@my-label)`.
+
+. . .
+
+What should YOU do?
+
+. . . 
+
+::: callout-tip
+
+`gloss()` can be used inline to generate a reference for any output: `r gloss("my-label")` in this case.
+
+:::
+
+## Tables of examples {.smaller}
+
+You can also get your data from a dataframe
+
+```{r}
+data(glosses)
+glosses <- select(glosses, -language)
+knitr::kable(filter(glosses, label == "languid-jp"))
+```
+
+---
+
+```{r, data-gloss}
+#| echo: true
+gloss_df(filter(glosses, label == "languid-jp"))
+```
+
+## No numbering
+
+You can remove numbering in `gloss_df()` and in `as_gloss()`.
+
+```{r}
+#| echo: true
+gloss_df(filter(glosses, label == "languid-jp"), numbering = FALSE)
+```
+
+
+<!-- # PDF-only features -->
+
+<!-- This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item. **This will not work in HTML or Word**, which will just keep the numbering on the top level. But on PDF, given the function on some examples from @shindo_2015, we can use `` `r knitr::inline_expr('gloss("jp")')` `` to reference `r gloss("jp")`, or `` `r knitr::inline_expr('gloss("heartwarming-jp")')` `` and `` `r knitr::inline_expr('gloss("languid-jp")')` `` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`. -->
+
+<!-- ```{r, jp-gloss} -->
+<!-- filter(glosses, endsWith(label, "jp")) %>%  -->
+<!--   gloss_df() %>%  -->
+<!--   gloss_list(listlabel = "jp") -->
+<!-- ``` -->
+
+<!-- Finally, it might be the case that you want to apply $LaTeX$ formatting to a long string of elements for your first lines of glosses, e.g. set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you `gloss_format_words()`, which you can implement to the strings given to `as_gloss()`. -->
+
+<!-- Internally, `glossr` will try to parse $LaTeX$ formatting into HTML but currently it doesn't parse it to Word or read HTML/markdown tags. (But see `vignette("styling")`.) -->
+
+<!-- ```{r, format-words} -->
+<!-- gloss_format_words("A long piece of text", "textit") -->
+<!-- ``` -->
+
+
+<!-- ```{r, last-gloss} -->
+<!-- my_gloss <- as_gloss( -->
+<!--   original = gloss_format_words("Hace calor/frío", "textbf"), -->
+<!--   parsed = "make.3SG.PRS heat/cold.N.A", -->
+<!--   translation = "'It is hot/cold'", -->
+<!--   label = "formatted" -->
+<!-- ) -->
+<!-- my_gloss -->
+<!-- ``` -->
+
+<!-- # About the formats -->
+
+<!-- The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell. -->
+
+<!-- If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you! -->
+
+
+<!-- # References -->
+
+
