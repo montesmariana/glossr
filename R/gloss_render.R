@@ -33,7 +33,7 @@ gloss_pdf <- function(gloss) {
 
   # define source
   if (attr(gloss, "has_source")){
-    attr(gloss, "source") <- sprintf("\\glpreamble %s// \n", attr(gloss, "source"))
+    attr(gloss, "source") <- sprintf("\\glpreamble %s// ", attr(gloss, "source"))
   }
 
   # define translation
@@ -41,16 +41,14 @@ gloss_pdf <- function(gloss) {
     attr(gloss, "translation") <- sprintf("\\glft %s// \n", attr(gloss, "translation"))
   }
   gloss_lines <- purrr::imap_chr(gloss[1:min(3, length(gloss))],
-                                 ~ sprintf("\\gl%s %s// \n", letters[.y], .x))
-  gloss_text <- c(
-    "\\ex",
-    sprintf("%s\n", attr(gloss, "label")),
-    "\\begingl \n",
+                                 ~ sprintf("\\gl%s %s//", letters[.y], .x)) %>%
+    paste(collapse = " ")
+  gloss_text <- sprintf(
+    "\\ex%s \\begingl %s%s %s \\endgl \\xe \n",
+    attr(gloss, "label"),
     attr(gloss, "source"),
     gloss_lines,
-    attr(gloss, "translation"),
-    "\\endgl \n",
-    "\\xe \n"
+    attr(gloss, "translation")
     )
   new_gloss(gloss, gloss_text)
 }

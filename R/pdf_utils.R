@@ -47,13 +47,10 @@ gloss_list <- function(glist, listlabel = NULL) {
 
   if (output == "latex") {
     llabel <- if (is.null(listlabel)) "" else sprintf("\\label{%s}", listlabel)
-    clean_gloss <- stringr::str_replace(clean_gloss, "\\\\ex", "\\\\a")
-    clean_gloss <- clean_gloss[clean_gloss != "\\xe \n"]
-    clean_gloss <- c(
-      sprintf("\\pex%s \n", llabel),
-      clean_gloss,
-      sprintf("\\xe \n")
-    )
+    clean_gloss <- stringr::str_replace_all(clean_gloss, "\\\\ex", "\\\\a") %>%
+      stringr::str_remove_all("\\\\xe \\n") %>%
+      paste(collapse = "\n")
+    clean_gloss <- sprintf("\\pex%s %s \\xe \n", llabel, clean_gloss)
     new_gloss(attr(glist, "data"), clean_gloss)
   } else {
     glist
@@ -70,9 +67,9 @@ format_pdf <- function(level) {
   if (is.null(format)) {
     NULL
   } else if (format %in% style_options("i")) {
-    "\\it"
+    "\\itshape"
   } else if (format %in% style_options("b")) {
-    "\\bf"
+    "\\bfseries"
   } else {
     NULL
   }

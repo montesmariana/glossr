@@ -54,7 +54,7 @@ knit_print.gloss <- function(x, ...) {
 gloss <- function(label) {
   output <- getOption("glossr.output", "latex")
   if (output == "latex") {
-    sprintf("(\\@ref(%s))", label)
+    sprintf("(\\ref{%s})", label)
   } else {
     sprintf("(@%s)", label)
   }

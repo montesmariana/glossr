@@ -21,24 +21,17 @@ test_that("Classes are correct", {
 # Test pdf ----
 test_that("almost full gloss label renders in pdf", {
   pdf_full <- gloss_pdf(my_gloss)
-  expect_match(pdf_full[[1]], "^\\\\ex$")
-  expect_match(pdf_full[[2]], "^\\\\label\\{ex1\\}\\\n$")
-  expect_match(pdf_full[[3]], "^\\\\begingl \\\n$")
-  expect_match(pdf_full[[5]], "^\\\\gla Un ejemplo en español// \\\n$")
-  expect_match(pdf_full[[6]], "^\\\\glb DET.M.SG example in Spanish// \\\n$")
-  expect_match(pdf_full[[7]], "^\\\\glft \\\"An example in Spanish.\\\"// \n$")
-  expect_match(pdf_full[[8]], "^\\\\endgl \n$")
-  expect_match(pdf_full[[9]], "^\\\\xe \n$")
+  expect_match(pdf_full[[1]], r"(^\\ex\\label\{ex1} \\begingl \\gla Un ejemplo en español// \\glb DET.M.SG example in Spanish// \\glft \"An example in Spanish.\"// \n \\endgl \\xe \n$)")
 })
 
 test_that("gloss label without translation renders in pdf", {
   pdf <- gloss_pdf(no_trans)
-  expect_equal(nchar(pdf[[7]]), 0)
+  expect_match(pdf[[1]], r"(\\ex\\label\{ex2} \\begingl \\gla Un ejemplo en español// \\glb DET.M.SG example in Spanish//  \\endgl \\xe \n)")
 })
 
 test_that("gloss label with source renders in pdf", {
   pdf <- gloss_pdf(source_gloss)
-  expect_equal(nchar(pdf[[4]]), 29)
+  expect_match(pdf[[1]], r"{\\ex \\begingl \\glpreamble \(Author:year)// \\gla Un ejemplo en español// \\glb DET.M.SG example in Spanish//  \\endgl \\xe \n}")
 })
 
 
