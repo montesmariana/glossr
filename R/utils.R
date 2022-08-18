@@ -8,15 +8,6 @@ set_default <- function(x, default = "") {
   if (is.null(x) || is.na(x) || !is.character(x) || nchar(x) == 0) default else x
 }
 
-#' Parse latex
-#'
-#' @param string Latex string to parse
-#' @param is_cell For word output, whether to style raw text or a cell
-#'
-#' @return Character vector
-#' @name parse_latex
-NULL
-
 #' Validate output format
 #'
 #' @param output Character string with output format required.

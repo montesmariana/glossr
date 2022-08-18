@@ -2,6 +2,8 @@ url: https://montesmariana.github.io/glossr/
 template:
   bootstrap: 5
   bootswatch: pulse
+development:
+  mode: auto
 reference:
 - title: Show glosses
   desc: |
@@ -27,38 +29,14 @@ reference:
     Functions for general styling of the glosses
   contents:
   - set_style_options
-  - style_options
 - title: Helpers for Latex glosses
   desc: |
     Functions to help with Latex glosses
   contents: gloss_format_words
 - title: Under the hood
   desc: |
-    Functions you might want to use for debugging
+    Class constructors and other helpers
   contents:
   - new_gloss_data
   - new_gloss
-  - format_html
-  - format_pdf
-  - format_word
-- title: internal
-  desc: |
-    Internal functions
-  contents:
-  - check_packages
-  - format_word
-  - gloss_table
-  - gloss_word_lines
-  - latex_tag
-  - reset_max
-  - set_default
-  - validate_output
-  - word_knitr
-  - leipzig_script
-  - use_leipzig
-  - use_tooltip
-  - gloss_linesplit
   - gloss_linetooltip
-  - latex2html
-  - sc_to_upper
-  - tooltip

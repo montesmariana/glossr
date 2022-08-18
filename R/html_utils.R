@@ -1,4 +1,7 @@
-#' @describeIn parse_latex Convert to HTML
+#' Convert from latex to HTML
+#' @param string Character string
+#' @return HTML tag
+#' @noRd
 latex2html <- function(string) {
   # TODO refine for replacement instead of removal
   string <- gsub(latex_tag("textit"), "<em>\\1</em>", string)

@@ -4,7 +4,7 @@
 #' @param title Text of the tooltip
 #'
 #' @return [`shiny.tag`][htmltools::tag()] with attributes for a tooltip
-#' @export
+#' @noRd
 #'
 #' @examples
 #' tooltip("One", "DET.SG")

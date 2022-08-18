@@ -84,7 +84,12 @@ gloss_table <- function(gloss_output, is_translation = FALSE) {
   if (is_translation) format_word_translation(ft) else format_word_glosses(ft)
 }
 
-#' @describeIn parse_latex Convert to Word
+#' Convert from latex to Word
+#'
+#' @param string Character string
+#' @param is_cell Logical. Is this a cell in a table
+#' @return formatted string
+#' @noRd
 latex2word <- function(string, is_cell = TRUE) {
   if (is_cell) {
     if (grepl(latex_tag("textsc"), string)) {
@@ -119,17 +124,11 @@ latex2word <- function(string, is_cell = TRUE) {
   }
 }
 
-#' Read Word formatting options
+#' Format glosses for word
 #'
-#' @param ft [`flextable::flextable`] for gloss lines or translation
-#' @param source Character vector with the source text.
-#'
-#' @name format_word
+#' @param ft [`flextable::flextable`] for gloss lines
 #' @return Formatted table or text
-NULL
-
-#' @describeIn format_word Format glosses
-#' @export
+#' @noRd
 format_word_glosses <- function(ft) {
   lines <- c("a", "b", "c")
   have_italics <- purrr::map_lgl(
@@ -149,8 +148,10 @@ format_word_glosses <- function(ft) {
   ft
 }
 
-#' @describeIn format_word Format translation
-#' @export
+#' Format translation for word
+#' @param ft [`flextable::flextable`] for gloss lines or translation
+#' @return Formatted table or text
+#' @noRd
 format_word_translation <- function(ft) {
   tr_option <- getOption("glossr.format.translation", "x")
   if (tr_option %in% style_options("i")) {
@@ -162,8 +163,11 @@ format_word_translation <- function(ft) {
   }
 }
 
-#' @describeIn format_word Format source text
-#' @export
+#' Format source text for Word
+#'
+#' @param source Character vector with the source text.
+#' @return Formatted table or text
+#' @noRd
 format_word_source <- function(source) {
   s_option <- getOption("glossr.format.preamble", "x")
   if (s_option %in% style_options("i")) {
