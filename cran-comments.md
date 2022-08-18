@@ -1,7 +1,3 @@
-## Resubmission
-
-This is a resubmission. In this version I have updated an url to follow the moved content.
-
 ## R CMD check results
 
 ### Locally
@@ -10,19 +6,25 @@ There were no ERRORs, WARNINGs or NOTEs.
 
 ### R-hub checks
 
-There were no ERRORs or WARNINGs. There was one NOTE for the Windows build:
+There were no ERRORs or WARNINGs.
+There was one NOTE for the Windows build:
 
 - Found the following files/directories:
   'lastMiKTeXException'
+  
+There was one NOTE for the Fedora Linux build (I don't know what it's about):
+
+- Skipping checking HTML validation: no command 'tidy' found
 
 ### win_devel
 
-There were no ERRORs or WARNINGs. There was one NOTE:
+Status OK. There were no ERRORs or WARNINGs. There was one NOTE:
 
-- R Under development (unstable) (2022-06-06 r82458 ucrt)
+- R Under development (unstable) (2022-08-17 r82724 ucrt)
 
-This is because I'm using R-devel.
+## Downstream dependencies (revdepcheck results)
 
-## Downstream dependencies
+We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
-There are currently no downstream dependencies for this package.
+ * We saw 0 new problems
+ * We failed to check 0 packages

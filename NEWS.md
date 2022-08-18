@@ -1,4 +1,4 @@
-# glossr (development version)
+# glossr 0.6.0
 
 - It is possible to create glosses in Quarto documents.
 
