@@ -1,11 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
+  gloss_factory: gloss_factory.html
   glossr: glossr.html
   glossr_how: glossr_how.html
   styling: styling.html
-last_built: 2022-06-08T12:27Z
+last_built: 2022-08-19T07:07Z
 urls:
   reference: https://montesmariana.github.io/glossr/reference
   article: https://montesmariana.github.io/glossr/articles
