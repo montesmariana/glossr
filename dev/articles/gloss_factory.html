@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">glossr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,12 +108,12 @@
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/use_glossr.html">use_glossr</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Setting up the `leipzig` engine.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Setting up the <span style="font-style: italic;">leipzig</span> engine.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">glosses</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="create-a-gloss-factory">Create a gloss factory<a class="anchor" aria-label="anchor" href="#create-a-gloss-factory"></a>
 </h2>
-<p>The first thing you need to do is assign the value of your <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> call to a short variable that works for you. I recommend trying this in the console, and then calling it in a setup R chunk that doesn’t print messages or warnings.</p>
+<p>The first thing you need to do is assign the return value of <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> to a short variable that works for you. I recommend trying this in the console, and then calling it in a setup R chunk that doesn’t print messages or warnings.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">by_label</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gloss_factory.html">gloss_factory</a></span><span class="op">(</span><span class="va">glosses</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following columns will be used for the gloss texts, in the following order:</span></span>
@@ -121,8 +121,8 @@
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `original`, `parsed`, and `language` (aligned columns)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `translation` (not aligned!)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The `label` column will be used for labels.</span></span></code></pre></div>
-<p>By default, <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> prints a few messages after checking the dataframe that was provided: it checks whether there are “source”, “translation” and “label” columns and which would be the remaining columns with content for the text lines. Notice how here it includes the <code>language</code> column in the group of aligned lines, which we don’t want, so we would prefer to remove it.</p>
-<p>If any of the other columns were not present, it would print a warning. These are just warnings: maybe it’s exactly what you are expecting, and that’s ok.</p>
+<p>By default (unless <code>verbose = FALSE</code>), <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> prints a few messages after checking the dataframe that was provided: it checks whether there are <code>source</code>, <code>translation</code> and <code>label</code> columns (“not aligned”, because they are printed as running text) and which would be the remaining columns with content for the text lines (“aligned”, because they are aligned to each other word by word). Notice how here it includes the <code>language</code> column in the group of aligned lines, which we don’t want, so we would prefer to remove it.</p>
+<p>If any of the expected columns (<code>source</code>, <code>translation</code> or <code>label</code>) were not present, it would print a warning. These are just warnings: maybe it’s exactly what <em>you</em> are expecting, and that’s ok.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">by_label</span> <span class="op">&lt;-</span> <span class="va">glosses</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">language</span>, <span class="op">-</span><span class="va">translation</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/gloss_factory.html">gloss_factory</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following columns will be used for the gloss texts, in the following order:</span></span>
@@ -140,7 +140,7 @@
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `original`, `parsed`, and `trans` (aligned columns)</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> `translation` (not aligned!)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The `label` column will be used for labels.</span></span></code></pre></div>
-<p>We can either remove the columns from the dataframe before giving it to <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> or add its name to the <code>ignore_columns</code> argument. This allows us to use the column for filtering without <code><a href="../reference/gloss_df.html">gloss_df()</a></code> finding out of its existence. Other kinds of modifications, however, would have to be performed before.</p>
+<p>We can either remove the extra column from the dataframe before giving it to <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> or add its name to the <code>ignore_columns</code> argument. This allows us to use the column for filtering without <code><a href="../reference/gloss_df.html">gloss_df()</a></code> finding out of its existence. Other kinds of modifications, however, would have to be performed beforehand.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modified_glosses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">glosses</span>, source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">source</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">by_label</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gloss_factory.html">gloss_factory</a></span><span class="op">(</span><span class="va">modified_glosses</span>, ignore_columns <span class="op">=</span> <span class="st">"language"</span><span class="op">)</span></span>
@@ -149,7 +149,7 @@
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `original` and `parsed` (aligned columns)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `translation` (not aligned!)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The `label` column will be used for labels.</span></span></code></pre></div>
-<p><code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> <a href="https://adv-r.hadley.nz/function-factories.html" class="external-link">function factory</a>: its output is a function.</p>
+<p><code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> is a <a href="https://adv-r.hadley.nz/function-factories.html" class="external-link">function factory</a>: its output is a function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">by_label</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "function"</span></span></code></pre></div>
@@ -180,7 +180,7 @@ reply-while father and mother TOP heartwarming warm thing with surround-PASS fee
 <div class="section level2">
 <h2 id="filter-by-label-or-id">Filter by label or id<a class="anchor" aria-label="anchor" href="#filter-by-label-or-id"></a>
 </h2>
-<p>By default, the function created by <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> will take a label or set of labels and use it for filtering. Unlike <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, however, you can keep the order of your items!</p>
+<p>By default, the function created by <code><a href="../reference/gloss_factory.html">gloss_factory()</a></code> will take a label or set of labels and use it for filtering. In principle, the call below is equivalent to <code>gloss_df(filter(modified_glosses, label %in% c("heartwarming-jp", "languid-jp", "feel-dutch")))</code>. However, unlike <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, it keeps the requested order of your items!</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">by_label</span><span class="op">(</span><span class="st">"heartwarming-jp"</span>, <span class="st">"languid-jp"</span>, <span class="st">"feel-dutch"</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" class="example" style="list-style-type: decimal">
