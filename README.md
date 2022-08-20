@@ -10,6 +10,9 @@ status](https://www.r-pkg.org/badges/version/glossr)](https://CRAN.R-project.org
 [![DOI](https://zenodo.org/badge/485119883.svg)](https://zenodo.org/badge/latestdoi/485119883)
 ![Release](https://img.shields.io/github/v/release/montesmariana/glossr)
 [![R-CMD-check](https://github.com/montesmariana/glossr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/montesmariana/glossr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/r-lib/glossr/branch/main/graph/badge.svg)](https://codecov.io/gh/r-lib/glossr?branch=main)
+
 <!-- badges: end -->
 
 The glossr package gives you tools to include interlinear glosses in
