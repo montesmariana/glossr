@@ -20,7 +20,7 @@ There was one NOTE for the Fedora Linux build (I don't know what it's about):
 
 Status OK. There were no ERRORs or WARNINGs. There was one NOTE:
 
-- R Under development (unstable) (2022-08-17 r82724 ucrt)
+- R Under development (unstable) (2022-09-18 r82873 ucrt)
 
 ## Downstream dependencies (revdepcheck results)
 
