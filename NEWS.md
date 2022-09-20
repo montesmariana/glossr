@@ -1,3 +1,5 @@
+# glossr (development version)
+
 # glossr 0.6.1
 
 - Removed tests for compatibility with flextable changes.
