@@ -14,7 +14,7 @@ bibliography: ["../inst/REFERENCES.bib", "../inst/packages.bib"]
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = isTRUE(l10n_info()[['UTF-8']])
+  echo = TRUE
 )
 ```
 
