@@ -18,7 +18,8 @@
 #' @export
 use_glossr <- function(
     html_format = NULL,
-    styling = list()) {
+    styling = list()
+    ) {
   html_formats <- c("leipzig", "tooltip")
   opt <- getOption("glossr.output")
   if (knitr::is_latex_output()) {
@@ -47,9 +48,10 @@ use_glossr <- function(
 #'
 #' This is a helper function to set [options()] that control style characteristics
 #' for glosses across the full document. It is called within [use_glossr()]
-#' but can be overridden later but setting the appropriate options.
+#' but can be overridden later by setting the appropriate options.
 #'
-#' There are two types of settings that can be provided in the list.
+#' There are four types of settings that can be provided in the list.
+#'
 #' First, `trans_quotes` sets the characters that must surround the free translation in a gloss.
 #' If no value is specified, it will be double quotes. There are no real restrictions
 #' for this value.
@@ -63,11 +65,24 @@ use_glossr <- function(
 #' - **c|third**: The third line of the glosses if it exists.
 #' - **ft|trans|translation**: The line of the glosses where the free `translation`
 #'  is rendered.
-#' **numbering**: Whether the glosses should be numbered (in HTML and Word).
 #'
 #' Each of these items can take one of a few values:
 #' - `i`, `it`, `italics` and `textit` set italics.
 #' - `b`, `bf`, `bold` and `textbf` set boldface.
+#'
+#' Third, there are a few LaTeX-specific settings documented in the
+#' [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf).
+#' In all cases the default value is 0 (0pt).
+#' (If you would like other settings to be supported, write up an Issue and I will look into it!)
+#' - **exskip|par_spacing**: Space above *and* below the example. The `par_spacing` name
+#' is allowed for backwards compatibility, but the actual name in `expex` is `exskip`.
+#' - **belowglpreambleskip**: Space under the preamble (where the `source` is printed).
+#' - **aboveglftskip**: The spacing above the free translation.
+#' - **extraglsskip**: The spacing between the aligned lines.
+#'
+#' Finally, there is one setting that is not available in LaTeX, particularly
+#' thinking of slides: **numbering**, that is,
+#' whether the glosses should be numbered (in HTML).
 #'
 #' @param styling Named list of styling options for specific elements of glosses.
 #'
@@ -84,6 +99,10 @@ set_style_options <- function(styling = list()) {
     ft = "translation",
     trans = "translation"
     )
+
+  other_vars <- c('trans_quotes', 'par_spacing', 'numbering', 'exskip',
+                'belowglpreambleskip', 'aboveglftskip', 'extraglskip')
+
   style_opts <- list()
   bad_styling <- c()
   for (v in names(variables)) {
@@ -104,17 +123,15 @@ set_style_options <- function(styling = list()) {
                     "The following option{?s} {?is/are} not supported: {.var {bad_options}}."))
   }
 
-  if ("trans_quotes" %in% names(styling)) {
-    style_opts$glossr.trans.quotes = styling$trans_quotes
+  for (opt in other_vars) {
+    if (opt %in% names(styling)) {
+      name <- if (opt == 'exskip') 'glossr.par.spacing' else paste0('glossr.', gsub('_', '.', opt))
+      style_opts[[name]] <- styling[[opt]]
+    }
   }
-  if ("par_spacing" %in% names(styling)) {
-    style_opts$glossr.par.spacing = styling$par_spacing
-  }
-  if ("numbering" %in% names(styling)) {
-    style_opts$glossr.numbering = styling$numbering
-  }
+
   options(style_opts)
-  extra <- setdiff(names(styling), c(names(variables), "trans_quotes", "par_spacing", "numbering"))
+  extra <- setdiff(names(styling), c(names(variables), other_vars))
   for (e in extra) {
     cli::cli_warn(c("!" = "{.var {e}} is not a valid style option and was ignored."))
   }

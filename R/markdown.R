@@ -13,8 +13,9 @@ knit_print.gloss <- function(x, ...) {
   if (output == "latex") {
     latex_params = c(
       sprintf("exskip=%dpt", getOption("glossr.par.spacing", 0)),
-      "belowglpreambleskip=0pt",
-      "aboveglftskip=0pt",
+      sprintf("belowglpreambleskip=%dpt", getOption("glossr.belowglpreambleskip", 0)),
+      sprintf("aboveglftskip=%dpt", getOption("glossr.aboveglftskip", 0)),
+      sprintf("extraglskip=%dpt", getOption("glossr.extraglskip", 0)),
       paste0("everyglpreamble=", format_pdf("preamble")),
       paste0("everygla=", format_pdf("a")),
       paste0("everyglb=", format_pdf("b")),

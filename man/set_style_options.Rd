@@ -15,10 +15,11 @@ Set the appropriate options.
 \description{
 This is a helper function to set \code{\link[=options]{options()}} that control style characteristics
 for glosses across the full document. It is called within \code{\link[=use_glossr]{use_glossr()}}
-but can be overridden later but setting the appropriate options.
+but can be overridden later by setting the appropriate options.
 }
 \details{
-There are two types of settings that can be provided in the list.
+There are four types of settings that can be provided in the list.
+
 First, \code{trans_quotes} sets the characters that must surround the free translation in a gloss.
 If no value is specified, it will be double quotes. There are no real restrictions
 for this value.
@@ -33,7 +34,6 @@ indicate that various names are possible.
 \item \strong{c|third}: The third line of the glosses if it exists.
 \item \strong{ft|trans|translation}: The line of the glosses where the free \code{translation}
 is rendered.
-\strong{numbering}: Whether the glosses should be numbered (in HTML and Word).
 }
 
 Each of these items can take one of a few values:
@@ -41,4 +41,20 @@ Each of these items can take one of a few values:
 \item \code{i}, \code{it}, \code{italics} and \code{textit} set italics.
 \item \code{b}, \code{bf}, \code{bold} and \code{textbf} set boldface.
 }
+
+Third, there are a few LaTeX-specific settings documented in the
+\href{https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf}{expex documentation}.
+In all cases the default value is 0 (0pt).
+(If you would like other settings to be supported, write up an Issue and I will look into it!)
+\itemize{
+\item \strong{exskip|par_spacing}: Space above \emph{and} below the example. The \code{par_spacing} name
+is allowed for backwards compatibility, but the actual name in \code{expex} is \code{exskip}.
+\item \strong{belowglpreambleskip}: Space under the preamble (where the \code{source} is printed).
+\item \strong{aboveglftskip}: The spacing above the free translation.
+\item \strong{extraglsskip}: The spacing between the aligned lines.
+}
+
+Finally, there is one setting that is not available in LaTeX, particularly
+thinking of slides: \strong{numbering}, that is,
+whether the glosses should be numbered (in HTML).
 }

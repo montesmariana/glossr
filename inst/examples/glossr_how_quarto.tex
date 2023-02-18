@@ -213,11 +213,11 @@
 
 \title{Using the glossr package}
 \author{Mariana Montes}
-\date{2022-08-18}
+\date{2/18/23}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, enhanced, boxrule=0pt, breakable, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, breakable, interior hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -264,17 +264,7 @@ italics.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{load\_all}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-i Loading glossr
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# library(glossr)}
+\FunctionTok{library}\NormalTok{(glossr)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -288,7 +278,7 @@ i Loading glossr
 \end{Shaded}
 
 \begin{verbatim}
-Setting up the `latex` engine.
+i Setting up the latex engine.
 \end{verbatim}
 
 \hypertarget{basic-usage}{%
