@@ -169,6 +169,37 @@ gloss_word <- function(gloss, numbering = TRUE) {
   new_gloss(gloss, gloss_print)
 }
 
+#' Render a non interlinear gloss
+#'
+#' This function is called when a gloss has only one line beyond the translation
+#'   (or even no translation at all). Like other `gloss_render()` functions, it
+#'   is only meant to be called internally, but it can be used for debugging.
+#'
+#' Render a gloss with only one line or one line and free translation in HTML and
+#' Word.
+#'
+#' @inheritParams gloss_render
+#'
+#' @return Object of class [`gloss`][new_gloss()].
+#' @export
+gloss_single <- function(gloss, numbering) {
+  stopifnot(inherits(gloss, "gloss_data"))
+  label <- if (numbering) sprintf("(@%s) ", attr(gloss, "label")) else ""
+  source <- if (attr(gloss, "has_source")) sprintf(" %s \n\n    ", attr(gloss, "source")) else ""
+  line_format <- getOption("glossr.format.a")
+  if (is.null(line_format)) {
+    gloss_text <- gloss
+  } else if (line_format %in% style_options("i")) {
+    gloss_text <- sprintf("*%s*", gloss)
+  } else if (line_format %in% style_options("b")) {
+    gloss_text <- sprintf("**%s**", gloss)
+  } else {
+    gloss_text <- gloss
+  }
+  translation <- if (attr(gloss, "has_translation")) sprintf(" \n\n    %s\n\n", attr(gloss, "translation")) else ""
+  new_gloss(gloss, paste0(label, source, gloss_text, translation))
+}
+
 
 #' Render gloss from a dataframe
 #'

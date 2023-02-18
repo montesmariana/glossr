@@ -1,5 +1,9 @@
 # glossr (development version)
 
+- Word and HTML examples that don't need alignment look better.
+
+- New options for Latex rendering.
+
 # glossr 0.6.1
 
 - Removed tests for compatibility with flextable changes.

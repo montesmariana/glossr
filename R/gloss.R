@@ -92,12 +92,16 @@ as_gloss <- function(...,
     )
   if (output_format == "latex") {
     gloss_pdf(gloss)
+  } else if (length(gloss) == 1) {
+    # if there is only one line, i.e. no interlinear glosses
+    gloss_single(gloss, numbering = numbering)
   } else if (output_format == "word") {
     gloss_word(gloss, numbering = numbering)
   } else {
     gloss_html(gloss, numbering = numbering)
   }
 }
+
 
 #' gloss class
 #'
