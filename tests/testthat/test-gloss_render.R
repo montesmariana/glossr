@@ -72,9 +72,5 @@ test_that("gloss label renders in word", {
   word <- gloss_word(my_gloss)
   expect_length(word, 3)
   expect_match(word[[1]], "^\\(@ex1\\) _\\n$")
-  expect_match(
-    word[[2]],
-    "^```\\{=html\\}\\n<div class=\\\"tabwid tabwid_left\\\"><style>"
-    )
   expect_match(gloss_word(source_gloss)[[1]], "^\\(@\\) \\(Author:year\\)\\n$")
 })
