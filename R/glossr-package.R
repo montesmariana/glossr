@@ -78,7 +78,7 @@ use_glossr <- function(
 #' is allowed for backwards compatibility, but the actual name in `expex` is `exskip`.
 #' - **belowglpreambleskip**: Space under the preamble (where the `source` is printed).
 #' - **aboveglftskip**: The spacing above the free translation.
-#' - **extraglsskip**: The spacing between the aligned lines.
+#' - **extraglskip**: The spacing between the aligned lines.
 #'
 #' Finally, there is one setting that is not available in LaTeX, particularly
 #' thinking of slides: **numbering**, that is,

@@ -6,16 +6,20 @@ my_gloss <- new_gloss_data(gloss_lines, translation = ex_trans, label = "ex1")
 no_trans <- new_gloss_data(gloss_lines, label = "ex2")
 bare_gloss <- new_gloss_data(gloss_lines)
 source_gloss <- new_gloss_data(gloss_lines, source = "(Author:year)")
+single_gloss <- new_gloss_data(list(ex_sp))
 
 # Test classes
 test_that("Classes are correct", {
   expect_s3_class(my_gloss, "gloss_data")
+  expect_s3_class(single_gloss, "gloss_data")
   expect_s3_class(gloss_pdf(my_gloss), "gloss")
   expect_s3_class(gloss_html(my_gloss), "gloss")
   expect_s3_class(gloss_word(my_gloss), "gloss")
+  expect_s3_class(gloss_single(single_gloss), "gloss")
   expect_error(gloss_pdf(ex_sp))
   expect_error(gloss_html(ex_sp))
   expect_error(gloss_word(ex_sp))
+  expect_error(gloss_single(source_gloss))
 })
 
 # Test pdf ----
@@ -73,4 +77,19 @@ test_that("gloss label renders in word", {
   expect_length(word, 3)
   expect_match(word[[1]], "^\\(@ex1\\) _\\n$")
   expect_match(gloss_word(source_gloss)[[1]], "^\\(@\\) \\(Author:year\\)\\n$")
+})
+
+# Test single gloss ----
+test_that("Single gloss has the right text", {
+  single <- gloss_single(single_gloss)
+  expect_length(single, 1)
+  expect_match(single[[1]], r"[\(@\) Un ejemplo en español]")
+
+  single2 <- gloss_single(new_gloss_data(list(ex_sp), translation = ex_trans, label = "ex1"))
+  expect_length(single2, 1)
+  expect_match(single2[[1]], r"{\(@ex1\) Un ejemplo en español \n+\s+\"An example in Spanish\.\"\n+}")
+
+  expect_equal(as_gloss(ex_sp, output_format = 'leipzig'), gloss_single(single_gloss))
+  expect_equal(as_gloss(ex_sp, output_format = 'word'), gloss_single(single_gloss))
+  expect_equal(as_gloss(ex_sp, output_format = 'latex'), gloss_pdf(single_gloss))
 })

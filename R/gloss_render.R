@@ -181,9 +181,12 @@ gloss_word <- function(gloss, numbering = TRUE) {
 #' @inheritParams gloss_render
 #'
 #' @return Object of class [`gloss`][new_gloss()].
-#' @export
-gloss_single <- function(gloss, numbering) {
+#' @noRd
+gloss_single <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
+  if (length(gloss) != 1) {
+    cli::cli_abort("{.fun gloss_single} requires a gloss with only one line.")
+  }
   label <- if (numbering) sprintf("(@%s) ", attr(gloss, "label")) else ""
   source <- if (attr(gloss, "has_source")) sprintf(" %s \n\n    ", attr(gloss, "source")) else ""
   line_format <- getOption("glossr.format.a")

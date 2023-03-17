@@ -78,7 +78,7 @@ use_glossr(styling = list(
 
 ...will set the first line and the free translation in italics.
 
-You can always annul a setting by typing `options(glossr.format.a = NULL)`, for example. But this set-up is meant to encourage/enforce you to keep the same style across a given file.
+You can always annul a setting by typing `options(glossr.format.a = NULL)`, for example. But this setup is meant to encourage/enforce you to keep the same style across a given file.
 
 # Other formatting
 
@@ -102,4 +102,26 @@ use_glossr(styling = list(
 ))
 ```
 
-Finally, "par_spacing" (also to be set as `options(glossr.par.spacing = 0)`) defines the space above and below the glosses in PDF output, which by default is 0. Depending on the settings of your template, you might want to add more spacing.
+Second, "numbering = `FALSE`" when the output is not PDF allows you to remove the numbering of examples, e.g. in slides.
+
+## Latex-specific features
+
+
+The [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf) shows a number of parameters that can be manipulated to adjust the spacing of the different parts of a gloss. In all cases the default value is `0`, but you can increase them (or reduce them, if some other setting in your template sets a different default value) by providing the right instructions to `use_glossr()`.
+
+The variables that you can manipulate are the following:
+
+- `exskip` (also called `par_spacing` in this package) defines the space above *and* below the example.
+- `belowglpreambleskip` defines the pace under the preamble (where the source is printed).
+- `aboveglftskip` defines the spacing above the free translation.
+- `extraglskip` defines the spacing between the types of lines, e.g. between the source and the aligned lines, between the aligned lines and the translation, and between the groups of lines if your example is long enough to take more than one line.
+
+For instance, the following sets a spacing of 6pt above and below the example and a spacing of 15pt between the different sections of the example:
+
+```{r, eval = FALSE}
+use_glossr(styling = list(
+  exskip = 6,
+  extraglskip = 15
+))
+```
+

@@ -51,7 +51,7 @@ In all cases the default value is 0 (0pt).
 is allowed for backwards compatibility, but the actual name in \code{expex} is \code{exskip}.
 \item \strong{belowglpreambleskip}: Space under the preamble (where the \code{source} is printed).
 \item \strong{aboveglftskip}: The spacing above the free translation.
-\item \strong{extraglsskip}: The spacing between the aligned lines.
+\item \strong{extraglskip}: The spacing between the aligned lines.
 }
 
 Finally, there is one setting that is not available in LaTeX, particularly

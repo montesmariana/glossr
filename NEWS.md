@@ -1,4 +1,4 @@
-# glossr (development version)
+# glossr 0.7.0
 
 - Word and HTML examples that don't need alignment look better.
 

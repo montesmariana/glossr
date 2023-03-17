@@ -1,7 +1,7 @@
 Package: glossr
 Type: Package
 Title: Use Interlinear Glosses in R Markdown
-Version: 0.6.1.9000
+Version: 0.7.0
 Authors@R: c(
   person(given = "Mariana",
         family = "Montes",
