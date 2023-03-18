@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Interlinear glosses are a way of writing linguistic examples in a language other than the language of the main text (typically English). They first have a couple of lines of vertically aligned bits (however words are split in the original language) with, normally, some morphological information, and finally they might close with a free translation of the example. Most often they follow the [Leipzig Glossing Rules](https://www.eva.mpg.de/lingua/resources/glossing-rules.php).
+Interlinear glosses are a way of writing linguistic examples in a language other than the language of the main text (typically English). They first have a couple of lines of vertically aligned bits (however words are split in the original language) with, normally, some morphological information, and finally they might close with a free translation of the example. Most often they follow the Leipzig Glossing Rules.
 
 R Markdown [@R-rmarkdown] is an R package for literate programming, where you can weave together text and code. You can use R Markdown to write your papers, focusing on content rather than formatting, confident that the same source (pretty much) can turn into both a beautiful PDF file or a gorgeous web page with the minimum of effort. Yes, once you're used to it, it's not harder than writing in MS Word. I've [written a bit](https://www.marianamontes.me/post/academic-writing-in-r-markdown-i/) about it in case you're interested.
 

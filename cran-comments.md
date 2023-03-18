@@ -12,7 +12,7 @@ There was one NOTE for the Windows build:
 - Found the following files/directories:
   'lastMiKTeXException'
   
-There was one NOTE for the Fedora Linux build (I don't know what it's about):
+There was one NOTE for the Fedora Linux build:
 
 - Skipping checking HTML validation: no command 'tidy' found
 
@@ -20,7 +20,7 @@ There was one NOTE for the Fedora Linux build (I don't know what it's about):
 
 Status OK. There were no ERRORs or WARNINGs. There was one NOTE:
 
-- R Under development (unstable) (2022-09-18 r82873 ucrt)
+- R Under development (unstable) (2023-03-16 r83996 ucrt)
 
 ## Downstream dependencies (revdepcheck results)
 
