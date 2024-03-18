@@ -28,18 +28,15 @@ Imports:
     purrr,
     rlang,
     stringr,
-    flextable,
     tidyr,
     cli
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Suggests: 
     bookdown,
-    officedown,
     testthat,
     rmarkdown,
-    officer,
     htmltools,
     covr
 Depends: 
