@@ -74,9 +74,16 @@ test_that("source is rendered", {
 # Test word ----
 test_that("gloss label renders in word", {
   word <- gloss_word(my_gloss)
-  expect_length(word, 3)
-  expect_match(word[[1]], "^\\(@ex1\\) _\\n$")
-  expect_match(gloss_word(source_gloss)[[1]], "^\\(@\\) \\(Author:year\\)\\n$")
+  expect_length(word, 1)
+  word_parts <- strsplit(word, "\n\n    ")[[1]]
+  expect_length(word_parts, 3)
+  expect_match(
+    word_parts[[1]],
+    "^\\(@ex1\\) Un(&nbsp;)+ejemplo(&nbsp;)+en(&nbsp;)+español(&nbsp;)+$")
+  expect_match(
+    strsplit(gloss_word(source_gloss)[[1]], "\n\n    ")[[1]][[1]],
+    "^\\(@\\) \\(Author:year\\)$"
+    )
 })
 
 # Test single gloss ----
@@ -90,6 +97,6 @@ test_that("Single gloss has the right text", {
   expect_match(single2[[1]], r"{\(@ex1\) Un ejemplo en español \n+\s+\"An example in Spanish\.\"\n+}")
 
   expect_equal(as_gloss(ex_sp, output_format = 'leipzig'), gloss_single(single_gloss))
-  expect_equal(as_gloss(ex_sp, output_format = 'word'), gloss_single(single_gloss))
+  expect_equal(as_gloss(ex_sp, output_format = 'word'), gloss_word(single_gloss))
   expect_equal(as_gloss(ex_sp, output_format = 'latex'), gloss_pdf(single_gloss))
 })
