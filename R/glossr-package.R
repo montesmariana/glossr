@@ -101,7 +101,8 @@ set_style_options <- function(styling = list()) {
     )
 
   other_vars <- c('trans_quotes', 'par_spacing', 'numbering', 'exskip',
-                'belowglpreambleskip', 'aboveglftskip', 'extraglskip')
+                'belowglpreambleskip', 'aboveglftskip', 'extraglskip',
+                "font_family", "font_size", "page_width")
 
   style_opts <- list()
   bad_styling <- c()
@@ -126,6 +127,15 @@ set_style_options <- function(styling = list()) {
   for (opt in other_vars) {
     if (opt %in% names(styling)) {
       name <- if (opt == 'exskip') 'glossr.par.spacing' else paste0('glossr.', gsub('_', '.', opt))
+      if (startsWith(opt, "font") & !is.null(names(styling[[opt]]))) {
+        name_options <- c("a", "b", "c")
+        for (line_name in names(styling[[opt]])) {
+          if (!line_name %in% name_options) {
+            cli::cli_warn(c("!" = "If {.var {opt}} is a named vector, the names must be one of {.emph {name_options}}.",
+                    "{.emph {line_name}} is not supported and will be ignored."))
+          }
+        }
+      }
       style_opts[[name]] <- styling[[opt]]
     }
   }

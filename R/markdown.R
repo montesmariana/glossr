@@ -28,7 +28,9 @@ knit_print.gloss <- function(x, ...) {
         sprintf("\\lingset{%s}", paste(latex_params, collapse = ",")),
         x),
       meta = list(rmarkdown::latex_dependency("expex", extra_lines = for_xelatex)))
-  } else if (length(attr(x, 'data')) == 1 || output == "word") {
+  } else if (output == "word") {
+    knitr::asis_output(paste(x, collapse = "\n\n"))
+  } else if (length(attr(x, 'data')) == 1) {
     knitr::asis_output(x)
   } else if (output == "leipzig") {
     knitr::asis_output(paste(x, collapse = ""), meta = list(use_leipzig()))
