@@ -58,7 +58,7 @@ use_glossr <- function(
 #'
 #' Second, the following elements can set general styling instructions for different
 #' sections of a gloss, formatting them completely in italics OR bold. The items with a `|`
-#' indicate that various names are possible.
+#' indicate that various names are possible.×
 #' - **source|preamble**: The line of the glosses where the `source` is rendered.
 #' - **a|first**: The first line of the glosses, with the original language text.
 #' - **b|second**: The second line of the glosses.

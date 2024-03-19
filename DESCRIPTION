@@ -24,11 +24,8 @@ Imports:
     tibble,
     dplyr,
     knitr,
-    magrittr,
     purrr,
     rlang,
-    stringr,
-    tidyr,
     cli
 RoxygenNote: 7.3.1
 Config/testthat/edition: 3
@@ -37,6 +34,7 @@ Suggests:
     bookdown,
     testthat,
     rmarkdown,
+    stringr,
     htmltools,
     covr
 Depends: 

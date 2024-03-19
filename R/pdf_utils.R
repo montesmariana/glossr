@@ -14,12 +14,9 @@
 gloss_format_words <- function(text, formatting) {
   if (formatting %in% style_options("i")) formatting <- "textit"
   if (formatting %in% style_options("b")) formatting <- "textbf"
-  split_line <- gloss_linesplit(text) %>%
-    purrr::map_chr(~ sprintf("\\%s{%s}", formatting, .x)) %>%
-    purrr::map_chr(~ ifelse(
-      stringr::str_detect(.x, " "),
-      sprintf("{%s}", .x),
-      .x)) %>%
+  split_line <- gloss_linesplit(text) |>
+    purrr::map_chr(~ sprintf("\\%s{%s}", formatting, .x))
+  split_line <- ifelse(grepl(" ", split_line), sprintf("{%s}", split_line), split_line) |>
     paste(collapse = " ")
   gsub("\\s+", " ", split_line)
 }
@@ -46,8 +43,8 @@ gloss_list <- function(glist, listlabel = NULL) {
 
   if (output == "latex") {
     llabel <- if (is.null(listlabel)) "" else sprintf("\\label{%s}", listlabel)
-    clean_gloss <- stringr::str_replace_all(clean_gloss, "\\\\ex", "\\\\a") %>%
-      stringr::str_remove_all("\\\\xe \\n") %>%
+    clean_gloss <- gsub("\\\\ex", "\\\\a", clean_gloss)
+    clean_gloss <- gsub("\\\\xe \\n", "", clean_gloss) |>
       paste(collapse = "\n")
     clean_gloss <- sprintf("\\pex%s %s \\xe \n", llabel, clean_gloss)
     new_gloss(attr(glist, "data"), clean_gloss)
@@ -72,4 +69,17 @@ format_pdf <- function(level) {
   } else {
     NULL
   }
+}
+
+#' Convert from latex to Markdown
+#'
+#' @param string Character string
+#' @return formatted string
+#' @noRd
+latex2md <- function(string) {
+  string <- gsub(latex_tag("textsc"), "\\U\\1", string, perl=TRUE)
+  string <- gsub("\\\\O", "&#8709;", string)
+  string <- gsub("\\$\\\\(emptyset|varnothing)\\$", "&#8709;", string)
+
+  string
 }

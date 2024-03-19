@@ -7,15 +7,10 @@ italics_regex <- "^[_*]([^*_].*[^*_]?)[_*]$"
 #' @return formatted string
 #' @noRd
 latex2word <- function(string) {
-  if (grepl(latex_tag("textsc"), string)) {
-    string <- gsub(latex_tag("textsc"), "\\U\\1", string, perl=TRUE)
-  }
-  if (grepl(latex_tag("textbf"), string)) {
-    string <- gsub(latex_tag("textbf"), "**\\1**", string)
-  }
-  if (grepl(latex_tag("textit"), string)) {
-    string <- gsub(latex_tag("textit"), "_\\1_", string)
-  }
+  string <- latex2md(string)
+  string <- gsub(latex_tag("textbf"), "**\\1**", string)
+  string <- gsub(latex_tag("textit"), "_\\1_", string)
+
   string
 }
 

@@ -26,7 +26,7 @@ for this value.
 
 Second, the following elements can set general styling instructions for different
 sections of a gloss, formatting them completely in italics OR bold. The items with a \code{|}
-indicate that various names are possible.
+indicate that various names are possible.×
 \itemize{
 \item \strong{source|preamble}: The line of the glosses where the \code{source} is rendered.
 \item \strong{a|first}: The first line of the glosses, with the original language text.

@@ -4,35 +4,14 @@
 #' @noRd
 latex2html <- function(string) {
   # TODO refine for replacement instead of removal
+  string <- latex2md(string)
   string <- gsub(latex_tag("textit"), "<em>\\1</em>", string)
   string <- gsub(latex_tag("em"), "<em>\\1</em>", string)
   string <- gsub(latex_tag("textbf"), "<strong>\\1</strong>", string)
-  string <- gsub("\\\\O", "&#8709;", string)
-  string <- gsub("\\$\\\\(emptyset|varnothing)\\$", "&#8709;", string)
-  string <- sc_to_upper(string)
+
   htmltools::HTML(string)
 }
 
-
-#' Small caps to upper case
-#'
-#' Replaces small caps tags from LaTeX to upper case within a string.
-#'
-#' @param string String with a LaTeX small caps tag
-#'
-#' @noRd
-#' @return Character vector of length one
-sc_to_upper <- function(string) {
-  replaced <- gsub(
-    latex_tag("textsc"),
-    "&&&\\1&&",
-    string)
-  replaced <- stringr::str_split(replaced, "&&")[[1]]
-  purrr::map_chr(
-    replaced[replaced != ""],
-    ~ ifelse(startsWith(.x, "&"), gsub(".(.+)", "\\1", toupper(.x)), .x)
-  ) %>% paste(collapse = "")
-}
 
 #' Regex for a latex tag
 #'
@@ -54,21 +33,19 @@ latex_tag <- function(tag) {
 #' @noRd
 #' @return Character vector of elements.
 gloss_linesplit <- function(line) {
-  first_split <- stringr::str_replace_all(
-    line,
+  tokenized <- gsub(
     " \\{([^}]+)\\}\\.?([^ ]*)?",
-    " :::%\\1\\2:::"
-    ) %>%
-    stringr::str_split(" ?::: ?")
-  first_split[[1]][first_split[[1]] != ""] %>%
-    purrr::map(function(x) {
-      if (stringr::str_starts(x, "%")) {
-        stringr::str_remove(x, "%")
-      } else {
-        stringr::str_split(x, " ")[[1]]
-      }
-    }) %>%
-    purrr::flatten_chr()
+    " :::%\\1\\2:::",
+    line
+    )
+  first_line <- strsplit(tokenized, " ?::: ?")[[1]]
+  first_line <- first_line[first_line != ""]
+  ifelse(
+    startsWith(first_line, "%"),
+    gsub("^%", "", first_line),
+    strsplit(first_line, " ")
+    ) |>
+    unlist()
 }
 
 #' HTML dependency for leipzig.js

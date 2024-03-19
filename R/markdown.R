@@ -138,6 +138,7 @@ validate_gloss_factory <- function(glosses) {
 #'   conditions that a [dplyr::filter()] would.
 #' @export
 #'
+#' @importFrom dplyr filter
 #' @examples
 #' my_glosses <- dplyr::select(glosses, -language)
 #' by_label <- gloss_factory(my_glosses)
@@ -155,15 +156,18 @@ gloss_factory <- function(
     ignore_columns = NULL,
     validate = TRUE) {
 
-  remove_cols <- function(x) dplyr::select(x, -dplyr::all_of(ignore_columns))
+  remove_cols <- function(x) {
+    ok_columns <- colnames(x)[!colnames(x) %in% ignore_columns]
+    x[,ok_columns]
+  }
 
   if (validate) validate_gloss_factory(remove_cols(glosses))
 
 
   if (use_conditionals) {
     function(...) {
-      glosses %>% filter(...) %>%
-        remove_cols() %>%
+      glosses |> filter(...) |>
+        remove_cols() |>
         gloss_df()
     }
   } else {
@@ -195,7 +199,7 @@ gloss_factory <- function(
         cli::cli_alert_danger("No rows in the dataset match this selection.")
         return()
       } else {
-        remove_cols(glosses[selection,]) %>% gloss_df()
+        remove_cols(glosses[selection,]) |> gloss_df()
       }
 
     }

@@ -39,13 +39,17 @@ By default (unless `verbose = FALSE`), `gloss_factory()` prints a few messages a
 If any of the expected columns (`source`, `translation` or `label`) were not present, it would print a warning. These are just warnings: maybe it's exactly what *you* are expecting, and that's ok.
 
 ```{r fact2}
-by_label <- glosses %>% select(-language, -translation) %>% gloss_factory()
+by_label <- glosses |> 
+  select(-language, -translation) |> 
+  gloss_factory()
 ```
 
 If there were too many text columns, it would also warn you:
 
 ```{r fact3}
-by_label <- glosses %>% rename(trans = translation) %>% gloss_factory()
+by_label <- glosses|> 
+  rename(trans = translation)|> 
+  gloss_factory()
 ```
 
 We can either remove the extra column from the dataframe before giving it to `gloss_factory()` or add its name to the `ignore_columns` argument. This allows us to use the column for filtering without `gloss_df()` finding out of its existence. Other kinds of modifications, however, would have to be performed beforehand.

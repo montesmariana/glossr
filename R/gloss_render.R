@@ -40,8 +40,8 @@ gloss_pdf <- function(gloss) {
   if (attr(gloss, "has_translation")){
     attr(gloss, "translation") <- sprintf("\\glft %s// \n", attr(gloss, "translation"))
   }
-  gloss_lines <- purrr::imap_chr(gloss[1:min(3, length(gloss))],
-                                 ~ sprintf("\\gl%s %s//", letters[.y], .x)) %>%
+  gloss_lines <- gloss[1:min(3, length(gloss))]
+  gloss_lines <- sprintf("\\gl%s %s//", letters[1:length(gloss_lines)], gloss_lines) |>
     paste(collapse = " ")
   gloss_text <- sprintf(
     "\\ex%s \\begingl %s%s %s \\endgl \\xe \n",

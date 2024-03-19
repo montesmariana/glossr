@@ -31,13 +31,15 @@ and `officedown::rdocx_document`, which renders an MS Word file [@R-bookdown; @R
 
 ```{r}
 #| label: setup
-library(glossr)
+# library(glossr)
+devtools::load_all()
 ```
 
 ```{r useglossr}
 use_glossr(styling = list(
   source = "b",
-  first = "i"
+  first = "i",
+  font_family = "Cambria"
 ))
 ```
 
@@ -77,8 +79,8 @@ If you have many examples, you might want to keep them in their own file, if you
 library(magrittr)
 library(dplyr) # for select() and filter()
 data(glosses)
-glosses <- glosses %>% 
-  select(original, parsed, translation, label, source) %>% 
+glosses <- glosses |> 
+  select(original, parsed, translation, label, source) |> 
   mutate(source = paste0("(", source, ")"))
 glosses
 glosses$label
@@ -96,8 +98,8 @@ gloss_df(head(glosses, 3))
 This package also offers a few extensions when working on PDF output. On the one hand, `gloss_list()` allows you to nest a list of glosses and have both a reference for the list and for each individual item. **This will not work in HTML or Word**, which will just keep the numbering on the top level. But on PDF, given the function on some examples from @shindo_2015, we can use `` `r knitr::inline_expr('gloss("jp")')` `` to reference `r gloss("jp")`, or `` `r knitr::inline_expr('gloss("heartwarming-jp")')` `` and `` `r knitr::inline_expr('gloss("languid-jp")')` `` to reference `r gloss("heartwarming-jp")` and `r gloss("languid-jp")`.
 
 ```{r, jp-gloss}
-filter(glosses, endsWith(label, "jp")) %>% 
-  gloss_df() %>% 
+filter(glosses, endsWith(label, "jp")) |> 
+  gloss_df() |> 
   gloss_list(listlabel = "jp")
 ```
 

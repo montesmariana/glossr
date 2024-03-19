@@ -37,7 +37,7 @@ new_gloss_data <- function(
     cli::cli_abort("The gloss lines must be provided as a list.")
   }
   gloss_lines <- unname(purrr::map_chr(gloss_lines, as.character))
-  lengths <- purrr::map_dbl(gloss_lines, ~ length(gloss_linesplit(.x)))
+  lengths <- purrr::map_dbl(gloss_lines, \(x) length(gloss_linesplit(x)))
   source <- set_default(source, NULL) # set to NULL if invalid
   translation <- set_default(translation, NULL) # set to NULL if invalid
   if (!is.null(translation)) {
