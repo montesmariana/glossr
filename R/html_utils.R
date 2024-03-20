@@ -106,8 +106,8 @@ format_html <- function() {
     translation = ".gloss__line--free")
 
   style <- purrr::imap_chr(levels, function(css_class, level) {
-    format <- getOption(sprintf("glossr.format.%s", level))
-    if (is.null(format)) {
+    format <- config$format[[level]]
+    if (is.null(format) | format == "") {
       sprintf("%s {font-style:normal;font-weight:normal}", css_class)
     } else if (format %in% style_options("i")) {
       sprintf("%s {font-style:italic;}", css_class)

@@ -4,11 +4,7 @@
 \alias{gloss_df}
 \title{Render gloss from a dataframe}
 \usage{
-gloss_df(
-  df,
-  output_format = getOption("glossr.output", "latex"),
-  numbering = getOption("glossr.numbering", TRUE)
-)
+gloss_df(df, output_format = config$output, numbering = config$numbering)
 }
 \arguments{
 \item{df}{Dataframe one row per gloss. Columns \code{translation},

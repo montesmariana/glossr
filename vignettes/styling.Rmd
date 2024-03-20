@@ -20,29 +20,23 @@ knitr::opts_chunk$set(
 
 # Line styling
 
-By default, glosses produced with `glossr` don't have italics or bold (this may change in the future, by user request). However, it is fairly easy to adapt that at the document level.
+By default, glosses produced with glossr don't have italics or boldface. However, it is fairly easy to adapt that at the document level.
 
-The formatting of different lines is stored in `options()`, with variables starting with "glossr.format.":
+The formatting of different lines is stored in a `format` named list inside an internal `config` environment:
 
-- `glossr.format.preamble` indicates the styling for the (optional) first line, where the "source" variable is rendered.
+- `format$preamble` indicates the styling for the (optional) first line, where the "source" variable is rendered.
 
-- `glossr.format.a` indicates the styling of the first gloss line.
+- `format$a` indicates the styling of the first gloss line.
 
-- `glossr.format.b` indicates the styling of the second gloss line.
+- `format$b` indicates the styling of the second gloss line.
 
-- `glossr.format.c` indicates the styling of the third gloss line.
+- `format$c` indicates the styling of the third gloss line.
 
-- `glossr.format.translation` indicates the styling of the translation line.
+- `format$translation` indicates the styling of the translation line.
 
 Each of these options can either take a value setting italics ("i", "it", "italics" or "textit") or one setting boldface ("b" "bf", "bold", "textbf").
 
-If you're familiar with `options()`, you can set your preference by entering something like this in a chunk:
-
-```{r, eval = FALSE}
-options(glossr.format.a = "i") # italics in the first line
-```
-
-Alternatively, `use_glossr()` offers a friendlier interface with a wider variety of names, so you can choose the mnemonic that works for you.
+The `use_glossr()` function allows the user to override the default in these and other configuration properties, and offers a wide variety of names, so you can choose the mnemonic that works for you.
 The argument "styling" must be a named list, with a key pointing to the line you want to style and the same range of values mentioned above.
 
 - `source` and `preamble` are both valid names to set the format of the first optional line, where the `source` variable is rendered.
@@ -59,7 +53,7 @@ If you would like to add other alternatives, let me know!
 
 As an example, if you run the following chunk:
 
-```{r, eval=FALSE}
+```{r, message=FALSE}
 library(glossr)
 use_glossr(styling = list(
   source = "b",
@@ -69,7 +63,7 @@ use_glossr(styling = list(
 
 ...you will set all first lines to italics and the sources to boldface. The next one, on the other hand:
 
-```{r, eval = FALSE}
+```{r}
 use_glossr(styling = list(
   first = "i",
   trans = "i"
@@ -86,7 +80,7 @@ Next to the line formatting options, the `styling` argument can take two other e
 
 First, "trans_quotes" (also to be set as `options(glossr.trans.quotes = "whatever")`) defines the character you want to surround your translation with. By default, this is double quotes, but you might want to select single quotes instead, or remove them altogether. The following chunk of code sets italics in the first line and single quotes for the translation:
 
-```{r, eval = FALSE}
+```{r}
 use_glossr(styling = list(
   first = "i",
   trans_quotes = "'"
@@ -95,7 +89,7 @@ use_glossr(styling = list(
 
 And the following removes quotes altogether:
 
-```{r, eval = FALSE}
+```{r}
 use_glossr(styling = list(
   first = "i",
   trans_quotes = ""
@@ -105,7 +99,6 @@ use_glossr(styling = list(
 Second, "numbering = `FALSE`" when the output is not PDF allows you to remove the numbering of examples, e.g. in slides.
 
 ## Latex-specific features
-
 
 The [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf) shows a number of parameters that can be manipulated to adjust the spacing of the different parts of a gloss. In all cases the default value is `0`, but you can increase them (or reduce them, if some other setting in your template sets a different default value) by providing the right instructions to `use_glossr()`.
 
@@ -118,10 +111,15 @@ The variables that you can manipulate are the following:
 
 For instance, the following sets a spacing of 6pt above and below the example and a spacing of 15pt between the different sections of the example:
 
-```{r, eval = FALSE}
+```{r}
 use_glossr(styling = list(
   exskip = 6,
   extraglskip = 15
 ))
 ```
 
+## Word-specific features
+
+Since version 0.8.0 glossr renders interlinear glosses in Word by computing the expected width of the words in pixels and padding them with spaces. This is done via `systemfonts::string_width()`, which takes arguments such as font family, font size, boldface, and italics. Boldface and italics are already specified via $LaTeX$ or markdown formatting (also covered above, when applied to full lines) but font family and size can be specified as `styling` arguments `font_family` and `font_size`. If they are a normal vector of length 1 (e.g. `font_family = "Cambria` and `font_size = 11`), they will be applied to all the lines. Alternatively, you can specify different fonts if, for example, you combine different scripts with different font families or sizes. For instance, `font_family = c("a" = "Arial", "b" = "Cambria", "c" = "Cambria")` will assume that the first aligned line is in Arial and the second and third, in Cambria.
+
+Note that this does not render the text in a specific font family or size, but only uses the information to estimate the width of the words and align them better.

@@ -25,15 +25,15 @@ latex2word <- function(string) {
 #'
 #' @return Formatted line
 #' @noRd
-format_word_section <- function(line, section) {
-  option <- getOption(paste0("glossr.format.", section))
-  if (is.null(option)) {
+format_word_section <- function(line, level) {
+  format <- config$format[[level]]
+  if (is.null(format) | format == "") {
     return(line)
   }
-  if (option %in% style_options("i")) {
+  if (format %in% style_options("i")) {
     return(sprintf("_%s_", line))
   }
-  if (option %in% style_options("b")) {
+  if (format %in% style_options("b")) {
     return(sprintf("**%s**", line))
   }
   line
@@ -76,6 +76,7 @@ fit_width <- function(font_family = "", font_size = 12) {
   space_width <- word_to_pixels(" ")
 
   pad_word <- function(word, max_width) {
+    max_width <- max_width - ceiling(space_width/2) # err on the size of less padding
     while (word_to_pixels(word) < max_width) {
       word <- paste0(word, " ")
     }
@@ -134,11 +135,11 @@ align_word <- function(gdata) {
     stats::setNames(c("a", "b", "c")[1:length(gdata)])
 
   gdata_widths <- purrr::imap(gdata_split, function(line, name) {
-    font_family <- getOption("glossr.font.family", "")
+    font_family <- config$word$font_family
     if (!is.null(names(font_family))) {
       font_family <- if (name %in% names(font_family)) font_family[[name]] else ""
     }
-    font_size <- getOption("glossr.font.size", 12)
+    font_size <- config$word$font_size
     if (is.null(names(font_size))) {
       font_size <- if (name %in% names(font_size)) font_size[[name]] else 12
     }
@@ -161,7 +162,7 @@ align_word <- function(gdata) {
   }) |>
     tibble::as_tibble()
   as_tbl$cum_width <- cumsum(max_widths)
-  as_tbl$line_number <- ceiling(as_tbl$cum_width / getOption("glossr.page.width", 411))
+  as_tbl$line_number <- ceiling(as_tbl$cum_width / config$word$page_width)
   split(as_tbl[names(gdata_split)], as_tbl$line_number) |>
     purrr::map(\(line) purrr::map_chr(line, paste, collapse = "")) |>
     purrr::flatten_chr() |>

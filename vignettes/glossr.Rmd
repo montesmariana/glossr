@@ -21,7 +21,7 @@ Interlinear glosses are a way of writing linguistic examples in a language other
 
 R Markdown [@R-rmarkdown] is an R package for literate programming, where you can weave together text and code. You can use R Markdown to write your papers, focusing on content rather than formatting, confident that the same source (pretty much) can turn into both a beautiful PDF file or a gorgeous web page with the minimum of effort. Yes, once you're used to it, it's not harder than writing in MS Word. I've [written a bit](https://www.marianamontes.me/post/academic-writing-in-r-markdown-i/) about it in case you're interested.
 
-Mixing R Markdown and interlinear glosses has proved challenging. This package offers you some wrapping functions that call [the `expex`](https://ctan.org/pkg/expex?lang=en) $LaTeX$ package for PDF output and [leipzig.js](https://github.com/bdchauvette/leipzig.js/) for HTML output and generate `flextable::flextable()` tables for MS Word output. You don't really need to know any Latex or Javascript or HTML to take advantage of both of them.
+Mixing R Markdown and interlinear glosses has proved challenging. This package offers you some wrapping functions that call [the `expex`](https://ctan.org/pkg/expex?lang=en) $LaTeX$ package for PDF output and [leipzig.js](https://github.com/bdchauvette/leipzig.js/) for HTML output and try to compute spaces to align the words in MS Word output. You don't really need to know any Latex or Javascript or HTML to take advantage of these features.
 
 The package also takes care of cross-references, giving you a handy function `gloss()` to sprinkle around your text every time you want to reference one of your examples. Go ahead and check out the articles and [the rendered versions](https://github.com/montesmariana/glossr/tree/main/inst/examples/) of `vignette("glossr_how")`.
 
@@ -37,7 +37,7 @@ Last but not least, I'd like to acknowledge the source of the examples in the sm
 
 # Alternatives
 
-Shortly before^[A few months earlier, but I didn't find out until a few days after.] this package, another R package came out to render glosses in R Markdown with HTML output: [lingglosses](https://agricolamz.github.io/lingglosses/). Unlike glossr, it is tailored for HTML, where it creates a table to render the glosses, much like `glossr` does for Word^[The markup is therefore different than the one given by leipzig.js]. It also allows grammaticality judgements, inline examples and sign language glosses, offers a list of abbreviations and generates a table from your glosses. In short, they have different focuses, so take a look and see what works for you :) 
+Shortly before^[A few months earlier, but I didn't find out until a few days after.] this package, another R package came out to render glosses in R Markdown with HTML output: [lingglosses](https://agricolamz.github.io/lingglosses/). Unlike glossr, it is tailored for HTML, where it creates a table to render the glosses^[The markup is therefore different than the one given by leipzig.js]. It also allows grammaticality judgements, inline examples and sign language glosses, offers a list of abbreviations and generates a table from your glosses. In short, they have different focuses, so take a look and see what works for you :) 
 
 # References
 

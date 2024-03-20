@@ -10,7 +10,7 @@ new_gloss_data(
   source = NULL,
   translation = NULL,
   label = NULL,
-  trans_quotes = getOption("glossr.trans.quotes", "\\"")
+  trans_quotes = config$trans_quotes
 )
 }
 \arguments{

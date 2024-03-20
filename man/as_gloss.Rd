@@ -9,9 +9,9 @@ as_gloss(
   source = NULL,
   translation = NULL,
   label = NULL,
-  trans_quotes = getOption("glossr.trans.quotes", "\\""),
-  output_format = getOption("glossr.output", "latex"),
-  numbering = getOption("glossr.numbering", TRUE)
+  trans_quotes = config$trans_quotes,
+  output_format = config$output,
+  numbering = config$numbering
 )
 }
 \arguments{

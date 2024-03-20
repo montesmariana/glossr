@@ -14,8 +14,7 @@
 gloss_format_words <- function(text, formatting) {
   if (formatting %in% style_options("i")) formatting <- "textit"
   if (formatting %in% style_options("b")) formatting <- "textbf"
-  split_line <- gloss_linesplit(text) |>
-    purrr::map_chr(~ sprintf("\\%s{%s}", formatting, .x))
+  split_line <- sprintf("\\%s{%s}", formatting, gloss_linesplit(text))
   split_line <- ifelse(grepl(" ", split_line), sprintf("{%s}", split_line), split_line) |>
     paste(collapse = " ")
   gsub("\\s+", " ", split_line)
@@ -37,7 +36,7 @@ gloss_list <- function(glist, listlabel = NULL) {
     cli::cli_abort(c("{.fun gloss_list} needs an object of class {.cls gloss}",
                      "please use {.fun as_gloss} or {.fun gloss_df} first."))
   }
-  output <- getOption("glossr.output", "latex")
+  output <- config$output
   clean_gloss <- unclass(glist)
   attr(clean_gloss, "data") <- NULL
 
@@ -59,8 +58,8 @@ gloss_list <- function(glist, listlabel = NULL) {
 #' @noRd
 #' @return Key for expex
 format_pdf <- function(level) {
-  format <- getOption(sprintf("glossr.format.%s", level))
-  if (is.null(format)) {
+  format <- config$format[[level]]
+  if (is.null(format) | format == "") {
     NULL
   } else if (format %in% style_options("i")) {
     "\\itshape"

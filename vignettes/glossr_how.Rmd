@@ -34,9 +34,7 @@ As you can see in `vignette("styling")`, `use_glossr()` also takes some variable
 
 ```{r setup}
 library(glossr)
-```
 
-```{r useglossr}
 use_glossr(styling = list(
   source = "b",
   first = "i"
@@ -124,12 +122,13 @@ my_gloss
 
 # About the formats
 
-The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output is an invisible table generated with {flextable} [@R-flextable]. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example `r gloss("heartwarming-jp")`), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
+The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using `systemfonts::string_width()` [@R-systemfonts] and tries to align them programmatically via spaces.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 
-
 # References
+
+
 
 
 

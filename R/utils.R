@@ -23,9 +23,12 @@ validate_output <- function(output = c("word", "latex", "leipzig", "tooltip", "h
       },
     match.arg(output)
     )
-  if (output == "html") output <- "leipzig"
-  if (output == "pdf") output <- "latex"
-  options("glossr.output" = output)
+  if (output == "html") {
+    output <- "leipzig"
+  } else if (output == "pdf") {
+    output <- "latex"
+  }
+  config$output <- output
   invisible(output)
 }
 
@@ -43,17 +46,3 @@ style_options <- function(format = c("i", "b")) {
   )
 }
 
-#' Check if required packages are installed
-#'
-#' Calls [requireNamespace()] with the required packages.
-#'
-#' @noRd
-#' @param output_format Word, Leipzig or Tooltip, desired format
-check_packages <- function(output_format) {
-  if (output_format == "word") {
-    requireNamespace("officer", quietly = TRUE)
-    requireNamespace("flextable", quietly = TRUE)
-  } else if (output_format %in% c("leipzig", "tooltip")) {
-    requireNamespace("htmltools", quietly = TRUE)
-  }
-}

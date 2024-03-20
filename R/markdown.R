@@ -8,14 +8,13 @@
 #' @exportS3Method knitr::knit_print gloss
 #' @export
 knit_print.gloss <- function(x, ...) {
-  output <- getOption("glossr.output")
-  validate_output(output)
+  output <- config$output
   if (output == "latex") {
     latex_params = c(
-      sprintf("exskip=%dpt", getOption("glossr.par.spacing", 0)),
-      sprintf("belowglpreambleskip=%dpt", getOption("glossr.belowglpreambleskip", 0)),
-      sprintf("aboveglftskip=%dpt", getOption("glossr.aboveglftskip", 0)),
-      sprintf("extraglskip=%dpt", getOption("glossr.extraglskip", 0)),
+      sprintf("exskip=%dpt", config$pdf$par_spacing),
+      sprintf("belowglpreambleskip=%dpt", config$pdf$belowglpreambleskip),
+      sprintf("aboveglftskip=%dpt", config$pdf$aboveglftskip),
+      sprintf("extraglskip=%dpt", config$pdf$extraglskip),
       paste0("everyglpreamble=", format_pdf("preamble")),
       paste0("everygla=", format_pdf("a")),
       paste0("everyglb=", format_pdf("b")),
@@ -55,7 +54,7 @@ knit_print.gloss <- function(x, ...) {
 #' @noMd
 #' @export
 gloss <- function(label) {
-  output <- getOption("glossr.output", "latex")
+  output <- config$output
   if (output == "latex") {
     sprintf("(\\ref{%s})", label)
   } else {

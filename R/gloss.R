@@ -31,7 +31,7 @@ new_gloss_data <- function(
     source = NULL,
     translation = NULL,
     label = NULL,
-    trans_quotes = getOption("glossr.trans.quotes", '"')
+    trans_quotes = config$trans_quotes
 ) {
   if (!inherits(gloss_lines, "list")) {
     cli::cli_abort("The gloss lines must be provided as a list.")
@@ -80,11 +80,11 @@ as_gloss <- function(...,
                      source = NULL,
                      translation = NULL,
                      label = NULL,
-                     trans_quotes = getOption("glossr.trans.quotes", '"'),
-                     output_format = getOption("glossr.output", "latex"),
-                     numbering = getOption("glossr.numbering", TRUE)
+                     trans_quotes = config$trans_quotes,
+                     output_format = config$output,
+                     numbering = config$numbering
                      ) {
-  validate_output(output_format)
+  output_format <- validate_output(output_format)
   gloss <- new_gloss_data(
     list(...),
     source = source, translation = translation, label = label,

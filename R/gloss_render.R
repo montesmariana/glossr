@@ -57,8 +57,7 @@ gloss_pdf <- function(gloss) {
 #' @export
 gloss_html <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
-  output <- getOption("glossr.output", "leipzig")
-  func <- if (output == "tooltip") gloss_tooltip else gloss_leipzig
+  func <- if (config$output == "tooltip") gloss_tooltip else gloss_leipzig
   g <- c(
     if (numbering) sprintf("(@%s) ", attr(gloss, "label")) else NULL,
     func(gloss, numbering))
@@ -86,7 +85,6 @@ gloss_tooltip <- function(gloss, numbering = TRUE) {
 #' @export
 gloss_leipzig <- function(gloss, numbering = TRUE) {
   stopifnot(inherits(gloss, "gloss_data"))
-  is_first <- getOption("glossr.first_leipzig", TRUE)
 
   # define source
   source <- if (attr(gloss, "has_source")) {
@@ -117,13 +115,13 @@ gloss_leipzig <- function(gloss, numbering = TRUE) {
     .noWS = "outside"
   )
 
-  if (is_first) {
+  if (config$first_leipzig) {
     g <- htmltools::tagList(
       format_html(),
       g,
       leipzig_script()
     )
-    options("glossr.first_leipzig" = FALSE)
+    config$first_leipzig <- FALSE
   } else {
     g <- htmltools::tagList(
       format_html(),
@@ -204,8 +202,8 @@ gloss_single <- function(gloss, numbering = TRUE) {
 #'   label = "label"
 #' )
 #' gloss_df(my_gloss)
-gloss_df <- function(df, output_format = getOption("glossr.output", "latex"),
-                     numbering = getOption("glossr.numbering", TRUE)) {
+gloss_df <- function(df, output_format = config$output,
+                     numbering = config$numbering) {
   if (!inherits(df, "data.frame")) {
     cli::cli_abort("{.fun gloss_df} requires a {.cls data.frame} object.")
   }
