@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# glossr <img src="man/figures/logo.png" align="right" />
+# glossr <img src="man/figures/logo.png" align="right" height="138"/>
 
 <!-- badges: start -->
 
@@ -15,8 +15,8 @@ status](https://www.r-pkg.org/badges/version/glossr)](https://CRAN.R-project.org
 <!-- badges: end -->
 
 The glossr package gives you tools to include interlinear glosses in
-your R Markdown file. If you are writing a linguistics paper and you
-want some interlinear glosses, this is for you!
+your R Markdown or Quarto file. If you are writing a linguistics paper
+and you want some interlinear glosses, this is for you!
 
 Maybe you already use `gb4e` or `expex` and you’re happy with your PDF
 files, good for you! But maybe you want to spice things up, have your
@@ -32,8 +32,8 @@ outputs: one using
 [leipzig.js](https://github.com/bdchauvette/leipzig.js/) and a sadder
 one that *might* be more accessible, just less pro-looking.
 
-If you also want Word output, glossr can also take care of it,
-generating invisible tables for the right alignment.
+If you also want Word output, glossr can also take care of it, computing
+the expected width of the words and aligning them accordingly.
 
 But please, don’t take my word for it —you can check the PDF, HTML and
 MS Word outputs of `vignette("glossr_how")` [stored in the
@@ -77,9 +77,8 @@ my_gloss <- as_gloss(
 ## Acknowledgements
 
 This package is possible thanks to the existence of other packages it
-has built on, mostly `{rmarkdown}`, `{htmltools}`, `{officedown}` and
-`{flextable}`, as well as [the `expex`
-package](https://ctan.org/pkg/expex?lang=en) for PDF output and
+has built on, mostly `{rmarkdown}` and `{htmltools}`, as well as [the
+`expex` package](https://ctan.org/pkg/expex?lang=en) for PDF output and
 [leipzig.js](https://github.com/bdchauvette/leipzig.js/) for the HTML
 output. The HexSticker was designed in [Krita](https://krita.org/en/)
 and rendered with `{hexSticker}`.

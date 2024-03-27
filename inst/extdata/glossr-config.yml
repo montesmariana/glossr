@@ -1,0 +1,17 @@
+format:
+  a: i
+  preamble: b
+pdf:
+  exskip: 2
+  belowglpreambleskip: 0
+  aboveglftskip: 0
+  extraglskip: 0
+word:
+  font_family:
+    a: Cambria
+    default: Times New Roman
+  font_size: 12
+  page_width: 1332
+other:
+  trans_quotes: "'"
+  numbering: true

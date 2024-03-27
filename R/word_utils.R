@@ -71,16 +71,19 @@ fit_width <- function(font_family = "", font_size = 12) {
       italics <- TRUE
       word <- gsub(italics_regex, "\\1", word)
     }
-    systemfonts::string_width(word, family=font_family, size = font_size, italic = italics, bold = bold)
+    systemfonts::string_width(
+      word,
+      family=font_family, size = font_size,
+      italic = italics, bold = bold,
+      res = 220)
   }
   space_width <- word_to_pixels(" ")
 
   pad_word <- function(word, max_width) {
-    max_width <- max_width - ceiling(space_width/2) # err on the size of less padding
-    while (word_to_pixels(word) < max_width) {
-      word <- paste0(word, " ")
-    }
-    gsub(" ", "&nbsp;", word)
+    padding_needed <- max_width - word_to_pixels(word)
+    word <- paste(c(word, rep(" ", ceiling(padding_needed/space_width) + 1)),
+                  collapse = "")
+    gsub("  ", " &nbsp;", word)
   }
 
   list(
@@ -113,43 +116,39 @@ make_italics <- function(word) {
 
 #' Align gloss lines for Word output
 #'
-#' Take two or three lines of glosses, parse $\LaTeX$ formatting if
+#' Take two or three lines of glosses, parse LaTeX formatting if
 #' relevant, split them into words, apply boldface or italics formatting
 #' if necessary, compute the expected width and then align each word of
 #' each line with their corresponding word in the other lines,
 #' calculating the width they need to achieve and padding them with spaces.
 #' This also reads the 'glossr.font.family', 'glossr.font.size' options
 #' to check for desired font families and sizes (one or multiple different
-#' ones) and 'glossr.page.width' (by default 411) for the width of the
+#' ones) and 'glossr.page.width' (by default 1332) for the width of the
 #' writing page "in pixels".
 #'
 #' @param gdata A character vector with up to three lines; it can be
 #'   also of class "gloss_data".
 #'
 #' @return A character vector of the same length, in which the words
-#'  have been padded with fixed spaces ("&nbsp;").
+#'  have been padded with spaces.
 #' @noRd
 align_word <- function(gdata) {
   stopifnot(length(gdata) <= 3)
   gdata_split <- purrr::map(gdata, \(x) gloss_linesplit(latex2word(x))) |>
     stats::setNames(c("a", "b", "c")[1:length(gdata)])
+  font_family <- config$word$font_family
+  font_size <- config$word$font_size
 
   gdata_widths <- purrr::imap(gdata_split, function(line, name) {
-    font_family <- config$word$font_family
-    if (!is.null(names(font_family))) {
-      font_family <- if (name %in% names(font_family)) font_family[[name]] else ""
-    }
-    font_size <- config$word$font_size
-    if (is.null(names(font_size))) {
-      font_size <- if (name %in% names(font_size)) font_size[[name]] else 12
-    }
-    fit_width_line <- fit_width(font_family, font_size)
+    ffamily <- if (inherits(font_family, "list")) font_family[[name]] else font_family
+    fsize <- if (inherits(font_size, "list")) font_size[[name]] else font_size
+    fit_width_line <- fit_width(ffamily, fsize)
 
     line <- format_word_section(line, name)
 
     list(
       line = line,
-      width = purrr::map_int(line, fit_width_line$word_to_pixels) + fit_width_line$space_width,
+      width = purrr::map_int(line, fit_width_line$word_to_pixels),
       pad_word = fit_width_line$pad_word
     )
   })
@@ -162,7 +161,7 @@ align_word <- function(gdata) {
   }) |>
     tibble::as_tibble()
   as_tbl$cum_width <- cumsum(max_widths)
-  as_tbl$line_number <- ceiling(as_tbl$cum_width / config$word$page_width)
+  as_tbl$line_number <- floor(as_tbl$cum_width / config$word$page_width)
   split(as_tbl[names(gdata_split)], as_tbl$line_number) |>
     purrr::map(\(line) purrr::map_chr(line, paste, collapse = "")) |>
     purrr::flatten_chr() |>

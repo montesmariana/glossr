@@ -17,3 +17,11 @@ Set options
 \description{
 Override default configuration.
 }
+\examples{
+use_glossr(styling = list(numbering = FALSE, trans_quotes = "~"))
+print_config("other")
+
+}
+\seealso{
+\code{\link[=set_style_options]{set_style_options()}}
+}

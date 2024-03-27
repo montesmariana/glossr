@@ -9,9 +9,6 @@ set_style_options(styling = list())
 \arguments{
 \item{styling}{Named list of styling options for specific elements of glosses.}
 }
-\value{
-Set the appropriate options.
-}
 \description{
 This is a helper function to set the configuration that control style characteristics
 for glosses across the full document. It is called within \code{\link[=use_glossr]{use_glossr()}}.
@@ -53,7 +50,7 @@ is allowed for backwards compatibility, but the actual name in \code{expex} is \
 \item \strong{extraglskip}: The spacing between the aligned lines.
 }
 
-Fourth, there is one setting that is not available in $\LaTeX$, particularly
+Fourth, there is one setting that is not available in LaTeX, particularly
 thinking of slides: \strong{numbering}, that is,
 whether the glosses should be numbered (in HTML).
 
@@ -61,13 +58,17 @@ Finally, you may set the following values for Word output, used in computing
 the spaces for alignment:
 \itemize{
 \item \strong{font_family}: A character vector of length 1 indicating the font family used in the
-lines to be aligned, or a character vector with names "a" and "b" (and "c" if
+lines to be aligned, or a list with names "a" and "b" (and "c" if
 relevant) indicating the font families of specific lines.
 \item \strong{font_size}: A numeric vector of length one indicating the font size used in the
-lines to be aligned, or a numeric vector with names "a" and "b" (and "c" if
+lines to be aligned, or a list with names "a" and "b" (and "c" if
 relevant) indicating the font sizes of specific lines.
 \item \strong{page_width}: The width of the space between the margins of the Word file,
 in pixels, used to wrap long examples. The default is 411; if you see that your
 output does not match what you want, you can tweak it with this value.
 }
+}
+\examples{
+set_style_options(styling = list(a = "b", trans_quotes = "'"))
+print_config()#'
 }

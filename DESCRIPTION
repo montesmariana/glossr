@@ -1,7 +1,7 @@
 Package: glossr
 Type: Package
 Title: Use Interlinear Glosses in R Markdown
-Version: 0.7.0
+Version: 0.8.0
 Authors@R: c(
   person(given = "Mariana",
         family = "Montes",
@@ -26,7 +26,8 @@ Imports:
     knitr,
     purrr,
     rlang,
-    cli
+    cli,
+    yaml
 RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 VignetteBuilder: knitr
@@ -38,7 +39,7 @@ Suggests:
     htmltools,
     covr
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1)
 URL: https://montesmariana.github.io/glossr/,
     https://github.com/montesmariana/glossr
 Language: en-GB

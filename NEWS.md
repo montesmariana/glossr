@@ -1,3 +1,11 @@
+# glossr 0.8.0
+
+- Word examples are rendered with programmatically computed spaces instead of
+  invisible tables; dependency on `{flextable}` is gone. Examples without a
+  source also look better as a result.
+
+- Dependencies on `{tidyr}`, `{stringr}` and `{magrittr}` are gone.
+
 # glossr 0.7.0
 
 - Word and HTML examples that don't need alignment look better.

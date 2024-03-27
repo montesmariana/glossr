@@ -12,7 +12,7 @@ test_that("gloss lines are identified",  {
   expect_lt(abs(width_with_spaces(lines[[1]]) - width_with_spaces(lines[[2]])),
             systemfonts::string_width(" "))
   for (line in lines) {
-    expect_lte(width_with_spaces(line), 411)
+    expect_lte(width_with_spaces(line), 1332)
   }
   final_gloss <- gloss_word(my_gloss)
   expect_length(final_gloss, 1)
@@ -37,7 +37,7 @@ test_that("long examples are properly folded", {
   expect_lt(abs(width_with_spaces(lines[[3]]) - width_with_spaces(lines[[4]])),
             systemfonts::string_width(" "))
   for (line in lines) {
-    expect_lte(width_with_spaces(line), 411)
+    expect_lte(width_with_spaces(line), 1332)
   }
 
 })

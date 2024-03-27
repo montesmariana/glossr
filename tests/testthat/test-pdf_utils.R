@@ -15,14 +15,14 @@ test_that("gloss_list has the right class", {
 })
 
 test_that("gloss_list renders properly with leipzig", {
-  options("glossr.output" = "leipzig")
+  config$output <- "leipzig"
   from_glosses <- gloss_df(glosses)
   gl <- gloss_list(from_glosses)
   expect_identical(gl[[1]], from_glosses[[1]])
 })
 
 test_that("gloss_list renders properly with latex", {
-  options("glossr.output" = "latex")
+  config$output <-  "latex"
   from_glosses <- gloss_df(glosses)
   gl <- gloss_list(from_glosses)
   for (gloss_item in from_glosses) {
@@ -32,3 +32,4 @@ test_that("gloss_list renders properly with latex", {
     expect_match(gl[[1]], as_re)
   }
 })
+

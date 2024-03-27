@@ -79,7 +79,7 @@ test_that("gloss label renders in word", {
   expect_length(word_parts, 3)
   expect_match(
     word_parts[[1]],
-    "^\\(@ex1\\) Un(&nbsp;)+ejemplo(&nbsp;)+en(&nbsp;)+español(&nbsp;)+$")
+    "^\\(@ex1\\) Un(&nbsp;)+ejemplo(&bnsp; )+en(&nbsp;)+español(&nbsp;)+$")
   expect_match(
     strsplit(gloss_word(source_gloss)[[1]], "\n\n    ")[[1]][[1]],
     "^\\(@\\) \\(Author:year\\)$"

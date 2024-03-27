@@ -1,5 +1,7 @@
 ---
 title: "Using dataframes"
+author: "Mariana Montes"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using dataframes}

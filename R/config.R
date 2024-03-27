@@ -8,7 +8,7 @@ config <- rlang::env(
     translation = ""
   ),
   pdf = list(
-    par_spacing = 0,
+    exskip = 0,
     belowglpreambleskip = 0,
     aboveglftskip = 0,
     extraglskip = 0
@@ -16,7 +16,7 @@ config <- rlang::env(
   word = list(
     font_family = "",
     font_size = 12,
-    page_width = 411
+    page_width = 1332
   ),
   trans_quotes = '"',
   numbering = TRUE,
@@ -24,12 +24,37 @@ config <- rlang::env(
   output = "latex"
   )
 
+reset_config <- function() {
+  config$format <- list(
+    a = "",
+    b = "",
+    c = "",
+    preamble = "",
+    translation = ""
+  )
+  config$pdf <- list(
+    par_spacing = 0,
+    belowglpreambleskip = 0,
+    aboveglftskip = 0,
+    extraglskip = 0
+  )
+  config$word<- list(
+    font_family = "",
+    font_size = 12,
+    page_width = 1332
+  )
+  config$trans_quotes <- '"'
+  config$numbering <- TRUE
+  config$first_leipzig <- TRUE
+  config$output <- "latex"
+}
+
 #' Print the glossr configuration
 #'
 #' @param config_sections Character vector with the following possible values:
 #' - **format**: to show the formatting options (italics / bold / nothing) for
 #' the different lines.
-#' - **pdf**: to show $\LaTeX$-specific formatting
+#' - **pdf**: to show LaTeX-specific formatting
 #' - **word**: to show Word-specific formatting
 #' - **other**: to show the current output format, translation quotes and
 #' the `numbering` setting.
@@ -97,8 +122,14 @@ print_config <- function(config_sections = c("format", "pdf", "word", "other")) 
 #' @param output_format Desired output format
 #' @inheritParams set_style_options
 #'
+#' @seealso [set_style_options()]
+#'
 #' @return Set options
 #' @export
+#' @examples
+#' use_glossr(styling = list(numbering = FALSE, trans_quotes = "~"))
+#' print_config("other")
+#'
 use_glossr <- function(
     output_format = NULL,
     styling = list()
@@ -179,26 +210,28 @@ set_output <- function(output_format = NULL) {
 #' - **aboveglftskip**: The spacing above the free translation.
 #' - **extraglskip**: The spacing between the aligned lines.
 #'
-#' Fourth, there is one setting that is not available in $\LaTeX$, particularly
+#' Fourth, there is one setting that is not available in LaTeX, particularly
 #' thinking of slides: **numbering**, that is,
 #' whether the glosses should be numbered (in HTML).
 #'
 #' Finally, you may set the following values for Word output, used in computing
 #' the spaces for alignment:
 #' - **font_family**: A character vector of length 1 indicating the font family used in the
-#' lines to be aligned, or a character vector with names "a" and "b" (and "c" if
+#' lines to be aligned, or a list with names "a" and "b" (and "c" if
 #' relevant) indicating the font families of specific lines.
 #' - **font_size**: A numeric vector of length one indicating the font size used in the
-#' lines to be aligned, or a numeric vector with names "a" and "b" (and "c" if
+#' lines to be aligned, or a list with names "a" and "b" (and "c" if
 #' relevant) indicating the font sizes of specific lines.
 #' - **page_width**: The width of the space between the margins of the Word file,
-#' in pixels, used to wrap long examples. The default is 411; if you see that your
+#' in pixels, used to wrap long examples. The default is 1332; if you see that your
 #' output does not match what you want, you can tweak it with this value.
 #'
 #' @param styling Named list of styling options for specific elements of glosses.
 #'
-#' @return Set the appropriate options.
 #' @export
+#' @examples
+#' set_style_options(styling = list(a = "b", trans_quotes = "'"))
+#' print_config()#'
 set_style_options <- function(styling = list()) {
   if (length(styling) == 0) {
     return()
@@ -212,6 +245,43 @@ set_style_options <- function(styling = list()) {
   for (e in extra) {
     cli::cli_warn(c("!" = "{.var {e}} is not a valid style option and was ignored."))
   }
+}
+
+#' Override configuration with a YAML file
+#'
+#' Read configuration from a YAML file to provide instructions for styling
+#' and PDF- or Word-specific options.
+#'
+#' @param filename Path to the YAML configuration file, e.g. "glossr-config.yaml".
+#'
+#' @return Invisibly, the contents of the configuration file that passed validation.
+#' @export
+#'
+#' @examples
+#' config_file <- system.file("extdata/glossr-config.yml", package="glossr")
+#' config_from_file(config_file)
+#' print_config()
+config_from_file <- function(filename) {
+  config_file <- yaml::yaml.load_file(filename)
+  config_functions <- c(
+    "format" = set_format_options,
+    "pdf" = set_pdf_options,
+    "word" = set_word_options,
+    "other" = set_other_options
+  )
+  for (name in names(config_file)) {
+    if (name %in% names(config_functions)) {
+      ok_names <- config_functions[[name]](config_file[[name]])
+      for (e in setdiff(names(config_file[[name]]), ok_names)) {
+        cli::cli_warn(c("!" = "{.var {e}} in section {.var {name}} is not a valid style option and was ignored."))
+        config_file[[name]][[e]] <- NULL
+      }
+    } else {
+      cli::cli_warn(c("!" = "{.var {name}} is not a valid configuration section and was ignored."))
+      config_file[[name]] <- NULL
+    }
+  }
+  invisible(config_file)
 }
 
 #' Set formatting options
@@ -239,18 +309,18 @@ set_format_options <- function(styling = list()) {
   }
 
   bad_styling <- c()
+  accepted_values <- c(style_options("i"), style_options("b"), "")
   for (v in names(variables)) {
     if (v %in% names(styling)) {
-      if (!styling[[v]] %in% c(style_options("i"), style_options("b"))) {
+      if (!styling[[v]] %in% accepted_values) {
         bad_styling <- c(bad_styling, styling[[v]])
       } else {
-        # style_opts[[paste0("glossr.format.", variables[[v]])]] <- styling[[v]]
         config$format[[variables[[v]]]] <- styling[[v]]
       }
     }
   }
   styling_vars <- styling[names(styling) %in% names(variables)]
-  if (any(!styling_vars %in% c(style_options("i"), style_options("b")))) {
+  if (any(!styling_vars %in% accepted_values)) {
     i_options <- cli::cli_vec(style_options("i"), list(vec_last = " or "))
     b_options <- cli::cli_vec(style_options("b"), list(vec_last = " or "))
     bad_options <- cli::cli_vec(bad_styling)
@@ -270,14 +340,14 @@ set_format_options <- function(styling = list()) {
 #' @return Invisibly, the names of the styling options that were modified.
 #' @noRd
 set_other_options <- function(styling = list()) {
-  var_classes <- c("trans_quotes" = "character", "numbering" = "logical")
+  var_classes <- list("trans_quotes" = "character", "numbering" = "logical")
   styling <- styling[intersect(names(styling), names(var_classes))]
   if (length(styling) == 0) {
     return()
   }
   for (opt in names(styling)) {
     if (!inherits(styling[[opt]], var_classes[[opt]])) {
-      abort("{.var {opt}} must be of class {.var {var_classes[[opt]]}}.")
+      cli::cli_abort("{.var {opt}} must be of class {.var {var_classes[[opt]]}}.")
     } else {
       config[[opt]] <- styling[[opt]]
     }
@@ -287,34 +357,34 @@ set_other_options <- function(styling = list()) {
 
 #' Set PDF options
 #'
-#' Validate and override $\LaTeX$-specific options.
+#' Validate and override LaTeX-specific options.
 #'
 #' @param styling
 #'
 #' @return Invisibly, the names of the styling options that were modified.
 #' @noRd
 set_pdf_options <- function(styling = list()) {
-  var_classes <- c("par_spacing",
-                "belowglpreambleskip", "aboveglftskip", "extraglskip")
-  for (opt in names(styling)) {
-    if (opt == "exskip") {
-      if (!"par_spacing" %in% names(styling)) {
-        styling$par_spacing <- styling$exskip
-      }
-      styling$exskip <- NULL
+  var_classes <- c("exskip", "belowglpreambleskip", "aboveglftskip", "extraglskip")
+  ps_used <- FALSE
+  if ("par_spacing" %in% names(styling)) {
+    if (!("exskip" %in% names(styling))) {
+      styling$exskip <- styling$par_spacing
     }
+    styling$par_spacing <- NULL
+    ps_used <- TRUE
   }
   styling <- styling[intersect(names(styling), var_classes)]
   if (length(styling) == 0) {
     return()
   }
   for (opt in names(styling)) {
-    if (!inherits(styling[[opt]], "numeric")) {
-      abort("{.var {opt}} must be of class {.var numeric}.")
+    if (!is.numeric(styling[[opt]])) {
+      cli::cli_abort("{.var {opt}} must be a number.")
     }
     config$pdf[[opt]] <- styling[[opt]]
   }
-  invisible(names(styling))
+  to_return <- if (ps_used) c(names(styling), "par_spacing") else names(styling)
+  invisible(to_return)
 }
 
 #' Set Word options
@@ -326,9 +396,9 @@ set_pdf_options <- function(styling = list()) {
 #' @return Invisibly, the names of the styling options that were modified.
 #' @noRd
 set_word_options <- function(styling = list()) {
-  var_classes <- c("page_width" = "numeric",
-                     "font_size" = "numeric",
-                     "font_family" = "character")
+  var_classes <- list("page_width" = c("numeric", "integer"),
+                   "font_size" = c("numeric", "integer"),
+                   "font_family" = "character")
 
   styling <- styling[intersect(names(styling), names(var_classes))]
   if (length(styling) == 0) {
@@ -338,31 +408,40 @@ set_word_options <- function(styling = list()) {
   with_default <- c(name_options, "default")
   font_defaults <- c(font_family = "", font_size = 12)
   for (opt in names(styling)) {
-    if (!inherits(styling[[opt]], var_classes[[opt]])) {
-      abort("{.var {opt}} must be of class {.var {valid_classes[[opt]]}}.")
-    }
     if (opt == "page_width") {
+      if (!is.numeric(styling[[opt]])) {
+        cli::cli_abort("{.var {opt}} must be a number.")
+      }
       config$word[[opt]] <- styling[[opt]]
-    } else if (is.null(names(styling[[opt]]))) {
-      config$word[[opt]]<- setNames(rep(styling[[opt]], 3), name_options)
-    } else {
+    } else if (inherits(styling[[opt]], "list")) {
       for (line_name in names(styling[[opt]])) {
         if (!line_name %in% with_default) {
-          cli::cli_warn(c("!" = "If {.var {opt}} is a named vector, the names must be one of {.emph {with_default}}.",
+          cli::cli_warn(c("!" = "If {.var {opt}} is a named list, the names must be one of {.emph {with_default}}.",
                           "{.emph {line_name}} is not supported and will be ignored."))
+          styling[[opt]][[line_name]] <- NULL
         }
       }
-      line_based_config <- purrr::map_chr(name_options, \(line_name) {
+      line_based_config <- purrr::map(name_options, \(line_name) {
         if (line_name %in% names(styling[[opt]])) {
-          return(styling[[opt]][[line_name]])
-        } else if ("default" %in% names(styling[[opt]])) {
-          return(styling[[opt]]$default)
-        } else {
-          return(font_defaults[[opt]])
+          if (inherits(styling[[opt]][[line_name]], var_classes[[opt]])) {
+           return(styling[[opt]][[line_name]])
+          }
+          cli::cli_warn("The value of {.var {opt}} for {.emph {line_name}} must be of class {.var {var_classes[[opt]]}}.")
         }
+        if ("default" %in% names(styling[[opt]])) {
+          if (inherits(styling[[opt]]$default, var_classes[[opt]])) {
+           return(styling[[opt]]$default)
+          }
+          cli::cli_warn("The default value of {.var {opt}} must be of class {.var {var_classes[[opt]]}}.")
+        }
+        return(font_defaults[[opt]])
       }) |> setNames(name_options)
       config$word[[opt]] <- line_based_config
-      }
+    } else if (!inherits(styling[[opt]], var_classes[[opt]])) {
+      cli::cli_abort("{.var {opt}} must be of class {.var {var_classes[[opt]]}} or a list of vectors of that class.")
+    } else {
+      config$word[[opt]] <- styling[[opt]]
+    }
   }
   invisible(names(styling))
 }

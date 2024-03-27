@@ -10,8 +10,15 @@ reference:
     Functions to use only in the R Markdown file
   contents:
   - gloss
-  - use_glossr
   - knit_print.gloss
+- title: Styling
+  desc: |
+    Functions to modify and view styling settings
+  contents:
+  - use_glossr
+  - config_from_file
+  - set_style_options
+  - print_config
 - title: Create gloss objects
   desc: |
     Functions to turn strings into the right gloss format.
@@ -25,11 +32,6 @@ reference:
   desc: |
     Dataset used in vignettes.
   contents: glosses
-- title: Styling
-  desc: |
-    Functions for general styling of the glosses
-  contents:
-  - set_style_options
 - title: Helpers for Latex glosses
   desc: |
     Functions to help with Latex glosses

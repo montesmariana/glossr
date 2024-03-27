@@ -11,7 +11,7 @@ print_config(config_sections = c("format", "pdf", "word", "other"))
 \itemize{
 \item \strong{format}: to show the formatting options (italics / bold / nothing) for
 the different lines.
-\item \strong{pdf}: to show $\LaTeX$-specific formatting
+\item \strong{pdf}: to show LaTeX-specific formatting
 \item \strong{word}: to show Word-specific formatting
 \item \strong{other}: to show the current output format, translation quotes and
 the \code{numbering} setting.

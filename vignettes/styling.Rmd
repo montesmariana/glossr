@@ -16,97 +16,139 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# library(glossr)
+devtools::load_all()
 ```
 
-# Line styling
+Users of glossr can configure certain styling parameters in different ways. From version 0.8.0,
+next to the `styling` argument of `use_glossr()`, users can also load a YAML
+configuration file via `config_from_file()`; either of these options will override
+glossr's defaults. A YAML file can be useful if you want to reuse a configuration
+across different documents. In any case, you can still use `use_glossr()` along
+your document to override the current settings.
 
-By default, glosses produced with glossr don't have italics or boldface. However, it is fairly easy to adapt that at the document level.
+In this vignette I will first show how you can check and override the current
+configuration, and then go over the effect of each of the settings.
 
-The formatting of different lines is stored in a `format` named list inside an internal `config` environment:
+# Configuration settings and override
 
-- `format$preamble` indicates the styling for the (optional) first line, where the "source" variable is rendered.
+The current configuration settings can be inspected with `print_config()`, which
+optionally takes as argument one of the four types of settings:
+["format"](#format), ["pdf"](#pdf), ["word"](#word) and ["other"](#other).
+You can also store the contents as a list by assigning the
+output to a variable.
 
-- `format$a` indicates the styling of the first gloss line.
-
-- `format$b` indicates the styling of the second gloss line.
-
-- `format$c` indicates the styling of the third gloss line.
-
-- `format$translation` indicates the styling of the translation line.
-
-Each of these options can either take a value setting italics ("i", "it", "italics" or "textit") or one setting boldface ("b" "bf", "bold", "textbf").
-
-The `use_glossr()` function allows the user to override the default in these and other configuration properties, and offers a wide variety of names, so you can choose the mnemonic that works for you.
-The argument "styling" must be a named list, with a key pointing to the line you want to style and the same range of values mentioned above.
-
-- `source` and `preamble` are both valid names to set the format of the first optional line, where the `source` variable is rendered.
-
-- `a` and `first` are both valid names for the first gloss line.
-
-- `b` and `second` are both valid names for the second gloss line.
-
-- `c` and `third` are both valid names for the third gloss line.
-
-- `ft`, `trans` and `translation` are all valid names for the free translation line.
-
-If you would like to add other alternatives, let me know!
-
-As an example, if you run the following chunk:
-
-```{r, message=FALSE}
-library(glossr)
-use_glossr(styling = list(
-  source = "b",
-  first = "i"
-))
+```{r}
+print_config()
 ```
 
-...you will set all first lines to italics and the sources to boldface. The next one, on the other hand:
+## Configuration file {.tabset}
+
+One of the ways to override the default settings, available since version 0.8.0,
+is loading a YAML file with `config_from_file()`. An example file is provided in
+`system.file("extdata/glossr-config.yml", package="glossr")`.
+
+### glossr-config.yml
+
+```{r results="asis", echo=FALSE}
+cat("```yaml\n")
+readLines(system.file("extdata/glossr-config.yml", package="glossr")) |> 
+  paste(collapse = "\n") |> 
+  cat()
+cat("\n")
+cat("```\n")
+```
+
+
+### New configuration
+
+```{r}
+config_from_file(system.file("extdata/glossr-config.yml", package="glossr"))
+print_config()
+```
+
+## `use_glossr()` on the fly
+
+Alternatively, for more occasional overrides you may want to use the old `use_glossr()`,
+which since version 0.8.0 is only necessary if you want to customize your settings.
+
+```{r}
+use_glossr(styling = list(a = "i", numbering = TRUE, trans_quotes = "**"))
+print_config("other")
+```
+
+> Repeated calls to `use_glossr()`
+can be used to switch the styling in a PDF or Word document, but it won't work
+in HTML output because styling is defined by CSS classes that affect all the
+lines of a certain type.
+
+# Effect of the configuration settings
+
+In the subsections below we'll go into some more detail regarding these configuration
+settings. In each of them we'll discuss one of the "sections", but all the settings
+can be adjusted together either as the `styling` argument of `use_glossr()` or
+via the YAML file.
+
+## Line styling {#format}
+
+Glosses produced with glossr don't have italics or boldface by default.
+Instructions to set this kind of formatting at the line level can be provided
+by setting the right items of the `format` set of configuration settings:
+
+- `preamble` or `source` indicate the styling for the (optional) first line, where the "source" variable is rendered.
+
+- `a` or `first` indicate the styling of the first gloss line.
+
+- `b` or `second` indicate the styling of the second gloss line.
+
+- `c` or `third` indicate the styling of the third gloss line.
+
+- `translation`, `trans` or `ft` indicate the styling of the translation line.
+
+Each of these options can either take a value setting
+italics ("i", "it", "italics" or "textit") or one setting
+boldface ("b" "bf", "bold", "textbf").
+
+The names can be provided directly in the `styling` argument of `use_glossr()`
+or as items under `format` in the YAML file. For instance, we can set up the first line in italics and the source in bold as follows:
 
 ```{r}
 use_glossr(styling = list(
-  first = "i",
-  trans = "i"
+  a = "i", preamble = "b"
 ))
+print_config("format")
+as_gloss("First line", "Primera línea", source="This should be in bold")
 ```
 
-...will set the first line and the free translation in italics.
+The following YAML section achieves the same:
 
-You can always annul a setting by typing `options(glossr.format.a = NULL)`, for example. But this setup is meant to encourage/enforce you to keep the same style across a given file.
+```yaml
+format:
+  a: i
+  preamble: b
+```
 
-# Other formatting
+Styling can be removed by setting the value to "". 
 
-Next to the line formatting options, the `styling` argument can take two other elements.
-
-First, "trans_quotes" (also to be set as `options(glossr.trans.quotes = "whatever")`) defines the character you want to surround your translation with. By default, this is double quotes, but you might want to select single quotes instead, or remove them altogether. The following chunk of code sets italics in the first line and single quotes for the translation:
+The current configuration of this level can be requested as follows:
 
 ```{r}
-use_glossr(styling = list(
-  first = "i",
-  trans_quotes = "'"
-))
+print_config("format")
 ```
 
-And the following removes quotes altogether:
+## Latex-specific features {#pdf}
 
-```{r}
-use_glossr(styling = list(
-  first = "i",
-  trans_quotes = ""
-))
-```
-
-Second, "numbering = `FALSE`" when the output is not PDF allows you to remove the numbering of examples, e.g. in slides.
-
-## Latex-specific features
-
-The [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf) shows a number of parameters that can be manipulated to adjust the spacing of the different parts of a gloss. In all cases the default value is `0`, but you can increase them (or reduce them, if some other setting in your template sets a different default value) by providing the right instructions to `use_glossr()`.
+The [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf) shows a number of parameters that can be manipulated to adjust the spacing
+between the different parts of a gloss. In all cases the default value is `0`, but you can increase them or reduce them by providing the desiderd value to the appropriate item under the `pdf` section.
 
 The variables that you can manipulate are the following:
 
 - `exskip` (also called `par_spacing` in this package) defines the space above *and* below the example.
-- `belowglpreambleskip` defines the pace under the preamble (where the source is printed).
+
+- `belowglpreambleskip` defines the space under the preamble (where the source is printed).
+
 - `aboveglftskip` defines the spacing above the free translation.
+
 - `extraglskip` defines the spacing between the types of lines, e.g. between the source and the aligned lines, between the aligned lines and the translation, and between the groups of lines if your example is long enough to take more than one line.
 
 For instance, the following sets a spacing of 6pt above and below the example and a spacing of 15pt between the different sections of the example:
@@ -118,8 +160,95 @@ use_glossr(styling = list(
 ))
 ```
 
-## Word-specific features
+The YAML equivalent is:
 
-Since version 0.8.0 glossr renders interlinear glosses in Word by computing the expected width of the words in pixels and padding them with spaces. This is done via `systemfonts::string_width()`, which takes arguments such as font family, font size, boldface, and italics. Boldface and italics are already specified via $LaTeX$ or markdown formatting (also covered above, when applied to full lines) but font family and size can be specified as `styling` arguments `font_family` and `font_size`. If they are a normal vector of length 1 (e.g. `font_family = "Cambria` and `font_size = 11`), they will be applied to all the lines. Alternatively, you can specify different fonts if, for example, you combine different scripts with different font families or sizes. For instance, `font_family = c("a" = "Arial", "b" = "Cambria", "c" = "Cambria")` will assume that the first aligned line is in Arial and the second and third, in Cambria.
+```yaml
+pdf:
+  exskip: 6
+  extraglskip: 15
+```
+
+The current $\LaTeX$ specific configuration can be requested like so:
+
+```{r}
+print_config("pdf")
+```
+
+## Word-specific features {#word}
+
+Since version 0.8.0 glossr renders interlinear glosses in Word by computing the expected width of the words in pixels and padding them with spaces.
+This is achieved via `systemfonts::string_width()`,
+which takes arguments such as font family, font size, boldface, and italics.
+Boldface and italics are already specified via $\LaTeX$ or markdown formatting
+but font family and size can be specified as the `styling` arguments
+`font_family` and `font_size` or under the `word` section in the YAML file.
+If they are a character/numeric vector of length 1
+(e.g. `font_family = "Cambria` and `font_size = 11`),
+they will be applied to all the lines.
+Alternatively, you can specify the values for certain lines if, for example,
+you combine different scripts with different font families or sizes.
+For instance, `font_family = list(a = "Arial", default = "Cambria")` will assume that the first aligned line is in Arial and the second and third, in Cambria.
+
+A third Word-specific argument is `page_width`,
+which indicates the width covered by the lines in pixels.
+This number (by default 411) is used to wrap the lines properly when they are too long.
+If the width of your text differs from the one used to set up this default,
+you can easily modify it via `use_glossr()` or the configuration file.
+
+As an example, the code below sets "Arial" as the font for the first aligned line
+and "Cambria" for the rest; size 11 for all the lines and a page width of 430 pixels.
+
+```{r}
+use_glossr(styling = list(
+  font_family = list(a = "Arial", default = "Cambria"),
+  font_size = 11,
+  page_width = 430))
+```
+
+The YAML section below fulfills the same goal:
+
+```yaml
+word:
+  font_family:
+    a: Arial
+    default: Cambria
+  font_size: 11
+  page_width: 430
+```
+
+The current values for these settings can be requested like so:
+
+```{r}
+print_config("word")
+```
 
 Note that this does not render the text in a specific font family or size, but only uses the information to estimate the width of the words and align them better.
+
+## Other formatting {#other}
+
+Next to the options discussed above, the `styling` argument can take two other elements.
+
+First, "trans_quotes" defines the character you want to surround your translation with. By default, this is double quotes, but you might want to select single quotes instead, or remove them altogether. The following chunk of code sets italics in the first line and single quotes for the translation:
+
+Second, "numbering = `FALSE`" when the output is not PDF allows you to remove the numbering of examples, e.g. in slides.
+
+These two settings can be provided as part of the `other` section.
+
+```{r}
+use_glossr(styling = list(
+  trans_quotes = "~",
+  numbering = FALSE
+))
+as_gloss("First line", "Primera línea", translation = "Free translation")
+```
+
+```yaml
+other:
+  trans_quotes: ~
+  numbering: false
+```
+
+```{r}
+print_config("other")
+```
+

@@ -6,16 +6,19 @@
 \documentclass[
 ]{article}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -46,13 +49,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -60,7 +63,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -69,7 +72,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -127,15 +130,12 @@
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{fontspec}
 \usepackage{xeCJK}
-\usepackage{expex}
-\let\expexgla\gla
-\AtBeginDocument{\let\gla\expexgla}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Using the glossr package},
   pdfauthor={Mariana Montes},
@@ -148,7 +148,7 @@
 
 \title{Using the glossr package}
 \author{Mariana Montes}
-\date{2022-08-18}
+\date{2024-03-23}
 
 \begin{document}
 \maketitle
@@ -162,28 +162,26 @@
 \section{Introduction}\label{introduction}}
 
 The \{glossr\} package offers useful functions to recreate interlinear glosses in R Markdown texts.
-The immediate solution for a \(LaTeX\) output is to use a specific library, such as \{gb4e\} (the one I knew when this package was born) or \{expex\} (the one this package uses now). If PDF output is enough for you, you can still use this package to automatically print them in an R-chunk, minimizing typos\footnote{Most of my code is designed to avoid typos. Let's just say that this package would have taken a few hours less if I didn't constantly write \emph{leizpig} instead of \emph{leipzig}.}, and even generate them automatically from a dataframe with your examples!
+The immediate solution for a \(\LaTeX\) output is to use a specific library, such as \{gb4e\} (the one I knew when this package was born) or \{expex\} (the one this package uses now). If PDF output is enough for you, you can still use this package to automatically print them in an R-chunk, minimizing typos\footnote{Most of my code is designed to avoid typos. Let's just say that this package would have taken a few hours less if I didn't constantly write \emph{leizpig} instead of \emph{leipzig}.}, and even generate them automatically from a dataframe with your examples!
 But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least \emph{some} rendering) of your interlinear glosses in HTML as well\ldots{} and why not, MS Word! This offers some challenges, because you would need to figure out \emph{how} to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats.
 I took that pain and packaged it so you don't need to feel it.
 
-You can start using \texttt{glossr} in an R Markdown file by calling the library and then \texttt{use\_glossr()} to activate some background stuff. Mainly, this function informs all the other functions whether you are using \(LaTeX\), HTML\footnote{You can also choose between the default HTML implementation, with \href{https://github.com/bdchauvette/leipzig.js/}{leipzig.js}, or a ``legacy'' implementation with simple tooltips and up to two glossing lines; do so by running \texttt{use\_glossr("tooltip")}.} or neither, in which case it assumes you have Word output. This vignette has been run in \href{https://github.com/montesmariana/glossr/tree/main/inst/examples}{all three formats} by changing the output format to
+You can start using glossr in an R Markdown file by calling the library and then \texttt{use\_glossr()} to activate some background stuff. Mainly, this function informs all the other functions whether you are using \(\LaTeX\), HTML\footnote{You can also choose between the default HTML implementation, with \href{https://github.com/bdchauvette/leipzig.js/}{leipzig.js}, or a ``legacy'' implementation with simple tooltips and up to two glossing lines; do so by running \texttt{use\_glossr("tooltip")}.} or neither, in which case it assumes you have Word output. This vignette has been run in \href{https://github.com/montesmariana/glossr/tree/main/inst/examples}{all three formats} by changing the output format to
 \texttt{bookdown::pdf\_document2}, which renders a PDF file;
 \texttt{bookdown::html\_document2} and \texttt{rmdformats::readthedown}, which render HTML files;
-and \texttt{officedown::rdocx\_document}, which renders an MS Word file (Xie 2022; Gohel and Ross 2022; Barnier 2022). As you can see in \texttt{vignette("styling")}, \texttt{use\_glossr()} also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
+and \texttt{officedown::rdocx\_document}, which renders an MS Word file (Xie 2022; Gohel and Ross 2022; Barnier 2022). You can also use glossr in \href{https://quarto.org/}{Quarto} documents and create slides!
+
+As you can see in \texttt{vignette("styling")}, \texttt{use\_glossr()} also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# library(glossr)}
-\end{Highlighting}
-\end{Shaded}
+\FunctionTok{library}\NormalTok{(glossr)}
 
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{use\_glossr}\NormalTok{(}\AttributeTok{styling =} \FunctionTok{list}\NormalTok{(}
   \AttributeTok{source =} \StringTok{"b"}\NormalTok{,}
-  \AttributeTok{first =} \StringTok{"i"}
+  \AttributeTok{first =} \StringTok{"i"}\NormalTok{,}
+  \AttributeTok{font\_family =} \StringTok{"Cambria"}
 \NormalTok{))}
-\CommentTok{\#\textgreater{} Setting up the \textasciigrave{}latex\textasciigrave{} engine.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -203,7 +201,7 @@ When you want to include an example, create a gloss with \texttt{as\_gloss()} an
   \texttt{trans\_glosses} indicates what character should surround the translation, by default \texttt{"}. (See \texttt{vignette("styling")}.)
 \end{itemize}
 
-All other values will be interpreted as lines to be aligned and reproduced in the order given, but only up to 3 lines are allowed.\footnote{Note that if you use Chinese characters you will need to add some \(LaTeX\) packages (namely \{fontspec\} and \{xeCJK\}). You can do that either by adding them to \href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html}{the \texttt{header-includes} section} or \href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html}{to the \texttt{extra\_dependencies} list} inside the \texttt{pdf\_document} output section in your YAML. Thanks to Thomas Van Hoey for offering me the example and pointing this out.}
+All other values will be interpreted as lines to be aligned and reproduced in the order given, but only up to 3 lines are allowed.\footnote{Note that if you use Chinese characters you will need to add some \(\LaTeX\) packages (namely \{fontspec\} and \{xeCJK\}). You can do that either by adding them to \href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html}{the \texttt{header-includes} section} or \href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html}{to the \texttt{extra\_dependencies} list} inside the \texttt{pdf\_document} output section in your YAML. Thanks to Thomas Van Hoey for offering me the example and pointing this out.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -219,10 +217,21 @@ All other values will be interpreted as lines to be aligned and reproduced in th
 \end{Highlighting}
 \end{Shaded}
 
-\lingset{exskip=0pt,belowglpreambleskip=0pt,aboveglftskip=0pt,everyglpreamble=\bfseries,everygla=\itshape,everyglb=,everyglc=,everyglft=}\ex\label{my-label} \begingl \glpreamble ASBC (nº 100622)// \gla 她 哇的一聲 大 哭起來，// \glb tā wā=de-yì-shēng dà kū-qǐlái,// \glc TSG waa.IDEO-LINK-one-sound big cry-inch// \glft ``Waaaaa, she began to wail.''//
-\endgl \xe 
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\item
+  \textbf{ASBC (nº 100622)}
 
-The label given to \texttt{as\_gloss()} allows you to cross-reference the example: in PDF this looks like \texttt{example\ (\textbackslash{}@ref(my-label))}, whereas in HTML and Word you would use \texttt{example\ (@my-label)}. What should YOU do? \texttt{gloss()} can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: (\ref{my-label}) in this case.
+  \emph{她}~~\emph{哇的一聲}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\emph{大}~\emph{哭起來，}~
+
+  tā~~~~wā=de-yì-shēng~~~~~~~~~~~~~~~~~~~dà~~kū-qǐlái,~
+
+  TSG~waa.IDEO-LINK-one-sound~big~cry-inch~
+
+  ``Waaaaa, she began to wail.''
+\end{enumerate}
+
+The label given to \texttt{as\_gloss()} allows you to cross-reference the example: in PDF this looks like \texttt{example\ (\textbackslash{}ref\{my-label\})}, whereas in HTML and Word you would use \texttt{example\ (@my-label)}. What should YOU do? \texttt{gloss()} can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: (1) in this case.
 
 If you have many examples, you might want to keep them in their own file, if you don't have them like that already. \texttt{glossr} offers a small dataset for testing, called \texttt{data(glosses)}.
 
@@ -231,19 +240,18 @@ If you have many examples, you might want to keep them in their own file, if you
 \FunctionTok{library}\NormalTok{(magrittr)}
 \FunctionTok{library}\NormalTok{(dplyr) }\CommentTok{\# for select() and filter()}
 \FunctionTok{data}\NormalTok{(glosses)}
-\NormalTok{glosses }\OtherTok{\textless{}{-}}\NormalTok{ glosses }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(original, parsed, translation, label, source) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{glosses }\OtherTok{\textless{}{-}}\NormalTok{ glosses }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(original, parsed, translation, label, source) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{source =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"("}\NormalTok{, source, }\StringTok{")"}\NormalTok{))}
 \NormalTok{glosses}
 \CommentTok{\#\textgreater{} \# A tibble: 5 x 5}
-\CommentTok{\#\textgreater{}   original                                           parsed trans\textasciitilde{}1 label source}
-\CommentTok{\#\textgreater{}   \textless{}chr\textgreater{}                                              \textless{}chr\textgreater{}  \textless{}chr\textgreater{}   \textless{}chr\textgreater{} \textless{}chr\textgreater{} }
-\CommentTok{\#\textgreater{} 1 Mér er heitt/kalt                                  "\textbackslash{}\textbackslash{}te\textasciitilde{} I am h\textasciitilde{} feel\textasciitilde{} (Eina\textasciitilde{}}
-\CommentTok{\#\textgreater{} 2 Hace calor/frío                                    "make\textasciitilde{} It is \textasciitilde{} amb{-}\textasciitilde{} (Pust\textasciitilde{}}
-\CommentTok{\#\textgreater{} 3 Ik heb het koud                                    "\textbackslash{}\textbackslash{}te\textasciitilde{} I am c\textasciitilde{} feel\textasciitilde{} (Ross\textasciitilde{}}
-\CommentTok{\#\textgreater{} 4 Kotae{-}nagara otousan to okaasan wa honobonoto ata\textasciitilde{} "repl\textasciitilde{} While \textasciitilde{} hear\textasciitilde{} (Shin\textasciitilde{}}
-\CommentTok{\#\textgreater{} 5 Ainiku sonna shumi wa nai. Tsumetai{-}none. Kedaru{-}\textasciitilde{} "unfo\textasciitilde{} Unfort\textasciitilde{} lang\textasciitilde{} (Shin\textasciitilde{}}
-\CommentTok{\#\textgreater{} \# ... with abbreviated variable name 1: translation}
+\CommentTok{\#\textgreater{}   original                                       parsed translation label source}
+\CommentTok{\#\textgreater{}   \textless{}chr\textgreater{}                                          \textless{}chr\textgreater{}  \textless{}chr\textgreater{}       \textless{}chr\textgreater{} \textless{}chr\textgreater{} }
+\CommentTok{\#\textgreater{} 1 Mér er heitt/kalt                              "\textbackslash{}\textbackslash{}te\textasciitilde{} I am hot/c\textasciitilde{} feel\textasciitilde{} (Eina\textasciitilde{}}
+\CommentTok{\#\textgreater{} 2 Hace calor/frío                                "make\textasciitilde{} It is hot/\textasciitilde{} amb{-}\textasciitilde{} (Pust\textasciitilde{}}
+\CommentTok{\#\textgreater{} 3 Ik heb het koud                                "\textbackslash{}\textbackslash{}te\textasciitilde{} I am cold;\textasciitilde{} feel\textasciitilde{} (Ross\textasciitilde{}}
+\CommentTok{\#\textgreater{} 4 Kotae{-}nagara otousan to okaasan wa honobonoto\textasciitilde{} "repl\textasciitilde{} While repl\textasciitilde{} hear\textasciitilde{} (Shin\textasciitilde{}}
+\CommentTok{\#\textgreater{} 5 Ainiku sonna shumi wa nai. Tsumetai{-}none. Ked\textasciitilde{} "unfo\textasciitilde{} Unfortunat\textasciitilde{} lang\textasciitilde{} (Shin\textasciitilde{}}
 \NormalTok{glosses}\SpecialCharTok{$}\NormalTok{label}
 \CommentTok{\#\textgreater{} [1] "feel{-}icelandic"  "amb{-}spanish"     "feel{-}dutch"      "heartwarming{-}jp"}
 \CommentTok{\#\textgreater{} [5] "languid{-}jp"}
@@ -251,7 +259,7 @@ If you have many examples, you might want to keep them in their own file, if you
 \end{Shaded}
 
 Assuming you have them in a table with columns matching the arguments of \texttt{as\_gloss()}, you can give it to \texttt{gloss\_df()} directly and it will do the job. That is: columns named ``translation'', ``source'', ``label'' and ``trans\_glosses'' will be interpreted as those arguments, and all the others will be read as lines to align regardless of their column names.
-This table has more columns than we need, so we will only select the right ones and print the glosses of the first three rows. Note that the values in the ``label'' column will be used as labels: \texttt{\textasciigrave{}r\ gloss("feel-icelandic")\textasciigrave{}} will return (\ref{feel-icelandic}).
+This table has more columns than we need, so we will only select the right ones and print the glosses of the first three rows. Note that the values in the ``label'' column will be used as labels: \texttt{\textasciigrave{}r\ gloss("feel-icelandic")\textasciigrave{}} will return (2).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -259,34 +267,80 @@ This table has more columns than we need, so we will only select the right ones 
 \end{Highlighting}
 \end{Shaded}
 
-\lingset{exskip=0pt,belowglpreambleskip=0pt,aboveglftskip=0pt,everyglpreamble=\bfseries,everygla=\itshape,everyglb=,everyglc=,everyglft=}\ex\label{feel-icelandic} \begingl \glpreamble (Einarsson 1945:170)// \gla Mér er heitt/kalt// \glb \textsc{1sg.dat} \textsc{cop.1sg.prs} hot/cold.\textsc{a}// \glft ``I am hot/cold.''//
-\endgl \xe 
-\ex\label{amb-spanish} \begingl \glpreamble (Pustet 2015:908)// \gla Hace calor/frío// \glb make.\textsc{3sg.prs} heat/cold.\textsc{.n.a}// \glft ``It is hot/cold; literally: it makes heat/cold.''//
-\endgl \xe 
-\ex\label{feel-dutch} \begingl \glpreamble (Ross 1996:204)// \gla Ik heb het koud// \glb \textsc{1sg} have \textsc{3sg} \textsc{cold.a}// \glft ``I am cold; literally: I have it cold.''//
-\endgl \xe 
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{1}
+\item
+  \textbf{(Einarsson 1945:170)}
+
+  \emph{Mér}~~~~~~\emph{er}~~~~~~~~~~~~~~~~\emph{heitt/kalt}~
+
+  1SG.DAT~COP.1SG.PRS~hot/cold.A~
+
+  ``I am hot/cold.''
+\item
+  \textbf{(Pustet 2015:908)}
+
+  \emph{Hace}~~~~~~~~~~~~~~\emph{calor/frío}~~~~~
+
+  make.3SG.PRS~heat/cold..N.A~
+
+  ``It is hot/cold; literally: it makes heat/cold.''
+\item
+  \textbf{(Ross 1996:204)}
+
+  \emph{Ik}~\emph{heb}~\emph{het}~\emph{koud}~~
+
+  1SG~have~3SG~COLD.A~
+
+  ``I am cold; literally: I have it cold.''
+\end{enumerate}
 
 \hypertarget{pdf-only-features}{%
 \section{PDF-only features}\label{pdf-only-features}}
 
-This package also offers a few extensions when working on PDF output. On the one hand, \texttt{gloss\_list()} allows you to nest a list of glosses and have both a reference for the list and for each individual item. \textbf{This will not work in HTML or Word}, which will just keep the numbering on the top level. But on PDF, given the function on some examples from Shindo (2015), we can use \texttt{\textasciigrave{}r\ gloss("jp")\textasciigrave{}} to reference (\ref{jp}), or \texttt{\textasciigrave{}r\ gloss("heartwarming-jp")\textasciigrave{}} and \texttt{\textasciigrave{}r\ gloss("languid-jp")\textasciigrave{}} to reference (\ref{heartwarming-jp}) and (\ref{languid-jp}).
+This package also offers a few extensions when working on PDF output. On the one hand, \texttt{gloss\_list()} allows you to nest a list of glosses and have both a reference for the list and for each individual item. \textbf{This will not work in HTML or Word}, which will just keep the numbering on the top level. But on PDF, given the function on some examples from Shindo (2015), we can use \texttt{\textasciigrave{}r\ gloss("jp")\textasciigrave{}} to reference ((\textbf{jp?})), or \texttt{\textasciigrave{}r\ gloss("heartwarming-jp")\textasciigrave{}} and \texttt{\textasciigrave{}r\ gloss("languid-jp")\textasciigrave{}} to reference (5) and (6).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{filter}\NormalTok{(glosses, }\FunctionTok{endsWith}\NormalTok{(label, }\StringTok{"jp"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{gloss\_df}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{filter}\NormalTok{(glosses, }\FunctionTok{endsWith}\NormalTok{(label, }\StringTok{"jp"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{gloss\_df}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{gloss\_list}\NormalTok{(}\AttributeTok{listlabel =} \StringTok{"jp"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\lingset{exskip=0pt,belowglpreambleskip=0pt,aboveglftskip=0pt,everyglpreamble=\bfseries,everygla=\itshape,everyglb=,everyglc=,everyglft=}\pex\label{jp} \a\label{heartwarming-jp} \begingl \glpreamble (Shindo 2015:660)// \gla Kotae-nagara otousan to okaasan wa honobonoto atatakai2 mono ni tsutsum-areru kimochi ga shi-ta.// \glb reply-while father and mother \textsc{top} heartwarming warm thing with surround-\textsc{pass} feeling \textsc{nom} do-\textsc{pst}// \glft ``While replying (to your question), Father and Mother felt like they were surrounded by something heart warming.''//
-\endgl 
-\a\label{languid-jp} \begingl \glpreamble (Shindo 2015:660)// \gla Ainiku sonna shumi wa nai. Tsumetai-none. Kedaru-souna koe da-tta.// \glb unfortunately such interest \textsc{top} not.exist cold-\textsc{emph} languid-seem voice \textsc{cop-pst}// \glft ``Unfortunately I never have such an interest. You are so cold. (Her) voice sounded languid.''//
-\endgl  \xe 
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{4}
+\item
+  \textbf{(Shindo 2015:660)}
 
-Finally, it might be the case that you want to apply \(LaTeX\) formatting to a long string of elements for your first lines of glosses, e.g.~set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you \texttt{gloss\_format\_words()}, which you can implement to the strings given to \texttt{as\_gloss()}.
+  \emph{Kotae-nagara}~\emph{otousan}~\emph{to}~\emph{okaasan}~\emph{wa}~\emph{honobonoto}~~\emph{atatakai2}~\emph{mono}~\emph{ni}~~
 
-Internally, \texttt{glossr} will try to parse \(LaTeX\) formatting into HTML but currently it doesn't parse it to Word or read HTML/markdown tags. (But see \texttt{vignette("styling")}.)
+  reply-while~~~father~~~and~mother~~TOP~heartwarming~warm~~~~~~thing~with~
+
+  \emph{tsutsum-areru}~\emph{kimochi}~\emph{ga}~~~\emph{shi-ta.}~
+
+  surround-PASS~feeling~~NOM~do-PST~
+
+  ``While replying (to your question), Father and Mother felt like they were surrounded by something heart warming.''
+\item
+  \textbf{(Shindo 2015:660)}
+
+  \emph{Ainiku}~~~~~~~~~~~\emph{sonna}~\emph{shumi}~\emph{wa}~\emph{nai.}~~~~~~\emph{Tsumetai-none.}~\emph{Kedaru-souna}~\emph{koe}~
+
+  unfortunately~such~~interest~TOP~not.exist~cold-EMPH~~~~~~~languid-seem~voice~
+
+  \emph{da-tta.}~~
+
+  COP-PST~
+
+  ``Unfortunately I never have such an interest. You are so cold. (Her) voice sounded languid.''
+\end{enumerate}
+
+Finally, it might be the case that you want to apply \(\LaTeX\) formatting to a long string of elements for your first lines of glosses, e.g.~set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you \texttt{gloss\_format\_words()}, which you can implement to the strings given to \texttt{as\_gloss()}.
+
+Internally, \texttt{glossr} will try to parse \(\LaTeX\) formatting into HTML but currently it doesn't parse it to Word or read HTML/markdown tags. (But see \texttt{vignette("styling")}.)
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -307,13 +361,21 @@ Internally, \texttt{glossr} will try to parse \(LaTeX\) formatting into HTML but
 \end{Highlighting}
 \end{Shaded}
 
-\lingset{exskip=0pt,belowglpreambleskip=0pt,aboveglftskip=0pt,everyglpreamble=\bfseries,everygla=\itshape,everyglb=,everyglc=,everyglft=}\ex\label{formatted} \begingl \gla \textbf{Hace} \textbf{calor/frío}// \glb make.3SG.PRS heat/cold.N.A// \glft ``\,`It is hot/cold'\,''//
-\endgl \xe 
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{6}
+\item
+  \emph{\textbf{Hace}}~~~~~~~\emph{\textbf{calor/frío}}~
+
+  make.3SG.PRS~heat/cold.N.A~
+
+  ``\,`It is hot/cold'\,''
+\end{enumerate}
 
 \hypertarget{about-the-formats}{%
 \section{About the formats}\label{about-the-formats}}
 
-The Latex output writes your glosses with the format required by the \href{https://ctan.org/pkg/expex?lang=en}{\{expex\} package}. The default HTML rendering uses \href{https://github.com/bdchauvette/leipzig.js/}{leipzig.js 0.8.0} (and, of course, \{htmltools\} (Cheng et al. 2021) to read it with R). The Word output is an invisible table generated with \{flextable\} (Gohel 2022). Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example (\ref{heartwarming-jp})), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.
+The Latex output writes your glosses with the format required by the \href{https://ctan.org/pkg/expex?lang=en}{\{expex\} package}. The default HTML rendering uses \href{https://github.com/bdchauvette/leipzig.js/}{leipzig.js 0.8.0} (and, of course, \{htmltools\} (Cheng et al. 2021) to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using \texttt{systemfonts::string\_width()} (Pedersen, Ooms, and Govett 2024) and tries to align them programmatically via spaces.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 
@@ -329,11 +391,11 @@ Barnier, Julien. 2022. \emph{Rmdformats: HTML Output Formats and Templates for '
 \leavevmode\vadjust pre{\hypertarget{ref-R-htmltools}{}}%
 Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie, and Jeff Allen. 2021. \emph{Htmltools: Tools for HTML}. \url{https://github.com/rstudio/htmltools}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-R-flextable}{}}%
-Gohel, David. 2022. \emph{Flextable: Functions for Tabular Reporting}. \url{https://CRAN.R-project.org/package=flextable}.
-
 \leavevmode\vadjust pre{\hypertarget{ref-R-officedown}{}}%
 Gohel, David, and Noam Ross. 2022. \emph{Officedown: Enhanced r Markdown Format for Word and PowerPoint}. \url{https://CRAN.R-project.org/package=officedown}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-systemfonts}{}}%
+Pedersen, Thomas Lin, Jeroen Ooms, and Devon Govett. 2024. \emph{Systemfonts: System Native Font Finding}. \url{https://github.com/r-lib/systemfonts}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-shindo_2015}{}}%
 Shindo, Mika. 2015. {``Subdomains of Temperature Concepts in {Japanese}.''} In \emph{The {Linguistics} of {Temperature}}, edited by Maria Koptjevskaja-Tamm, 639--65. Typological {Studies} in {Language}. {Amsterdam}: {John Benjamins Publishing Company}.
