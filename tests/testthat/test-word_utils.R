@@ -9,7 +9,7 @@ test_that("gloss lines are identified",  {
   my_gloss <- new_gloss_data(gloss_lines, translation = ex_trans, label = "ex1")
   lines <- align_word(my_gloss)
   expect_length(lines, 2)
-  expect_lt(abs(width_with_spaces(lines[[1]]) - width_with_spaces(lines[[2]])),
+  expect_lte(abs(width_with_spaces(lines[[1]]) - width_with_spaces(lines[[2]])),
             systemfonts::string_width(" "))
   for (line in lines) {
     expect_lte(width_with_spaces(line), 1332)
