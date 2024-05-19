@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(glossr)
+default_width <- glossr:::config$word$page_width
 ```
 
 Users of glossr can configure certain styling parameters in different ways. From version 0.8.0,
@@ -182,7 +183,7 @@ Boldface and italics are already specified via $\LaTeX$ or markdown formatting
 but font family and size can be specified as the `styling` arguments
 `font_family` and `font_size` or under the `word` section in the YAML file.
 If they are a character/numeric vector of length 1
-(e.g. `font_family = "Cambria` and `font_size = 11`),
+(e.g. `font_family = "Cambria"` and `font_size = 11`),
 they will be applied to all the lines.
 Alternatively, you can specify the values for certain lines if, for example,
 you combine different scripts with different font families or sizes.
@@ -190,7 +191,7 @@ For instance, `font_family = list(a = "Arial", default = "Cambria")` will assume
 
 A third Word-specific argument is `page_width`,
 which indicates the width covered by the lines in pixels.
-This number (by default 411) is used to wrap the lines properly when they are too long.
+This number (by default `r default_width`) is used to wrap the lines properly when they are too long.
 If the width of your text differs from the one used to set up this default,
 you can easily modify it via `use_glossr()` or the configuration file.
 
