@@ -37,6 +37,9 @@
     <loc>https://montesmariana.github.io/glossr/reference/as_gloss.html</loc>
   </url>
   <url>
+    <loc>https://montesmariana.github.io/glossr/reference/config_from_file.html</loc>
+  </url>
+  <url>
     <loc>https://montesmariana.github.io/glossr/reference/gloss.html</loc>
   </url>
   <url>
@@ -76,7 +79,7 @@
     <loc>https://montesmariana.github.io/glossr/reference/new_gloss.html</loc>
   </url>
   <url>
-    <loc>https://montesmariana.github.io/glossr/reference/pipe.html</loc>
+    <loc>https://montesmariana.github.io/glossr/reference/print_config.html</loc>
   </url>
   <url>
     <loc>https://montesmariana.github.io/glossr/reference/set_style_options.html</loc>

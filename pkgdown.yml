@@ -1,12 +1,12 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   gloss_factory: gloss_factory.html
-  glossr: glossr.html
   glossr_how: glossr_how.html
+  glossr: glossr.html
   styling: styling.html
-last_built: 2023-04-01T09:27Z
+last_built: 2024-05-19T13:11Z
 urls:
   reference: https://montesmariana.github.io/glossr/reference
   article: https://montesmariana.github.io/glossr/articles
