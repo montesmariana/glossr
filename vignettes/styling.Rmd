@@ -139,7 +139,7 @@ print_config("format")
 ## Latex-specific features {#pdf}
 
 The [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf) shows a number of parameters that can be manipulated to adjust the spacing
-between the different parts of a gloss. In all cases the default value is `0`, but you can increase them or reduce them by providing the desiderd value to the appropriate item under the `pdf` section.
+between the different parts of a gloss. In all cases the default value is `0`, but you can increase them or reduce them by providing the desired value to the appropriate item under the `pdf` section.
 
 The variables that you can manipulate are the following:
 
