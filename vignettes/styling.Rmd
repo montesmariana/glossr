@@ -16,8 +16,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-# library(glossr)
-devtools::load_all()
+library(glossr)
 ```
 
 Users of glossr can configure certain styling parameters in different ways. From version 0.8.0,

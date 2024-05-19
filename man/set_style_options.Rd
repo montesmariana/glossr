@@ -64,7 +64,7 @@ relevant) indicating the font families of specific lines.
 lines to be aligned, or a list with names "a" and "b" (and "c" if
 relevant) indicating the font sizes of specific lines.
 \item \strong{page_width}: The width of the space between the margins of the Word file,
-in pixels, used to wrap long examples. The default is 411; if you see that your
+in pixels, used to wrap long examples. The default is 1332; if you see that your
 output does not match what you want, you can tweak it with this value.
 }
 }

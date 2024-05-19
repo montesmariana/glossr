@@ -22,7 +22,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   echo = TRUE
 )
-# devtools::load_all()
 ```
 
 # Introduction

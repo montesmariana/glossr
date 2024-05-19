@@ -31,8 +31,7 @@ and `officedown::rdocx_document`, which renders an MS Word file [@R-bookdown; @R
 
 ```{r}
 #| label: setup
-# library(glossr)
-devtools::load_all()
+library(glossr)
 ```
 
 ```{r useglossr}
