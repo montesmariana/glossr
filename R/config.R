@@ -33,7 +33,7 @@ reset_config <- function() {
     translation = ""
   )
   config$pdf <- list(
-    par_spacing = 0,
+    exskip = 0,
     belowglpreambleskip = 0,
     aboveglftskip = 0,
     extraglskip = 0

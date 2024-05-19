@@ -11,7 +11,7 @@ knit_print.gloss <- function(x, ...) {
   output <- config$output
   if (output == "latex") {
     latex_params = c(
-      sprintf("exskip=%dpt", config$pdf$par_spacing),
+      sprintf("exskip=%dpt", config$pdf$exskip),
       sprintf("belowglpreambleskip=%dpt", config$pdf$belowglpreambleskip),
       sprintf("aboveglftskip=%dpt", config$pdf$aboveglftskip),
       sprintf("extraglskip=%dpt", config$pdf$extraglskip),
