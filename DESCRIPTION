@@ -27,7 +27,8 @@ Imports:
     purrr,
     rlang,
     cli,
-    yaml
+    yaml,
+    systemfonts
 RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 VignetteBuilder: knitr
