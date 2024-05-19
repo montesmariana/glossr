@@ -225,10 +225,10 @@
 \section{Introduction}\label{introduction}
 
 The \{glossr\} package offers useful functions to recreate interlinear
-glosses in R Markdown texts. The immediate solution for a \(\LaTeX\)
-output is to use a specific library, such as \{gb4e\} (the one I knew
-when this package was born) or \{expex\} (the one this package uses
-now). If PDF output is enough for you, you can still use this package to
+glosses in R Markdown texts. The immediate solution for a LaTeX output
+is to use a specific library, such as \{gb4e\} (the one I knew when this
+package was born) or \{expex\} (the one this package uses). If PDF
+output is enough for you, you can still use this package to
 automatically print them in an R-chunk, minimizing typos\footnote{Most
   of my code is designed to avoid typos. Let's just say that this
   package would have taken a few hours less if I didn't constantly write
@@ -242,11 +242,11 @@ and neither the way to print them nor the way to reference them are
 compatible across output formats. I took that pain and packaged it so
 you don't need to feel it.
 
-You can start using \texttt{glossr} in an R Markdown file by calling the
+You can start using \{glossr\} in an R Markdown file by calling the
 library and then \texttt{use\_glossr()} to activate some background
 stuff. Mainly, this function informs all the other functions whether you
-are using \(\LaTeX\), HTML\footnote{You can also choose between the
-  default HTML implementation, with
+are using LaTeX, HTML\footnote{You can also choose between the default
+  HTML implementation, with
   \href{https://github.com/bdchauvette/leipzig.js/}{leipzig.js}, or a
   ``legacy'' implementation with simple tooltips and up to two glossing
   lines; do so by running \texttt{use\_glossr("tooltip")}.} or neither,
@@ -278,8 +278,7 @@ Setting up the latex engine.
 \begin{Highlighting}[]
 \FunctionTok{use\_glossr}\NormalTok{(}\AttributeTok{styling =} \FunctionTok{list}\NormalTok{(}
   \AttributeTok{source =} \StringTok{"b"}\NormalTok{,}
-  \AttributeTok{first =} \StringTok{"i"}\NormalTok{,}
-  \AttributeTok{font\_family =} \StringTok{"Cambria"}
+  \AttributeTok{first =} \StringTok{"i"}
 \NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -307,9 +306,9 @@ currently four named, optional arguments that will be treated specially:
 
 All other values will be interpreted as lines to be aligned and
 reproduced in the order given, but only up to 3 lines are
-allowed.\footnote{Note that if you use Chinese characters you will need
-  to add some \(\LaTeX\) packages (namely \{fontspec\} and \{xeCJK\}).
-  You can do that either by adding them to
+allowed.\footnote{Note that if you use Chinese characters and PDF output
+  you will need to add some LaTeX packages (namely \{fontspec\} and
+  \{xeCJK\}). You can do that either by adding them to
   \href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html}{the
   \texttt{header-includes} section} or
   \href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html}{to
@@ -345,13 +344,12 @@ PDF or HTML, depending on the output of your file: (\ref{my-label}) in
 this case.
 
 If you have many examples, you might want to keep them in their own
-file, if you don't have them like that already. \texttt{glossr} offers a
-small dataset for testing, called \texttt{data(glosses)}.
+file, if you don't have them like that already. glossr offers a small
+dataset for testing, called \texttt{glosses}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(dplyr) }\CommentTok{\# for select() and filter()}
-\FunctionTok{data}\NormalTok{(glosses)}
 \NormalTok{glosses }\OtherTok{\textless{}{-}}\NormalTok{ glosses }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(original, parsed, translation, label, source) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{source =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"("}\NormalTok{, source, }\StringTok{")"}\NormalTok{))}
@@ -446,16 +444,15 @@ interest \textsc{top} not.exist cold-\textsc{emph} languid-seem voice
 \textsc{cop-pst}// \glft ``Unfortunately I never have such an interest.
 You are so cold. (Her) voice sounded languid.''// \endgl  \xe 
 
-Finally, it might be the case that you want to apply \(\LaTeX\)
-formatting to a long string of elements for your first lines of glosses,
-e.g.~set half of your example in italics. In order to facilitate
-applying the same formatting to each individual element, this package
-offers you \texttt{gloss\_format\_words()}, which you can implement to
-the strings given to \texttt{as\_gloss()}.
+Finally, it might be the case that you want to apply LaTeX formatting to
+a long string of elements for your first lines of glosses, e.g.~set half
+of your example in italics. In order to facilitate applying the same
+formatting to each individual element, this package offers you
+\texttt{gloss\_format\_words()}, which you can implement to the strings
+given to \texttt{as\_gloss()}.
 
-Internally, \texttt{glossr} will try to parse \(\LaTeX\) formatting into
-HTML but currently it doesn't parse it to Word or read HTML/markdown
-tags. (But see \texttt{vignette("styling")}.)
+Internally, \texttt{glossr} will try to parse LaTeX formatting into HTML
+or markdown. (But see \texttt{vignette("styling")}.)
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -485,17 +482,15 @@ heat/cold.N.A// \glft ``\,`It is hot/cold'\,''// \endgl \xe
 
 \section{About the formats}\label{about-the-formats}
 
-The Latex output writes your glosses with the format required by the
+The \(LateX\) output writes your glosses with the format required by the
 \href{https://ctan.org/pkg/expex}{\{expex\} package}. The default HTML
 rendering uses
 \href{https://github.com/bdchauvette/leipzig.js/}{leipzig.js 0.8.0}
 (and, of course, \{htmltools\} (Cheng et al. 2021) to read it with R).
-The Word output is an invisible table generated with \{flextable\}
-(\textbf{R-flextable?}). Note that if the translation is very long it
-could exceed the margins of the file in Word (as is the case of example
-(\ref{heartwarming-jp})), and at least for the time being you need to
-fix it manually by selecting the translation and reducing the width of
-its cell.
+The Word output computes the width of each aligned piece in pixels based
+on the family font and size using \texttt{systemfonts::string\_width()}
+(Pedersen, Ooms, and Govett 2024) and tries to align them
+programmatically via spaces.
 
 If you are familiar with these tools and would like to suggests
 expansions or contribute to the package, go ahead, I would love to hear
@@ -520,6 +515,11 @@ and Jeff Allen. 2021. \emph{Htmltools: Tools for HTML}.
 Gohel, David, and Noam Ross. 2022. \emph{Officedown: Enhanced r Markdown
 Format for Word and PowerPoint}.
 \url{https://CRAN.R-project.org/package=officedown}.
+
+\bibitem[\citeproctext]{ref-R-systemfonts}
+Pedersen, Thomas Lin, Jeroen Ooms, and Devon Govett. 2024.
+\emph{Systemfonts: System Native Font Finding}.
+\url{https://github.com/r-lib/systemfonts}.
 
 \bibitem[\citeproctext]{ref-shindo_2015}
 Shindo, Mika. 2015. {``Subdomains of Temperature Concepts in

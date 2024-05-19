@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,9 +90,7 @@ div.csl-indent {
 <link href="glossr_how_quarto_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="glossr_how_quarto_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="glossr_how_quarto_files/libs/leipzig-0.8.0/leipzig.css" rel="stylesheet">
-
 <script src="glossr_how_quarto_files/libs/leipzig-0.8.0/leipzig.js"></script>
-
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -140,7 +138,7 @@ window.Quarto = {
   <li><a href="#about-the-formats" id="toc-about-the-formats" class="nav-link" data-scroll-target="#about-the-formats">About the formats</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="glossr_how_quarto.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="glossr_how_quarto.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../glossr_how_quarto.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="glossr_how_quarto.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -177,8 +175,8 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>The {glossr} package offers useful functions to recreate interlinear glosses in R Markdown texts. The immediate solution for a <span class="math inline">\(\LaTeX\)</span> output is to use a specific library, such as {gb4e} (the one I knew when this package was born) or {expex} (the one this package uses now). If PDF output is enough for you, you can still use this package to automatically print them in an R-chunk, minimizing typos<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and even generate them automatically from a dataframe with your examples! But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least <em>some</em> rendering) of your interlinear glosses in HTML as well… and why not, MS Word! This offers some challenges, because you would need to figure out <em>how</em> to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats. I took that pain and packaged it so you don’t need to feel it.</p>
-<p>You can start using <code>glossr</code> in an R Markdown file by calling the library and then <code>use_glossr()</code> to activate some background stuff. Mainly, this function informs all the other functions whether you are using <span class="math inline">\(\LaTeX\)</span>, HTML<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> or neither, in which case it assumes you have Word output. This vignette has been run in <a href="https://github.com/montesmariana/glossr/tree/main/inst/examples">all three formats</a> by changing the output format to <code>bookdown::pdf_document2</code>, which renders a PDF file; <code>bookdown::html_document2</code> and <code>rmdformats::readthedown</code>, which render HTML files; and <code>officedown::rdocx_document</code>, which renders an MS Word file <span class="citation" data-cites="R-bookdown R-officedown R-rmdformats">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2022</a>; <a href="#ref-R-officedown" role="doc-biblioref">Gohel and Ross 2022</a>; <a href="#ref-R-rmdformats" role="doc-biblioref">Barnier 2022</a>)</span>. As you can see in <code>vignette("styling")</code>, <code>use_glossr()</code> also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.</p>
+<p>The {glossr} package offers useful functions to recreate interlinear glosses in R Markdown texts. The immediate solution for a LaTeX output is to use a specific library, such as {gb4e} (the one I knew when this package was born) or {expex} (the one this package uses). If PDF output is enough for you, you can still use this package to automatically print them in an R-chunk, minimizing typos<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and even generate them automatically from a dataframe with your examples! But chances are, PDF is not enough for you, and you would also like a nice rendering (or at least <em>some</em> rendering) of your interlinear glosses in HTML as well… and why not, MS Word! This offers some challenges, because you would need to figure out <em>how</em> to render them to begin with, and neither the way to print them nor the way to reference them are compatible across output formats. I took that pain and packaged it so you don’t need to feel it.</p>
+<p>You can start using {glossr} in an R Markdown file by calling the library and then <code>use_glossr()</code> to activate some background stuff. Mainly, this function informs all the other functions whether you are using LaTeX, HTML<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> or neither, in which case it assumes you have Word output. This vignette has been run in <a href="https://github.com/montesmariana/glossr/tree/main/inst/examples">all three formats</a> by changing the output format to <code>bookdown::pdf_document2</code>, which renders a PDF file; <code>bookdown::html_document2</code> and <code>rmdformats::readthedown</code>, which render HTML files; and <code>officedown::rdocx_document</code>, which renders an MS Word file <span class="citation" data-cites="R-bookdown R-officedown R-rmdformats">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2022</a>; <a href="#ref-R-officedown" role="doc-biblioref">Gohel and Ross 2022</a>; <a href="#ref-R-rmdformats" role="doc-biblioref">Barnier 2022</a>)</span>. As you can see in <code>vignette("styling")</code>, <code>use_glossr()</code> also takes some variables to set up document-wide styling options for specific parts of your glosses. The code below sets the name of the source to render in boldface and the first line of each gloss in italics.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glossr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -188,9 +186,8 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_glossr</span>(<span class="at">styling =</span> <span class="fu">list</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">"b"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="st">"i"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">font_family =</span> <span class="st">"Cambria"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="st">"i"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-usage" class="level1">
@@ -238,14 +235,13 @@ TSG waa.IDEO-LINK-one-sound big cry-inch
 </div>
 </div>
 <p>The label given to <code>as_gloss()</code> allows you to cross-reference the example: in PDF this looks like <code>example (\ref{my-label})</code>, whereas in HTML and Word you would use <code>example (@my-label)</code>. What should YOU do? <code>gloss()</code> can be used inline to generate a reference for either PDF or HTML, depending on the output of your file: (1) in this case.</p>
-<p>If you have many examples, you might want to keep them in their own file, if you don’t have them like that already. <code>glossr</code> offers a small dataset for testing, called <code>data(glosses)</code>.</p>
+<p>If you have many examples, you might want to keep them in their own file, if you don’t have them like that already. glossr offers a small dataset for testing, called <code>glosses</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for select() and filter()</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(glosses)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>glosses <span class="ot">&lt;-</span> glosses <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(original, parsed, translation, label, source) <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">paste0</span>(<span class="st">"("</span>, source, <span class="st">")"</span>))</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>glosses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>glosses <span class="ot">&lt;-</span> glosses <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(original, parsed, translation, label, source) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">paste0</span>(<span class="st">"("</span>, source, <span class="st">")"</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>glosses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
   original                                       parsed translation label source
@@ -358,8 +354,8 @@ unfortunately such interest TOP not.exist cold-EMPH languid-seem voice COP-PST
 </ol>
 </div>
 </div>
-<p>Finally, it might be the case that you want to apply <span class="math inline">\(\LaTeX\)</span> formatting to a long string of elements for your first lines of glosses, e.g.&nbsp;set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you <code>gloss_format_words()</code>, which you can implement to the strings given to <code>as_gloss()</code>.</p>
-<p>Internally, <code>glossr</code> will try to parse <span class="math inline">\(\LaTeX\)</span> formatting into HTML but currently it doesn’t parse it to Word or read HTML/markdown tags. (But see <code>vignette("styling")</code>.)</p>
+<p>Finally, it might be the case that you want to apply LaTeX formatting to a long string of elements for your first lines of glosses, e.g.&nbsp;set half of your example in italics. In order to facilitate applying the same formatting to each individual element, this package offers you <code>gloss_format_words()</code>, which you can implement to the strings given to <code>as_gloss()</code>.</p>
+<p>Internally, <code>glossr</code> will try to parse LaTeX formatting into HTML or markdown. (But see <code>vignette("styling")</code>.)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gloss_format_words</span>(<span class="st">"A long piece of text"</span>, <span class="st">"textit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -397,7 +393,7 @@ make.3SG.PRS heat/cold.N.A
 </section>
 <section id="about-the-formats" class="level1">
 <h1>About the formats</h1>
-<p>The Latex output writes your glosses with the format required by the <a href="https://ctan.org/pkg/expex">{expex} package</a>. The default HTML rendering uses <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js 0.8.0</a> (and, of course, {htmltools} <span class="citation" data-cites="R-htmltools">(<a href="#ref-R-htmltools" role="doc-biblioref">Cheng et al. 2021</a>)</span> to read it with R). The Word output is an invisible table generated with {flextable} <span class="citation" data-cites="R-flextable">(<a href="#ref-R-flextable" role="doc-biblioref"><strong>R-flextable?</strong></a>)</span>. Note that if the translation is very long it could exceed the margins of the file in Word (as is the case of example (5)), and at least for the time being you need to fix it manually by selecting the translation and reducing the width of its cell.</p>
+<p>The <span class="math inline">\(LateX\)</span> output writes your glosses with the format required by the <a href="https://ctan.org/pkg/expex">{expex} package</a>. The default HTML rendering uses <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js 0.8.0</a> (and, of course, {htmltools} <span class="citation" data-cites="R-htmltools">(<a href="#ref-R-htmltools" role="doc-biblioref">Cheng et al. 2021</a>)</span> to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using <code>systemfonts::string_width()</code> <span class="citation" data-cites="R-systemfonts">(<a href="#ref-R-systemfonts" role="doc-biblioref">Pedersen, Ooms, and Govett 2024</a>)</span> and tries to align them programmatically via spaces.</p>
 <p>If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!</p>
 </section>
 <section id="references" class="level1 unnumbered">
@@ -416,6 +412,9 @@ Cheng, Joe, Carson Sievert, Barret Schloerke, Winston Chang, Yihui Xie, and Jeff
 <div id="ref-R-officedown" class="csl-entry" role="listitem">
 Gohel, David, and Noam Ross. 2022. <em>Officedown: Enhanced r Markdown Format for Word and PowerPoint</em>. <a href="https://CRAN.R-project.org/package=officedown">https://CRAN.R-project.org/package=officedown</a>.
 </div>
+<div id="ref-R-systemfonts" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin, Jeroen Ooms, and Devon Govett. 2024. <em>Systemfonts: System Native Font Finding</em>. <a href="https://github.com/r-lib/systemfonts">https://github.com/r-lib/systemfonts</a>.
+</div>
 <div id="ref-shindo_2015" class="csl-entry" role="listitem">
 Shindo, Mika. 2015. <span>“Subdomains of Temperature Concepts in <span>Japanese</span>.”</span> In <em>The <span>Linguistics</span> of <span>Temperature</span></em>, edited by Maria Koptjevskaja-Tamm, 639–65. Typological <span>Studies</span> in <span>Language</span>. <span>Amsterdam</span>: <span>John Benjamins Publishing Company</span>.
 </div>
@@ -427,7 +426,7 @@ Xie, Yihui. 2022. <em>Bookdown: Authoring Books and Technical Documents with r M
 <ol>
 <li id="fn1"><p>Most of my code is designed to avoid typos. Let’s just say that this package would have taken a few hours less if I didn’t constantly write <em>leizpig</em> instead of <em>leipzig</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>You can also choose between the default HTML implementation, with <a href="https://github.com/bdchauvette/leipzig.js/">leipzig.js</a>, or a “legacy” implementation with simple tooltips and up to two glossing lines; do so by running <code>use_glossr("tooltip")</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Note that if you use Chinese characters you will need to add some <span class="math inline">\(\LaTeX\)</span> packages (namely {fontspec} and {xeCJK}). You can do that either by adding them to <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html">the <code>header-includes</code> section</a> or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html">to the <code>extra_dependencies</code> list</a> inside the <code>pdf_document</code> output section in your YAML. Thanks to Thomas Van Hoey for offering me the example and pointing this out.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Note that if you use Chinese characters and PDF output you will need to add some LaTeX packages (namely {fontspec} and {xeCJK}). You can do that either by adding them to <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-preamble.html">the <code>header-includes</code> section</a> or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html">to the <code>extra_dependencies</code> list</a> inside the <code>pdf_document</code> output section in your YAML. Thanks to Thomas Van Hoey for offering me the example and pointing this out.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -510,24 +509,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -562,11 +543,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

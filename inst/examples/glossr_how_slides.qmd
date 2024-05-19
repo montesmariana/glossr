@@ -16,6 +16,7 @@ The {glossr} package offers useful functions to recreate interlinear glosses in 
 ```{r}
 #| label: ex-gloss
 library(glossr)
+library(dplyr)
 use_glossr()
 my_gloss <- as_gloss(
   "她 哇的一聲 大 哭起來，",
@@ -114,7 +115,7 @@ What should YOU do?
 
 ## Tables of examples {.smaller}
 
-You can also get your data from a dataframe
+You can also get your data from a dataframe, manipulating it with `{dplyr}`.
 
 ```{r}
 data(glosses)
