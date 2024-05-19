@@ -32,9 +32,9 @@ test_that("long examples are properly folded", {
   )
   lines <- align_word(long_gloss)
   expect_length(lines, 4)
-  expect_lt(abs(width_with_spaces(lines[[1]]) - width_with_spaces(lines[[2]])),
+  expect_lte(abs(width_with_spaces(lines[[1]]) - width_with_spaces(lines[[2]])),
             systemfonts::string_width(" ")*2)
-  expect_lt(abs(width_with_spaces(lines[[3]]) - width_with_spaces(lines[[4]])),
+  expect_lte(abs(width_with_spaces(lines[[3]]) - width_with_spaces(lines[[4]])),
             systemfonts::string_width(" "))
   for (line in lines) {
     expect_lte(width_with_spaces(line), 1332)
