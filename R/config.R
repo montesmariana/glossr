@@ -201,7 +201,7 @@ set_output <- function(output_format = NULL) {
 #' - `b`, `bf`, `bold` and `textbf` set boldface.
 #'
 #' Third, there are a few LaTeX-specific settings documented in the
-#' [expex documentation](https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf).
+#' [expex](https://ctan.org/pkg/expex) documentation.
 #' In all cases the default value is 0 (0pt).
 #' (If you would like other settings to be supported, write up an Issue and I will look into it!)
 #' - **exskip|par_spacing**: Space above *and* below the example. The `par_spacing` name
@@ -435,7 +435,7 @@ set_word_options <- function(styling = list()) {
           cli::cli_warn("The default value of {.var {opt}} must be of class {.var {var_classes[[opt]]}}.")
         }
         return(font_defaults[[opt]])
-      }) |> setNames(name_options)
+      }) |> stats::setNames(name_options)
       config$word[[opt]] <- line_based_config
     } else if (!inherits(styling[[opt]], var_classes[[opt]])) {
       cli::cli_abort("{.var {opt}} must be of class {.var {var_classes[[opt]]}} or a list of vectors of that class.")

@@ -3,6 +3,7 @@ title: "Using the glossr package"
 author: "Mariana Montes"
 date: "`r Sys.Date()`"
 output:
+  officedown::rdocx_document: default
   bookdown::pdf_document2:
     latex_engine: xelatex
     extra_dependencies:
@@ -11,7 +12,6 @@ output:
     keep_tex: true
   rmdformats::readthedown:
     highlight: kate
-  officedown::rdocx_document: default
 urlcolor: red
 bibliography: ["../REFERENCES.bib", "../packages.bib"]
 ---
@@ -126,7 +126,7 @@ my_gloss
 
 # About the formats
 
-The $LateX$ output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using `systemfonts::string_width()` [@R-systemfonts] and tries to align them programmatically via spaces.
+The $LateX$ output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using `systemfonts::string_width()` [@R-systemfonts] and tries to align them programmatically via spaces.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 

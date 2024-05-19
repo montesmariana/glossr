@@ -39,7 +39,7 @@ Each of these items can take one of a few values:
 }
 
 Third, there are a few LaTeX-specific settings documented in the
-\href{https://mirror.lyrahosting.com/CTAN/macros/generic/expex/expex-doc.pdf}{expex documentation}.
+\href{https://ctan.org/pkg/expex}{expex} documentation.
 In all cases the default value is 0 (0pt).
 (If you would like other settings to be supported, write up an Issue and I will look into it!)
 \itemize{

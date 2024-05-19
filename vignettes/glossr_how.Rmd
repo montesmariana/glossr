@@ -76,7 +76,6 @@ The label given to `as_gloss()` allows you to cross-reference the example: in PD
 If you have many examples, you might want to keep them in their own file, if you don't have them like that already. `glossr` offers a small dataset for testing, called `data(glosses)`.
 
 ```{r, data, message = FALSE}
-library(magrittr)
 library(dplyr) # for select() and filter()
 data(glosses)
 glosses <- glosses |> 
@@ -124,7 +123,7 @@ my_gloss
 
 # About the formats
 
-The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex?lang=en). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using `systemfonts::string_width()` [@R-systemfonts] and tries to align them programmatically via spaces.
+The Latex output writes your glosses with the format required by the [{expex} package](https://ctan.org/pkg/expex). The default HTML rendering uses [leipzig.js 0.8.0](https://github.com/bdchauvette/leipzig.js/) (and, of course, {htmltools} [@R-htmltools] to read it with R). The Word output computes the width of each aligned piece in pixels based on the family font and size using `systemfonts::string_width()` [@R-systemfonts] and tries to align them programmatically via spaces.
 
 If you are familiar with these tools and would like to suggests expansions or contribute to the package, go ahead, I would love to hear from you!
 

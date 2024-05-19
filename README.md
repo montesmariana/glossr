@@ -78,7 +78,7 @@ my_gloss <- as_gloss(
 
 This package is possible thanks to the existence of other packages it
 has built on, mostly `{rmarkdown}` and `{htmltools}`, as well as [the
-`expex` package](https://ctan.org/pkg/expex?lang=en) for PDF output and
+`expex` package](https://ctan.org/pkg/expex) for PDF output and
 [leipzig.js](https://github.com/bdchauvette/leipzig.js/) for the HTML
 output. The HexSticker was designed in [Krita](https://krita.org/en/)
 and rendered with `{hexSticker}`.
